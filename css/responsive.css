@@ -1,0 +1,121 @@
+/* ==========================================================================
+   responsive.css — mobile is the base design (360–430px).
+   Small phones · large phones · tablet (≥768) · desktop app preview (≥1024)
+   ========================================================================== */
+
+/* ---------- Very small phones (< 360px) ---------- */
+@media (max-width: 359px) {
+  :root { --gutter: 16px; }
+  .page-title, .intro__title { font-size: 27px; }
+  .hero-card__title { font-size: 26px; }
+  .countdown strong { font-size: 21px; }
+  .explore-card { min-height: 120px; padding: 14px; }
+  .explore-card__title { font-size: 13.5px; }
+  .reason-card { min-height: 180px; }
+  .bottom-nav__item span { font-size: 9.5px; }
+  .letter-paper { padding-left: 18px; padding-right: 18px; }
+  .letter-paper__body { font-size: 21px; }
+}
+
+/* ---------- Large phones ---------- */
+@media (min-width: 400px) {
+  .memory-grid { grid-auto-rows: 124px; }
+  .reason-card { min-height: 180px; }
+}
+
+/* ---------- Short screens (landscape phones) ---------- */
+@media (max-height: 560px) and (orientation: landscape) {
+  .intro__gift { width: 110px; height: 110px; margin-bottom: 10px; }
+  .intro__title { font-size: 28px; }
+  .intro__subtitle { margin-bottom: 18px; }
+  .detail-media { height: 80vh; }
+  .lightbox__frame img { max-height: 46vh; }
+}
+
+/* ---------- Tablet: centred, roomier column ---------- */
+@media (min-width: 640px) {
+  :root { --gutter: 28px; }
+  body { background: #FBEFF3; }
+  .app {
+    max-width: 560px;
+    box-shadow: 0 0 0 1px rgba(216, 63, 114, .06), 0 30px 80px -30px rgba(160, 40, 85, .35);
+  }
+  .bottom-nav { left: 50%; right: auto; width: min(440px, calc(100% - 24px)); transform: translateX(-50%); }
+  .bottom-nav.is-hidden { transform: translate(-50%, calc(100% + 24px)); }
+  .memory-grid { grid-auto-rows: 150px; gap: 22px 18px; }
+  .hero-card { aspect-ratio: 16 / 13; }
+  .h-card { width: 42%; }
+  .reasons-grid { grid-template-columns: repeat(3, 1fr); }
+  .detail-media { max-height: 600px; }
+  .t-item__photo { max-width: 340px; }
+  .page-title { font-size: 34px; }
+}
+
+/* ---------- Desktop: phone-style app preview with side caption ---------- */
+@media (min-width: 1024px) {
+  body {
+    display: flex; align-items: center; justify-content: center; gap: 72px;
+    min-height: 100vh; padding: 32px;
+    background:
+      radial-gradient(60% 60% at 15% 20%, rgba(245, 184, 203, .45), transparent 70%),
+      radial-gradient(50% 50% at 85% 85%, rgba(244, 167, 189, .35), transparent 70%),
+      #FDF2F5;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: radial-gradient(rgba(216, 63, 114, .10) 1.2px, transparent 1.4px);
+    background-size: 22px 22px;
+  }
+
+  .desktop-aside {
+    display: block; max-width: 340px; flex: 0 1 340px;
+  }
+  .desktop-aside__eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--secondary); font-weight: 600; }
+  .desktop-aside__title { font-family: var(--font-head); font-size: 52px; line-height: 1.05; font-weight: 600; margin: 14px 0 18px; color: var(--text); }
+  .desktop-aside__title em { color: var(--primary); font-weight: 500; }
+  .desktop-aside__hint { font-family: var(--font-hand); font-size: 24px; line-height: 1.3; color: var(--text-2); max-width: 26ch; }
+
+  .app {
+    flex: none;
+    width: 400px; max-width: 400px;
+    height: min(860px, calc(100vh - 64px));
+    border-radius: 44px;
+    border: 10px solid #fff;
+    box-shadow:
+      0 0 0 1px rgba(216, 63, 114, .10),
+      0 50px 100px -30px rgba(150, 35, 80, .40),
+      0 20px 40px -20px rgba(150, 35, 80, .25);
+  }
+  .screen { scrollbar-width: thin; scrollbar-color: var(--soft) transparent; }
+  .screen::-webkit-scrollbar { display: block; width: 4px; }
+  .screen::-webkit-scrollbar-thumb { background: var(--soft); border-radius: 4px; }
+
+  /* inside the preview we are "a phone" again */
+  :root { --gutter: 20px; }
+  .bottom-nav { width: auto; left: 12px; right: 12px; transform: none; }
+  .bottom-nav.is-hidden { transform: translateY(calc(100% + 24px)); }
+  .memory-grid { grid-auto-rows: 116px; gap: 18px 14px; }
+  .hero-card { aspect-ratio: 4 / 4.6; }
+  .h-card { width: 62%; }
+  .h-scroll--sm .h-card { width: 42%; }
+  .reasons-grid { grid-template-columns: 1fr 1fr; }
+  .page-title { font-size: 30px; }
+  .detail-media { height: 470px; }
+  .lightbox__frame img { max-height: 480px; }
+
+  /* hover affordances only on real pointers */
+  .memory-card:hover .memory-card__img { filter: saturate(1.08); }
+  .reason-card:hover:not(.is-flipped) .reason-card__inner { transform: translateY(-3px); }
+}
+
+@media (min-width: 1440px) {
+  body { gap: 120px; }
+  .desktop-aside__title { font-size: 60px; }
+  .app { width: 420px; max-width: 420px; }
+}
+
+/* ---------- Pointer niceties ---------- */
+@media (hover: none) {
+  .memory-card:hover { transform: rotate(var(--rot, 0deg)); box-shadow: var(--sh-2); }
+  .explore-card:hover { box-shadow: var(--sh-1); }
+}

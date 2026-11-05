@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FCE4EC">
+  <meta name="description" content="A Little Book About You — an interactive birthday experience.">
+  <title>A Little Book About You</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Desktop-only side caption (hidden on phones) -->
+  <aside class="desktop-aside" aria-hidden="true">
+    <p class="desktop-aside__eyebrow">an interactive birthday experience</p>
+    <h2 class="desktop-aside__title">A Little Book<br><em>About You</em></h2>
+    <p class="desktop-aside__hint">Best enjoyed on your phone — but this little window works too.</p>
+  </aside>
+
+  <div class="app" id="app">
+    <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+
+    <!-- Global music button -->
+    <button class="music-btn" id="musicBtn" type="button" aria-label="Play music" aria-pressed="false" hidden>
+      <span class="music-btn__icon" data-state="play"><i data-icon="music"></i></span>
+      <span class="music-btn__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <main class="screens" id="screens">
+
+      <!-- ============ 01 · INTRO ============ -->
+      <section class="screen screen--intro" id="screen-intro" data-route="intro" aria-label="Welcome">
+        <div class="floating-hearts" id="introHearts" aria-hidden="true"></div>
+        <div class="intro">
+          <div class="intro__gift" id="introGift" aria-hidden="true">
+            <div class="gift-art">
+              <div class="gift-art__lid"><span class="gift-art__bow"></span></div>
+              <div class="gift-art__box"></div>
+            </div>
+            <span class="intro__sparkle intro__sparkle--1"></span>
+            <span class="intro__sparkle intro__sparkle--2"></span>
+            <span class="intro__sparkle intro__sparkle--3"></span>
+          </div>
+          <p class="hand intro__to" id="introTo">for you</p>
+          <h1 class="intro__title" id="introTitle">A Little Surprise For You</h1>
+          <p class="intro__subtitle" id="introSubtitle">Someone made something special just for you.</p>
+          <button class="btn btn--primary btn--lg" id="openGiftBtn" type="button">
+            <span id="openGiftLabel">Open Your Gift</span> <i data-icon="gift"></i>
+          </button>
+          <p class="intro__hint">tap to begin · sound optional</p>
+        </div>
+      </section>
+
+      <!-- ============ 02 · HOME ============ -->
+      <section class="screen screen--home" id="screen-home" data-route="home" aria-label="Home" hidden>
+        <header class="app-header app-header--home">
+          <img class="avatar" id="homeAvatar" src="" alt="" width="44" height="44">
+          <div class="app-header__text">
+            <p class="app-header__eyebrow" id="homeGreeting">Hello</p>
+            <p class="app-header__name" id="homeName">—</p>
+          </div>
+        </header>
+
+        <div class="screen__body">
+          <article class="hero-card reveal">
+            <img class="hero-card__img" id="heroImg" src="" alt="">
+            <div class="hero-card__shade"></div>
+            <span class="tape tape--tl" aria-hidden="true"></span>
+            <div class="hero-card__content">
+              <span class="chip chip--glass"><i data-icon="calendar"></i> <span id="heroDate">—</span></span>
+              <h1 class="hero-card__title" id="heroHeadline">Happy Birthday</h1>
+              <p class="hand hero-card__caption" id="heroCaption"></p>
+            </div>
+          </article>
+
+          <section class="countdown-card reveal" aria-labelledby="countdownLabel">
+            <div class="countdown-card__head">
+              <p class="eyebrow" id="countdownLabel">Counting down to your day</p>
+              <span class="chip chip--soft" id="ageChip" hidden></span>
+            </div>
+            <div class="countdown" id="countdown" aria-live="polite">
+              <div><strong data-cd="d">0</strong><span>days</span></div>
+              <div><strong data-cd="h">0</strong><span>hours</span></div>
+              <div><strong data-cd="m">0</strong><span>mins</span></div>
+              <div><strong data-cd="s">0</strong><span>secs</span></div>
+            </div>
+            <p class="countdown-card__today hand" id="countdownToday" hidden>It's today! Happy birthday, my love.</p>
+            <div class="together">
+              <i data-icon="heart"></i>
+              <p><strong id="daysTogether">0</strong> days of us — and counting</p>
+            </div>
+          </section>
+
+          <section class="section reveal" aria-labelledby="exploreTitle">
+            <div class="section__head">
+              <h2 class="section__title" id="exploreTitle">Open a page</h2>
+              <p class="section__meta"><span id="journeyCount">0</span>/6 explored</p>
+            </div>
+            <div class="journey" aria-hidden="true"><span id="journeyBar"></span></div>
+            <div class="explore-grid">
+              <a class="explore-card explore-card--memories" href="#memories">
+                <span class="explore-card__icon"><i data-icon="images"></i></span>
+                <span class="explore-card__title">Our Memories</span>
+                <span class="explore-card__meta" id="exploreMemoriesMeta">photos</span>
+              </a>
+              <a class="explore-card explore-card--moments" href="#moments">
+                <span class="explore-card__icon"><i data-icon="clock"></i></span>
+                <span class="explore-card__title">Little Moments</span>
+                <span class="explore-card__meta">our timeline</span>
+              </a>
+              <a class="explore-card explore-card--reasons" href="#reasons">
+                <span class="explore-card__icon"><i data-icon="heart"></i></span>
+                <span class="explore-card__title">Reasons I Love You</span>
+                <span class="explore-card__meta" id="exploreReasonsMeta">reasons</span>
+              </a>
+              <a class="explore-card explore-card--letter" href="#letter">
+                <span class="explore-card__icon"><i data-icon="mail"></i></span>
+                <span class="explore-card__title">My Letter</span>
+                <span class="explore-card__meta">sealed for you</span>
+              </a>
+              <a class="explore-card explore-card--surprise explore-card--wide" href="#surprise">
+                <span class="explore-card__icon"><i data-icon="gift"></i></span>
+                <span>
+                  <span class="explore-card__title">Birthday Surprise</span>
+                  <span class="explore-card__meta">save this one for last</span>
+                </span>
+                <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
+              </a>
+            </div>
+          </section>
+
+          <section class="section reveal" aria-labelledby="featuredTitle">
+            <div class="section__head">
+              <h2 class="section__title" id="featuredTitle">Featured memories</h2>
+              <a class="link" href="#memories">See all <i data-icon="chevronRight"></i></a>
+            </div>
+            <div class="h-scroll" id="featuredList"></div>
+          </section>
+
+          <section class="note-card reveal" aria-label="A little note">
+            <span class="tape tape--top" aria-hidden="true"></span>
+            <i data-icon="quote" class="note-card__quote"></i>
+            <p class="note-card__text hand" id="homeNote"></p>
+            <p class="note-card__sign">— <span id="homeSender"></span></p>
+          </section>
+        </div>
+      </section>
+
+      <!-- ============ 03 · OUR MEMORIES ============ -->
+      <section class="screen screen--memories" id="screen-memories" data-route="memories" aria-label="Our memories" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Gallery</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro reveal">
+            <p class="eyebrow">chapter one</p>
+            <h1 class="page-title">Our Little <em>Memories</em></h1>
+            <p class="page-sub">Tiny pieces of us, kept safe in one place. Tap a photo to look closer.</p>
+          </div>
+          <div class="chips" id="memoryFilters" role="tablist" aria-label="Filter memories"></div>
+          <div class="memory-grid" id="memoryGrid"></div>
+          <p class="hand end-note">more pages coming, every year ♡</p>
+        </div>
+      </section>
+
+      <!-- ============ 04 · MEMORY DETAIL ============ -->
+      <section class="screen screen--detail" id="screen-memory" data-route="memory" aria-label="Memory detail" hidden>
+        <div class="detail-media">
+          <img class="detail-media__img" id="detailImg" src="" alt="">
+          <div class="detail-media__top">
+            <button class="icon-btn icon-btn--glass" type="button" data-back aria-label="Back to gallery"><i data-icon="chevronLeft"></i></button>
+          </div>
+          <button class="icon-btn icon-btn--glass detail-fav" type="button" id="detailFav" aria-pressed="false" aria-label="Mark as favorite"><i data-icon="heart"></i></button>
+          <div class="detail-thumbs" id="detailThumbs"></div>
+        </div>
+        <div class="detail-sheet">
+          <div class="detail-sheet__grip" aria-hidden="true"></div>
+          <div class="detail-sheet__meta">
+            <span class="chip chip--soft" id="detailTag">—</span>
+            <span class="detail-sheet__count" id="detailCount"></span>
+          </div>
+          <h1 class="detail-sheet__title" id="detailTitle">—</h1>
+          <ul class="detail-facts">
+            <li><i data-icon="calendar"></i> <span class="hand" id="detailDate">—</span></li>
+            <li id="detailLocationRow"><i data-icon="mapPin"></i> <span id="detailLocation">—</span></li>
+          </ul>
+          <p class="detail-sheet__story" id="detailStory"></p>
+          <div class="sticky-note" id="detailNoteWrap">
+            <span class="clip" aria-hidden="true"></span>
+            <p class="hand" id="detailNote"></p>
+          </div>
+          <h2 class="section__title section__title--sm">More memories</h2>
+          <div class="h-scroll h-scroll--sm" id="detailMore"></div>
+        </div>
+        <div class="action-bar">
+          <a class="btn btn--ghost" href="#memories"><i data-icon="grid"></i> Gallery</a>
+          <a class="btn btn--primary" id="detailNext" href="#memories">Next memory <i data-icon="arrowRight"></i></a>
+        </div>
+      </section>
+
+      <!-- ============ 05 · LITTLE MOMENTS ============ -->
+      <section class="screen screen--moments" id="screen-moments" data-route="moments" aria-label="Little moments" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Timeline</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro page-intro--center reveal">
+            <p class="eyebrow">chapter two</p>
+            <h1 class="page-title">Little <em>Moments</em></h1>
+            <p class="page-sub">The story of us, one small moment at a time.</p>
+            <div class="stat-row">
+              <div class="stat"><strong id="momentsDays">0</strong><span>days together</span></div>
+              <div class="stat"><strong id="momentsCount">0</strong><span>moments</span></div>
+              <div class="stat"><strong>∞</strong><span>to come</span></div>
+            </div>
+          </div>
+          <ol class="timeline" id="timeline"></ol>
+          <a class="cta-card reveal" href="#reasons">
+            <span class="cta-card__icon"><i data-icon="heart"></i></span>
+            <span><strong>Want to know why?</strong><span>Read the reasons I love you</span></span>
+            <i data-icon="arrowRight"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ 06 · REASONS ============ -->
+      <section class="screen screen--reasons" id="screen-reasons" data-route="reasons" aria-label="Reasons why I love you" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Reasons</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro reveal">
+            <p class="eyebrow">chapter three</p>
+            <h1 class="page-title">Reasons Why <em>I Love You</em></h1>
+            <p class="page-sub">Tap each card to open it. (There are way more, but these were a start.)</p>
+          </div>
+          <div class="reasons-progress reveal">
+            <div class="reasons-progress__text"><span id="reasonsOpened">0</span> of <span id="reasonsTotal">0</span> opened</div>
+            <div class="journey"><span id="reasonsBar"></span></div>
+            <button class="btn btn--soft btn--sm" type="button" id="reasonRandom"><i data-icon="shuffle"></i> Surprise me</button>
+          </div>
+          <div class="reasons-grid" id="reasonsGrid"></div>
+          <p class="reasons-done hand" id="reasonsDone" hidden>…and a million more I haven't written yet.</p>
+        </div>
+      </section>
+
+      <!-- ============ 07 · LETTER ============ -->
+      <section class="screen screen--letter" id="screen-letter" data-route="letter" aria-label="My letter" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Letter</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="letter-stage" id="letterStage">
+            <div class="page-intro page-intro--center">
+              <p class="eyebrow">chapter four</p>
+              <h1 class="page-title" id="letterTitle">A Letter Just For You</h1>
+              <p class="page-sub" id="letterSubtitle"></p>
+            </div>
+
+            <div class="envelope" id="envelope" aria-hidden="true">
+              <div class="envelope__back"></div>
+              <div class="envelope__paper"><span></span><span></span><span></span></div>
+              <div class="envelope__front"></div>
+              <div class="envelope__flap"></div>
+              <div class="envelope__seal"><i data-icon="heart"></i></div>
+            </div>
+
+            <button class="btn btn--primary btn--lg" type="button" id="openLetterBtn">
+              <span id="openLetterLabel">Open My Letter</span> <i data-icon="mail"></i>
+            </button>
+          </div>
+
+          <article class="letter-paper" id="letterPaper" hidden aria-live="polite">
+            <span class="tape tape--top" aria-hidden="true"></span>
+            <p class="letter-paper__date hand" id="letterDate"></p>
+            <div class="letter-paper__body" id="letterBody"></div>
+            <div class="letter-paper__hearts" aria-hidden="true">
+              <i data-icon="heart"></i><i data-icon="heart"></i><i data-icon="heart"></i>
+            </div>
+            <div class="letter-paper__actions">
+              <button class="btn btn--ghost btn--sm" type="button" id="letterSkip"><i data-icon="skip"></i> Show all</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="letterReplay" hidden><i data-icon="replay"></i> Read again</button>
+              <a class="btn btn--primary btn--sm" href="#surprise" id="letterNext" hidden>One more thing <i data-icon="arrowRight"></i></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ 08 · SURPRISE ============ -->
+      <section class="screen screen--surprise" id="screen-surprise" data-route="surprise" aria-label="Birthday surprise" hidden>
+        <div class="floating-hearts floating-hearts--stars" id="surpriseHearts" aria-hidden="true"></div>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Surprise</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="surprise-stage" id="surpriseStage">
+            <div class="page-intro page-intro--center">
+              <p class="eyebrow">the last page</p>
+              <h1 class="page-title" id="surpriseTitle">One Last Surprise</h1>
+              <p class="page-sub" id="surpriseSubtitle"></p>
+            </div>
+            <div class="big-gift" id="bigGift" aria-hidden="true">
+              <div class="big-gift__glow"></div>
+              <div class="big-gift__lid"><span class="big-gift__bow"></span></div>
+              <div class="big-gift__box"></div>
+              <div class="big-gift__shadow"></div>
+            </div>
+            <button class="btn btn--primary btn--lg" type="button" id="openPresentBtn">
+              <span id="openPresentLabel">Open Your Present</span> <i data-icon="sparkles"></i>
+            </button>
+          </div>
+
+          <div class="surprise-reveal" id="surpriseReveal" hidden>
+            <p class="eyebrow eyebrow--center">surprise!</p>
+            <h1 class="surprise-reveal__title">Happy Birthday,<br><em id="surpriseName">you</em></h1>
+            <div class="polaroid polaroid--hero">
+              <span class="tape tape--tl" aria-hidden="true"></span>
+              <span class="tape tape--tr" aria-hidden="true"></span>
+              <img id="surprisePhoto" src="" alt="">
+              <p class="hand polaroid__caption" id="surpriseAge">another year of you</p>
+            </div>
+            <p class="surprise-reveal__message" id="surpriseMessage"></p>
+            <div class="present-card">
+              <span class="present-card__icon"><i data-icon="gift"></i></span>
+              <div>
+                <p class="eyebrow" id="presentTitle">Your present</p>
+                <p class="present-card__desc" id="presentDesc"></p>
+                <p class="hand present-card__note" id="presentNote"></p>
+              </div>
+            </div>
+            <p class="hand surprise-reveal__sign">with all my love, <span id="surpriseSender"></span></p>
+            <div class="surprise-reveal__actions">
+              <button class="btn btn--soft" type="button" id="celebrateBtn"><i data-icon="sparkles"></i> Celebrate again</button>
+              <button class="btn btn--ghost" type="button" id="restartBtn"><i data-icon="replay"></i> Start from the beginning</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom navigation -->
+    <nav class="bottom-nav" id="bottomNav" aria-label="Main" hidden>
+      <a class="bottom-nav__item" href="#home" data-nav="home"><i data-icon="home"></i><span>Home</span></a>
+      <a class="bottom-nav__item" href="#memories" data-nav="memories"><i data-icon="images"></i><span>Memories</span></a>
+      <a class="bottom-nav__item" href="#moments" data-nav="moments"><i data-icon="clock"></i><span>Moments</span></a>
+      <a class="bottom-nav__item" href="#letter" data-nav="letter"><i data-icon="mail"></i><span>Letter</span></a>
+      <a class="bottom-nav__item" href="#surprise" data-nav="surprise"><i data-icon="gift"></i><span>Surprise</span></a>
+    </nav>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+      <div class="lightbox__backdrop" data-lb-close></div>
+      <div class="lightbox__panel">
+        <div class="lightbox__top">
+          <span class="lightbox__counter" id="lbCounter">1 / 1</span>
+          <button class="icon-btn icon-btn--glass" type="button" data-lb-close aria-label="Close photo"><i data-icon="x"></i></button>
+        </div>
+        <figure class="lightbox__figure">
+          <div class="lightbox__frame">
+            <img id="lbImg" src="" alt="">
+          </div>
+          <figcaption class="lightbox__caption">
+            <p class="hand lightbox__date" id="lbDate"></p>
+            <h2 class="lightbox__title" id="lbTitle"></h2>
+            <p class="lightbox__text" id="lbCaption"></p>
+          </figcaption>
+        </figure>
+        <div class="lightbox__controls">
+          <button class="icon-btn icon-btn--light" type="button" id="lbPrev" aria-label="Previous photo"><i data-icon="chevronLeft"></i></button>
+          <a class="btn btn--primary btn--sm" id="lbStory" href="#memories">Read the story <i data-icon="book"></i></a>
+          <button class="icon-btn icon-btn--light" type="button" id="lbNext" aria-label="Next photo"><i data-icon="chevronRight"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opening transition overlay + confetti -->
+    <div class="reveal-overlay" id="revealOverlay" aria-hidden="true"></div>
+    <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <noscript>
+    <p class="noscript">This little gift needs JavaScript turned on to open. 💌</p>
+  </noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
