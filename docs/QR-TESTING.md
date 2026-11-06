@@ -5,8 +5,10 @@ dan apa yang **belum** diuji. Tes otomatis dijalankan di cloud workspace (Linux,
 pada 6 November 2026 dengan URL tujuan `https://farelielj107.github.io/birthday-gift-website/`
 (QR versi 6, 41×41 modul, error correction H, quiet zone 4).
 
-> **Status penting:** belum ada pengujian dengan HP fisik. Google Lens, kamera Android,
-> kamera iPhone, dan scanner WhatsApp **belum diuji**. Lihat checklist di bagian akhir.
+> **Uji di HP fisik:** pemilik website memindai gambar QR hati dengan HP-nya, dan link
+> **berhasil terbuka ke website**. Aplikasi scanner dan jenis HP yang dipakai tidak dicatat.
+> Uji per aplikasi (Google Lens, kamera Android, kamera iPhone, WhatsApp) belum
+> terdokumentasi; lihat checklist di bagian akhir.
 
 ---
 
@@ -125,11 +127,14 @@ bergantian dibaca sebagai potongan tengah dengan resolusi asli dan frame penuh h
 
 ---
 
-## Checklist uji di HP (belum dilakukan)
+## Checklist uji di HP
 
-Lakukan setelah perubahan ini di-merge dan GitHub Pages ter-deploy, karena kamera butuh
-`https://`. Gunakan QR yang **diunduh** dari halaman `#qr`, lalu tampilkan di layar lain atau
-cetak.
+Sudah dilakukan: QR hati dipindai dengan HP pemilik → website terbuka ✅
+(aplikasi scanner tidak dicatat, jadi belum bisa dicentang per aplikasi di bawah).
+
+Sisanya dilakukan setelah perubahan ini di-merge dan GitHub Pages ter-deploy, karena kamera
+butuh `https://`. Gunakan QR yang **diunduh** dari halaman `#qr`, lalu tampilkan di layar lain
+atau cetak.
 
 | # | Uji | Heart | Standard |
 |---|---|---|---|
