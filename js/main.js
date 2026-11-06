@@ -505,6 +505,8 @@
     initLetter();
     initSurprise();
     Music.init();
+    if (window.QRGift) QRGift.init();     // "A Secret Message Just For You"
+    if (window.QRScan) QRScan.init();     // "Scan Your Little Surprise"
     Icons.render(); // icons inside freshly rendered markup
 
     Router.onVisited(updateJourney);

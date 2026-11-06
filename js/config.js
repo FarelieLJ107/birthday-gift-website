@@ -249,5 +249,43 @@ window.BIRTHDAY_CONFIG = {
     giftTitle: "Your Present",
     giftDescription: "A weekend getaway — just the two of us. Pack a small bag, I'll handle the rest.",
     giftNote: "valid forever, redeemable with one hug"
+  },
+
+  /* ---------- QR Gift: "A Secret Message Just For You" ----------
+     QR berbentuk hati yang membuka website ini saat dipindai dengan
+     Google Lens, kamera HP, WhatsApp, atau aplikasi scanner lain.
+
+     destinationUrl : alamat PUBLIK website (GitHub Pages / Netlify).
+                      Jangan pakai localhost, alamat IP, atau link preview.
+     redirectPage   : file tujuan, boleh dikosongkan ("") atau "index.html".
+     redirectHash   : halaman yang dibuka: "" atau "#intro" (pembuka),
+                      "#surprise", "#letter", dst.
+     autoRedirect   : true = scanner internal langsung membuka link, TAPI
+                      hanya untuk link milik website ini sendiri (https).
+                      Link lain selalu menunggu tombol "Open Link".        */
+  qrSettings: {
+    enabled: true,
+
+    destinationUrl: "https://farelielj107.github.io/birthday-gift-website/",
+    redirectPage: "",
+    redirectHash: "",
+
+    autoRedirect: false,
+
+    scannerEnabled: true,
+    allowCameraScanning: true,
+    allowImageUpload: true,
+    allowExternalScanner: true,   // tampilkan panduan scan via Google Lens / kamera
+
+    design: {
+      theme: "romantic-pink",
+      style: "heart",             // tampilan awal: "heart" atau "standard"
+      foreground: "#D83F72",      // warna modul QR (pakai warna yang cukup gelap)
+      background: "#FFFFFF",      // background QR (harus terang)
+      errorCorrection: "H",       // H = paling tahan rusak (30%), wajib untuk QR hati
+      size: 1000,                 // ukuran PNG default (px); ada pilihan 2000 px
+      margin: 4,                  // quiet zone, minimal 4 modul
+      centerHeart: true           // hati kecil di tengah QR (aman berkat level H)
+    }
   }
 };

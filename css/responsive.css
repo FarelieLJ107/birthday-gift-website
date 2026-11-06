@@ -45,7 +45,7 @@
   .memory-grid { grid-auto-rows: 150px; gap: 22px 18px; }
   .hero-card { aspect-ratio: 16 / 13; }
   .h-card { width: 42%; }
-  .reasons-grid { grid-template-columns: repeat(3, 1fr); }
+  .reasons-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .detail-media { max-height: 600px; }
   .t-item__photo { max-width: 340px; }
   .page-title { font-size: 34px; }
@@ -98,7 +98,7 @@
   .hero-card { aspect-ratio: 4 / 4.6; }
   .h-card { width: 62%; }
   .h-scroll--sm .h-card { width: 42%; }
-  .reasons-grid { grid-template-columns: 1fr 1fr; }
+  .reasons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .page-title { font-size: 30px; }
   .detail-media { height: 470px; }
   .lightbox__frame img { max-height: 480px; }
