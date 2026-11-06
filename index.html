@@ -14,6 +14,7 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/qr.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -131,6 +132,14 @@
                 <span>
                   <span class="explore-card__title">Birthday Surprise</span>
                   <span class="explore-card__meta">save this one for last</span>
+                </span>
+                <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
+              </a>
+              <a class="explore-card explore-card--qr explore-card--wide" href="#qr">
+                <span class="explore-card__icon"><i data-icon="qr"></i></span>
+                <span>
+                  <span class="explore-card__title">A Secret Message</span>
+                  <span class="explore-card__meta">a little heart you can scan</span>
                 </span>
                 <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
               </a>
@@ -348,10 +357,149 @@
             </div>
             <p class="hand surprise-reveal__sign">with all my love, <span id="surpriseSender"></span></p>
             <div class="surprise-reveal__actions">
+              <a class="btn btn--primary" href="#qr"><i data-icon="qr"></i> A secret message for you</a>
               <button class="btn btn--soft" type="button" id="celebrateBtn"><i data-icon="sparkles"></i> Celebrate again</button>
               <button class="btn btn--ghost" type="button" id="restartBtn"><i data-icon="replay"></i> Start from the beginning</button>
             </div>
           </div>
+        </div>
+      </section>
+      <!-- ============ 09 · QR GIFT — "A Secret Message Just For You" ============ -->
+      <section class="screen screen--qr" id="screen-qr" data-route="qr" aria-label="QR gift" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">QR Gift</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro page-intro--center">
+            <p class="eyebrow">a secret message just for you</p>
+            <h1 class="page-title">A Little <em>Secret</em></h1>
+            <p class="page-sub">Scan this little heart to discover something special.</p>
+          </div>
+
+          <div class="qr-warn" id="qrWarn" role="alert" hidden></div>
+
+          <div class="qr-card">
+            <span class="qr-card__deco qr-card__deco--1" aria-hidden="true"><i data-icon="heart"></i></span>
+            <span class="qr-card__deco qr-card__deco--2" aria-hidden="true"><i data-icon="heart"></i></span>
+            <span class="qr-card__deco qr-card__deco--3" aria-hidden="true"><i data-icon="sparkles"></i></span>
+            <div class="qr-stage" id="qrPreview" aria-live="polite"></div>
+            <p class="qr-verify" id="qrVerify" role="status" hidden></p>
+          </div>
+
+          <div class="qr-options">
+            <div class="segmented" id="qrStyle" role="radiogroup" aria-label="QR design">
+              <button type="button" role="radio" data-style="heart" aria-checked="true"><i data-icon="heart"></i> Heart</button>
+              <button type="button" role="radio" data-style="standard" aria-checked="false"><i data-icon="qr"></i> Standard</button>
+            </div>
+            <div class="qr-options__row">
+              <label class="switch">
+                <input type="checkbox" id="qrTransparent">
+                <span class="switch__track" aria-hidden="true"></span>
+                <span>Transparent background</span>
+              </label>
+              <label class="select">
+                <span class="sr-only">PNG size</span>
+                <select id="qrRes">
+                  <option value="1000">1000 px</option>
+                  <option value="2000">2000 px (HD)</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="qr-actions">
+            <button class="btn btn--primary" type="button" id="qrDownloadPng"><i data-icon="download"></i> Download PNG</button>
+            <button class="btn btn--soft" type="button" id="qrDownloadSvg"><i data-icon="download"></i> SVG</button>
+            <button class="btn btn--ghost" type="button" id="qrShare"><i data-icon="share"></i> Share</button>
+            <button class="btn btn--ghost" type="button" id="qrCopy"><i data-icon="copy"></i> Copy Link</button>
+          </div>
+
+          <div class="qr-dest">
+            <span class="qr-dest__icon"><i data-icon="link"></i></span>
+            <div class="qr-dest__text">
+              <p class="eyebrow">opens</p>
+              <p class="qr-dest__host" id="qrDestHost">—</p>
+              <a class="qr-dest__url" id="qrDestUrl" target="_blank" rel="noopener noreferrer">—</a>
+            </div>
+          </div>
+          <p class="qr-meta" id="qrMeta"></p>
+
+          <section class="howto" id="qrHowTo" aria-labelledby="howtoTitle">
+            <h2 class="section__title section__title--sm" id="howtoTitle">How to open the secret</h2>
+            <ol class="howto__list">
+              <li><span>1</span><p>Open <strong>Google Lens</strong>, your <strong>phone camera</strong>, or the QR scanner in <strong>WhatsApp</strong>.</p></li>
+              <li><span>2</span><p>Point it at the heart so the whole white square is visible.</p></li>
+              <li><span>3</span><p>Tap the link that appears — your little book opens.</p></li>
+            </ol>
+            <p class="howto__tip hand">if the heart is shy, try the Standard version ♡</p>
+          </section>
+
+          <a class="cta-card" href="#scan">
+            <span class="cta-card__icon"><i data-icon="scan"></i></span>
+            <span><strong>Scan Your Little Surprise</strong><span>Use this website's own QR scanner</span></span>
+            <i data-icon="arrowRight"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ 10 · QR SCANNER — "Scan Your Little Surprise" ============ -->
+      <section class="screen screen--scan" id="screen-scan" data-route="scan" aria-label="QR scanner" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Scanner</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro page-intro--center">
+            <p class="eyebrow">scan your little surprise</p>
+            <h1 class="page-title">Scan a <em>QR Code</em></h1>
+          </div>
+
+          <div class="scanner" id="scanView" data-mode="idle">
+            <video class="scanner__video" id="scanVideo" playsinline muted aria-label="Camera preview"></video>
+            <canvas class="scanner__freeze" id="scanFreeze" hidden aria-hidden="true"></canvas>
+            <img class="scanner__preview" id="scanPreview" alt="Uploaded image" hidden>
+            <div class="scanner__idle" aria-hidden="true">
+              <span class="scanner__idle-icon"><i data-icon="camera"></i></span>
+              <p>Your camera stays off until you tap <strong>Start Camera</strong>.</p>
+            </div>
+            <div class="scanner__frame" aria-hidden="true">
+              <span class="scanner__corner scanner__corner--tl"></span>
+              <span class="scanner__corner scanner__corner--tr"></span>
+              <span class="scanner__corner scanner__corner--bl"></span>
+              <span class="scanner__corner scanner__corner--br"></span>
+              <span class="scanner__line"></span>
+            </div>
+            <p class="scanner__hint">Place the QR Code inside the frame</p>
+          </div>
+
+          <p class="scan-status" id="scanStatus" role="status" aria-live="polite">Tap Start Camera to begin.</p>
+
+          <div class="scan-controls">
+            <button class="btn btn--primary" type="button" id="scanStart"><i data-icon="camera"></i> Start Camera</button>
+            <button class="btn btn--primary" type="button" id="scanStop" hidden><i data-icon="stop"></i> Stop Camera</button>
+            <button class="icon-btn scan-controls__switch" type="button" id="scanSwitch" aria-label="Switch camera" disabled><i data-icon="switchCam"></i></button>
+            <button class="btn btn--ghost" type="button" id="scanUpload"><i data-icon="upload"></i> Upload QR Image</button>
+            <input class="sr-only" type="file" id="scanFile" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" tabindex="-1" aria-hidden="true">
+          </div>
+
+          <div class="scan-result" id="scanResult" hidden>
+            <div class="scan-result__check" aria-hidden="true"><i data-icon="check"></i></div>
+            <h2 class="scan-result__title" id="scanResultTitle" tabindex="-1">QR Code detected!</h2>
+            <p class="chip chip--soft scan-result__badge" id="scanResultBadge" hidden><i data-icon="heart"></i> This is your birthday gift</p>
+            <p class="scan-domain" id="scanResultDomain" hidden></p>
+            <p class="scan-result__value" id="scanResultValue"></p>
+            <div class="scan-result__warn" id="scanResultWarn" hidden></div>
+            <div class="scan-result__actions">
+              <a class="btn btn--primary" id="scanOpen" hidden><i data-icon="external"></i> Open Link</a>
+              <button class="btn btn--soft" type="button" id="scanAgain"><i data-icon="replay"></i> Scan Again</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="scanCopy"><i data-icon="copy"></i> Copy</button>
+            </div>
+          </div>
+
+          <p class="scan-privacy"><i data-icon="lock"></i> Everything is read on your device. Nothing is uploaded or saved.</p>
         </div>
       </section>
     </main>
@@ -407,6 +555,10 @@
   <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/gallery.js"></script>
+  <script src="js/vendor/qrcode-generator.min.js"></script>
+  <script src="js/qr-generator.js"></script>
+  <script src="js/qr-scanner.js"></script>
   <script src="js/main.js"></script>
+  <!-- js/vendor/jsQR.min.js is loaded on demand by qr-scanner.js -->
 </body>
 </html>

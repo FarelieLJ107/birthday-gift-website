@@ -21,7 +21,13 @@ atau API berbayar. Cukup buka `index.html` di browser.
 | 05 | Little Moments | `#moments` | Timeline vertikal dengan polaroid & stiker, statistik hari bersama |
 | 06 | Reasons Why I Love You | `#reasons` | 12 kartu yang bisa dibalik (flip), ledakan hati, progres, tombol "Surprise me", confetti saat semua terbuka |
 | 07 | My Letter | `#letter` | Amplop terbuka, kertas surat bergaris, efek typewriter, "Show all", "Read again" |
-| 08 | Birthday Surprise | `#surprise` | Kado bergetar & tutupnya terbang, confetti, hati & bintang, pesan, foto, kartu hadiah |
+| 08 | Birthday Surprise | `#surprise` | Kado bergetar & tutupnya terbang, confetti, hati & bintang, pesan, foto, kartu hadiah, tombol ke QR Gift |
+| 09 | QR Gift: "A Little Secret" | `#qr` | QR berbentuk hati & QR standar yang berisi URL website, verifikasi scan otomatis, download PNG (1000/2000 px, transparan) & SVG, Share, Copy Link |
+| 10 | QR Scanner: "Scan a QR Code" | `#scan` | Scanner kamera real-time (kamera depan/belakang), upload gambar QR, validasi & pemblokiran link berbahaya |
+
+QR Gift bisa dibuka dari kartu **A Secret Message** di Home dan tombol **A secret message for you**
+di halaman Surprise; scanner dibuka dari halaman QR Gift. Bottom navigation tetap 5 menu
+(di halaman QR & Scanner, menu **Surprise** yang aktif).
 
 Fitur global: bottom navigation (Home · Memories · Moments · Letter · Surprise), transisi
 antarhalaman, scroll reveal, indikator progres scroll di atas layar, tombol kembali,
@@ -37,6 +43,7 @@ birthday-gift-website/
 ├── css/
 │   ├── style.css         ← design system (token warna, font, radius) + komponen
 │   ├── animations.css    ← keyframes, transisi halaman, micro-interactions
+│   ├── qr.css            ← halaman QR Gift & QR Scanner
 │   └── responsive.css    ← tablet & desktop "app preview"
 ├── js/
 │   ├── config.js         ← ✏️ SATU-SATUNYA FILE YANG PERLU DIEDIT
@@ -45,7 +52,15 @@ birthday-gift-website/
 │   ├── animations.js     ← hati melayang, confetti, typewriter, scroll reveal
 │   ├── navigation.js     ← router (#home, #memories, …) + bottom nav
 │   ├── gallery.js        ← galeri, filter, lightbox, halaman detail
-│   └── main.js           ← render semua halaman, surat, kejutan, musik
+│   ├── qr-generator.js   ← QR hati + QR standar, PNG/SVG, share, copy link
+│   ├── qr-scanner.js     ← kamera real-time, upload gambar, validasi URL
+│   ├── main.js           ← render semua halaman, surat, kejutan, musik
+│   └── vendor/           ← library QR open-source (disimpan lokal, tanpa CDN)
+│       ├── qrcode-generator.min.js   (MIT, Kazuhiko Arase)
+│       ├── jsQR.min.js               (Apache-2.0, dimuat hanya saat dibutuhkan)
+│       └── LICENSE-jsQR.txt
+├── docs/
+│   └── QR-TESTING.md     ← hasil pengujian QR + checklist uji di HP
 ├── assets/
 │   ├── images/           ← foto (saat ini berisi ilustrasi placeholder .svg)
 │   ├── music/            ← taruh lagu kamu di sini (our-song.mp3)
@@ -106,6 +121,99 @@ Tambahkan `featured: true` pada item tertentu untuk memilih yang tampil di "Feat
 ### Warna & font
 Token desain ada di bagian atas `css/style.css` (`--primary`, `--secondary`, `--soft`, …).
 Ubah satu variabel dan seluruh website ikut berubah.
+
+---
+
+## QR Gift — "A Secret Message Just For You"
+
+QR berbentuk hati yang membuka website ini saat dipindai dengan Google Lens, kamera HP,
+WhatsApp, atau aplikasi scanner lain. QR-nya **asli dan standar**: isinya URL website, bukan
+gambar yang hanya mirip QR.
+
+### Konfigurasi (`js/config.js` → `qrSettings`)
+
+```js
+qrSettings: {
+  enabled: true,                       // false = sembunyikan semua tautan ke QR Gift
+  destinationUrl: "https://farelielj107.github.io/birthday-gift-website/",
+  redirectPage: "",                    // "" atau "index.html"
+  redirectHash: "",                    // "" / "#intro" = halaman pembuka, "#surprise" = langsung ke kejutan
+  autoRedirect: false,                 // lihat catatan keamanan di bawah
+  scannerEnabled: true,                // false = sembunyikan tautan ke scanner
+  allowCameraScanning: true,           // false = scanner hanya lewat upload gambar
+  allowImageUpload: true,              // false = sembunyikan tombol Upload QR Image
+  allowExternalScanner: true,          // tampilkan panduan scan via Google Lens / kamera
+  design: {
+    theme: "romantic-pink",
+    style: "heart",                    // tampilan awal: "heart" atau "standard"
+    foreground: "#D83F72",             // warna modul (harus cukup gelap)
+    background: "#FFFFFF",             // background (harus terang)
+    errorCorrection: "H",              // wajib H untuk QR hati
+    size: 1000,                        // ukuran PNG default; ada pilihan 2000 px
+    margin: 4,                         // quiet zone (minimal 4, nilai lebih kecil diabaikan)
+    centerHeart: true                  // hati kecil di tengah QR
+  }
+}
+```
+
+- **Ganti `destinationUrl`** jika alamat website berubah (misalnya pindah ke Netlify).
+  QR langsung dibuat ulang dari URL ini. Halaman QR menampilkan peringatan jika URL berupa
+  `localhost`, alamat IP lokal, `http://`, atau masih placeholder (`username`).
+- File QR yang sudah pernah diunduh **tidak ikut berubah**. Unduh ulang setelah mengganti URL.
+- URL yang lebih pendek menghasilkan QR dengan modul lebih besar, sehingga lebih mudah dipindai.
+
+### Cara QR hati tetap bisa dipindai
+
+1. QR dibuat dengan error correction **H** (hingga 30% kode boleh rusak).
+2. QR diletakkan di **kartu putih dengan quiet zone 4 modul**. Hati merah muda tidak pernah
+   menyentuh kode.
+3. **Finder pattern** (tiga kotak di sudut) mempertahankan proporsi standar dan hanya sedikit
+   dibulatkan. Dalam pengujian, sudut yang sangat bulat membuat OpenCV gagal membaca.
+4. Hati kecil di tengah menutupi ±3–4% modul dan hanya dipasang pada QR versi ≤ 6, agar tidak
+   menimpa alignment pattern.
+5. Setiap kali QR dibuat, website **membaca ulang gambar PNG-nya sendiri** di browser dan
+   menampilkan status "Scannable" atau peringatan.
+6. Jika ada scanner yang kesulitan, pilih **Standard** (QR kotak klasik tanpa dekorasi).
+
+### Download & share
+
+| Tombol | Hasil |
+|---|---|
+| Download PNG | `birthday-gift-heart-qr.png` (hati) / `birthday-gift-qr.png` (standar), 1000 px atau 2000 px (HD) |
+| SVG | Versi vektor yang tajam di ukuran berapa pun, cocok untuk dicetak |
+| Transparent background | Area di luar hati menjadi transparan (kartu QR tetap putih). Untuk QR standar, letakkan hanya di atas background terang |
+| Share | Web Share API (mengirim gambar QR + link jika didukung). Di browser lain: link disalin dan PNG diunduh |
+| Copy Link | Menyalin URL tujuan ke clipboard |
+
+### QR Scanner ("Scan Your Little Surprise")
+
+- **Kamera real-time:** kamera baru menyala setelah **Start Camera** ditekan, dengan kamera
+  belakang sebagai prioritas. **Switch Camera** aktif jika perangkat punya lebih dari satu
+  kamera. Kamera dimatikan saat menekan Stop, setelah QR terbaca, saat meninggalkan halaman
+  scanner, dan saat tab disembunyikan.
+- **Mesin pembaca:** memakai `BarcodeDetector` bawaan browser bila tersedia (misalnya Chrome
+  Android), dengan cadangan otomatis **jsQR** (iPhone Safari, Firefox, dan browser lain).
+- **Upload QR Image:** PNG, JPG, JPEG, atau WEBP dari galeri. Tidak butuh izin kamera, dan di
+  desktop bisa juga dengan drag & drop.
+- **Privasi:** semua gambar diproses di HP/komputer pengguna. Tidak ada yang diunggah ke
+  server, dan hasil scan tidak disimpan.
+- **Kamera butuh HTTPS.** `getUserMedia` hanya jalan di halaman `https://` (GitHub Pages atau
+  Netlify) atau `localhost`. Jika website dibuka langsung dari file, scanner kamera
+  menampilkan pesan, sedangkan upload gambar tetap berfungsi.
+
+### Keamanan hasil scan
+
+- Link **tidak pernah dibuka otomatis**. Pengguna harus menekan **Open Link**.
+- Hanya `https://` dan `http://` yang bisa dibuka; `http://` diberi label "Not secure".
+- `javascript:`, `data:`, `vbscript:`, `file:`, `blob:`, `intent:`, dan skema lain **diblokir**
+  (tidak peka huruf besar/kecil maupun spasi di depan).
+- Domain tujuan ditampilkan jelas sebelum dibuka, dengan peringatan untuk link yang
+  menyembunyikan login (`user:pass@`) atau domain dengan karakter mirip (`xn--`).
+- Link ke situs lain dibuka di tab baru dengan `rel="noopener noreferrer"`.
+- `autoRedirect: true` hanya berlaku untuk **URL website ini sendiri** (https). Link lain
+  tetap menunggu tombol.
+
+Hasil pengujian lengkap dan checklist uji di HP ada di [`docs/QR-TESTING.md`](docs/QR-TESTING.md).
 
 ---
 

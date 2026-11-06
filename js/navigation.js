@@ -1,18 +1,19 @@
 /* ==========================================================================
    navigation.js — tiny hash router (works on file:// and GitHub Pages)
    Routes:  #intro  #home  #memories  #memory/<id>  #moments  #reasons
-            #letter  #surprise
+            #letter  #surprise  #qr (QR gift)  #scan (QR scanner)
    ========================================================================== */
 (function () {
   "use strict";
 
-  var ROUTES = ["intro", "home", "memories", "memory", "moments", "reasons", "letter", "surprise"];
-  var NAV_FOR = { home: "home", memories: "memories", memory: "memories", moments: "moments", letter: "letter", surprise: "surprise" };
-  var PARENT = { memory: "memories" };
+  var ROUTES = ["intro", "home", "memories", "memory", "moments", "reasons", "letter", "surprise", "qr", "scan"];
+  var NAV_FOR = { home: "home", memories: "memories", memory: "memories", moments: "moments", letter: "letter", surprise: "surprise", qr: "surprise", scan: "surprise" };
+  var PARENT = { memory: "memories", scan: "qr", qr: "surprise" };
   var NO_NAV = { intro: true, memory: true };
   var JOURNEY = ["memories", "memory", "moments", "reasons", "letter", "surprise"];
 
   var hooks = {};
+  var leaveHooks = {};
   var current = null;        // { name, param, hash }
   var stack = [];            // in-app history of hashes (for back direction)
   var leaveTimer;
@@ -64,6 +65,9 @@
     if (opts.replace) stack[stack.length ? stack.length - 1 : 0] = route.hash;
 
     var prevRoute = current;
+    if (prevRoute && prevRoute.name !== route.name && leaveHooks[prevRoute.name]) {
+      try { leaveHooks[prevRoute.name](route.name); } catch (e) { if (window.console) console.error(e); }
+    }
     current = route;
     updateChrome(route.name);
 
@@ -122,6 +126,7 @@
 
   var Router = {
     on: function (name, fn) { hooks[name] = fn; },
+    onLeave: function (name, fn) { leaveHooks[name] = fn; },
     onVisited: function (fn) { hooks.__visited = fn; },
     current: function () { return current; },
 
@@ -151,6 +156,8 @@
         try { history.replaceState(null, "", "#intro"); } catch (e) { /* file:// in some browsers */ }
       }
       stack = [route.hash];
+      // only the starting screen may be visible (the intro is visible in the HTML by default)
+      U.$$(".screen").forEach(function (sc) { sc.hidden = sc !== screenFor(route.name); });
       show(route, { instant: true });
 
       window.addEventListener("hashchange", function () {
