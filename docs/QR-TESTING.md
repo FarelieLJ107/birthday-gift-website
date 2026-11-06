@@ -5,10 +5,10 @@ dan apa yang **belum** diuji. Tes otomatis dijalankan di cloud workspace (Linux,
 pada 6 November 2026 dengan URL tujuan `https://farelielj107.github.io/birthday-gift-website/`
 (QR versi 6, 41×41 modul, error correction H, quiet zone 4).
 
-> **Uji di HP fisik:** pemilik website memindai gambar QR hati dengan HP-nya, dan link
-> **berhasil terbuka ke website**. Aplikasi scanner dan jenis HP yang dipakai tidak dicatat.
-> Uji per aplikasi (Google Lens, kamera Android, kamera iPhone, WhatsApp) belum
-> terdokumentasi; lihat checklist di bagian akhir.
+> **Uji di HP fisik:** pemilik website memindai gambar QR hati (PNG 1000 px yang dihasilkan
+> website) dengan **Google Lens** di HP-nya, dan link **berhasil terbuka langsung ke website** ✅.
+> Jenis HP tidak dicatat. Kamera bawaan Android/iPhone, WhatsApp, dan scanner internal website
+> belum diuji di HP; lihat checklist di bagian akhir.
 
 ---
 
@@ -129,16 +129,13 @@ bergantian dibaca sebagai potongan tengah dengan resolusi asli dan frame penuh h
 
 ## Checklist uji di HP
 
-Sudah dilakukan: QR hati dipindai dengan HP pemilik → website terbuka ✅
-(aplikasi scanner tidak dicatat, jadi belum bisa dicentang per aplikasi di bawah).
-
-Sisanya dilakukan setelah perubahan ini di-merge dan GitHub Pages ter-deploy, karena kamera
-butuh `https://`. Gunakan QR yang **diunduh** dari halaman `#qr`, lalu tampilkan di layar lain
-atau cetak.
+Fitur QR sudah live di GitHub Pages (`https://`), jadi semua uji di bawah, termasuk scanner
+kamera internal, bisa dilakukan sekarang. Gunakan QR yang **diunduh** dari halaman `#qr`, lalu
+tampilkan di layar lain atau cetak.
 
 | # | Uji | Heart | Standard |
 |---|---|---|---|
-| 1 | Google Lens (Android) | ⬜ | ⬜ |
+| 1 | Google Lens | ✅ website terbuka langsung (jenis HP tidak dicatat) | ⬜ |
 | 2 | Kamera bawaan Android | ⬜ | ⬜ |
 | 3 | Kamera iPhone | ⬜ | ⬜ |
 | 4 | Scanner QR di WhatsApp | ⬜ | ⬜ |
