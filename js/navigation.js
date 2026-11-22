@@ -2,12 +2,13 @@
    navigation.js — tiny hash router (works on file:// and GitHub Pages)
    Routes:  #intro  #home  #memories  #memory/<id>  #moments  #reasons
             #letter  #surprise  #qr (QR gift)  #scan (QR scanner)
+            #quest (Birthday Quest)  #cake (Birthday Cake)  #gifts (Gift collection)
    ========================================================================== */
 (function () {
   "use strict";
 
-  var ROUTES = ["intro", "home", "memories", "memory", "moments", "reasons", "letter", "surprise", "qr", "scan"];
-  var NAV_FOR = { home: "home", memories: "memories", memory: "memories", moments: "moments", letter: "letter", surprise: "surprise", qr: "surprise", scan: "surprise" };
+  var ROUTES = ["intro", "home", "memories", "memory", "moments", "reasons", "letter", "surprise", "qr", "scan", "quest", "cake", "gifts"];
+  var NAV_FOR = { home: "home", memories: "memories", memory: "memories", moments: "moments", letter: "letter", surprise: "surprise", qr: "surprise", scan: "surprise", quest: "surprise", cake: "surprise", gifts: "surprise" };
   var PARENT = { memory: "memories", scan: "qr", qr: "surprise" };
   var NO_NAV = { intro: true, memory: true };
   var JOURNEY = ["memories", "memory", "moments", "reasons", "letter", "surprise"];
