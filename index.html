@@ -14,7 +14,6 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
-  <link rel="stylesheet" href="css/qr.css">
   <link rel="stylesheet" href="css/party.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -133,14 +132,6 @@
                 <span>
                   <span class="explore-card__title">Kejutan Ulang Tahun</span>
                   <span class="explore-card__meta">simpan untuk yang terakhir</span>
-                </span>
-                <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
-              </a>
-              <a class="explore-card explore-card--qr explore-card--wide" href="#qr">
-                <span class="explore-card__icon"><i data-icon="qr"></i></span>
-                <span>
-                  <span class="explore-card__title">Pesan Rahasia</span>
-                  <span class="explore-card__meta">hati kecil yang bisa dipindai</span>
                 </span>
                 <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
               </a>
@@ -381,152 +372,13 @@
             </nav>
             <p class="hand surprise-reveal__sign">dengan segenap cintaku, <span id="surpriseSender"></span></p>
             <div class="surprise-reveal__actions">
-              <a class="btn btn--primary" href="#qr"><i data-icon="qr"></i> Pesan rahasia untukmu</a>
               <button class="btn btn--soft" type="button" id="celebrateBtn"><i data-icon="sparkles"></i> Rayakan lagi</button>
               <button class="btn btn--ghost" type="button" id="restartBtn"><i data-icon="replay"></i> Mulai dari awal</button>
             </div>
           </div>
         </div>
       </section>
-      <!-- ============ 09 · QR GIFT — "A Secret Message Just For You" ============ -->
-      <section class="screen screen--qr" id="screen-qr" data-route="qr" aria-label="Hadiah QR" hidden>
-        <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Hadiah QR</p>
-          <span class="app-header__spacer"></span>
-        </header>
-        <div class="screen__body">
-          <div class="page-intro page-intro--center">
-            <p class="eyebrow">pesan rahasia khusus untukmu</p>
-            <h1 class="page-title">Sebuah <em>Rahasia</em> Kecil</h1>
-            <p class="page-sub">Pindai hati kecil ini untuk menemukan sesuatu yang istimewa.</p>
-          </div>
-
-          <div class="qr-warn" id="qrWarn" role="alert" hidden></div>
-
-          <div class="qr-card">
-            <span class="qr-card__deco qr-card__deco--1" aria-hidden="true"><i data-icon="heart"></i></span>
-            <span class="qr-card__deco qr-card__deco--2" aria-hidden="true"><i data-icon="heart"></i></span>
-            <span class="qr-card__deco qr-card__deco--3" aria-hidden="true"><i data-icon="sparkles"></i></span>
-            <div class="qr-stage" id="qrPreview" aria-live="polite"></div>
-            <p class="qr-verify" id="qrVerify" role="status" hidden></p>
-          </div>
-
-          <div class="qr-options">
-            <div class="segmented" id="qrStyle" role="radiogroup" aria-label="Desain QR">
-              <button type="button" role="radio" data-style="heart" aria-checked="true"><i data-icon="heart"></i> Hati</button>
-              <button type="button" role="radio" data-style="standard" aria-checked="false"><i data-icon="qr"></i> Standar</button>
-            </div>
-            <div class="qr-options__row">
-              <label class="switch">
-                <input type="checkbox" id="qrTransparent">
-                <span class="switch__track" aria-hidden="true"></span>
-                <span>Latar transparan</span>
-              </label>
-              <label class="select">
-                <span class="sr-only">Ukuran PNG</span>
-                <select id="qrRes">
-                  <option value="1000">1000 px</option>
-                  <option value="2000">2000 px (HD)</option>
-                </select>
-              </label>
-            </div>
-          </div>
-
-          <div class="qr-actions">
-            <button class="btn btn--primary" type="button" id="qrDownloadPng"><i data-icon="download"></i> Unduh PNG</button>
-            <button class="btn btn--soft" type="button" id="qrDownloadSvg"><i data-icon="download"></i> SVG</button>
-            <button class="btn btn--ghost" type="button" id="qrShare"><i data-icon="share"></i> Bagikan</button>
-            <button class="btn btn--ghost" type="button" id="qrCopy"><i data-icon="copy"></i> Salin Tautan</button>
-          </div>
-
-          <div class="qr-dest">
-            <span class="qr-dest__icon"><i data-icon="link"></i></span>
-            <div class="qr-dest__text">
-              <p class="eyebrow">membuka</p>
-              <p class="qr-dest__host" id="qrDestHost">—</p>
-              <a class="qr-dest__url" id="qrDestUrl" target="_blank" rel="noopener noreferrer">—</a>
-            </div>
-          </div>
-          <p class="qr-meta" id="qrMeta"></p>
-
-          <section class="howto" id="qrHowTo" aria-labelledby="howtoTitle">
-            <h2 class="section__title section__title--sm" id="howtoTitle">Cara membuka rahasianya</h2>
-            <ol class="howto__list">
-              <li><span>1</span><p>Buka <strong>Google Lens</strong>, <strong>kamera HP</strong>, atau pemindai QR di <strong>WhatsApp</strong>.</p></li>
-              <li><span>2</span><p>Arahkan ke hati sampai seluruh kotak putihnya terlihat.</p></li>
-              <li><span>3</span><p>Ketuk tautan yang muncul — buku kecilmu akan terbuka.</p></li>
-            </ol>
-            <p class="howto__tip hand">kalau hatinya malu-malu, coba versi Standar ♡</p>
-          </section>
-
-          <a class="cta-card" href="#scan">
-            <span class="cta-card__icon"><i data-icon="scan"></i></span>
-            <span><strong>Pindai Kejutan Kecilmu</strong><span>Pakai pemindai QR milik website ini</span></span>
-            <i data-icon="arrowRight"></i>
-          </a>
-        </div>
-      </section>
-
-      <!-- ============ 10 · QR SCANNER — "Scan Your Little Surprise" ============ -->
-      <section class="screen screen--scan" id="screen-scan" data-route="scan" aria-label="Pemindai QR" hidden>
-        <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Pemindai</p>
-          <span class="app-header__spacer"></span>
-        </header>
-        <div class="screen__body">
-          <div class="page-intro page-intro--center">
-            <p class="eyebrow">pindai kejutan kecilmu</p>
-            <h1 class="page-title">Pindai <em>Kode QR</em></h1>
-          </div>
-
-          <div class="scanner" id="scanView" data-mode="idle">
-            <video class="scanner__video" id="scanVideo" playsinline muted aria-label="Pratinjau kamera"></video>
-            <canvas class="scanner__freeze" id="scanFreeze" hidden aria-hidden="true"></canvas>
-            <img class="scanner__preview" id="scanPreview" alt="Gambar yang diunggah" hidden>
-            <div class="scanner__idle" aria-hidden="true">
-              <span class="scanner__idle-icon"><i data-icon="camera"></i></span>
-              <p>Kamera tetap mati sampai kamu mengetuk <strong>Nyalakan Kamera</strong>.</p>
-            </div>
-            <div class="scanner__frame" aria-hidden="true">
-              <span class="scanner__corner scanner__corner--tl"></span>
-              <span class="scanner__corner scanner__corner--tr"></span>
-              <span class="scanner__corner scanner__corner--bl"></span>
-              <span class="scanner__corner scanner__corner--br"></span>
-              <span class="scanner__line"></span>
-            </div>
-            <p class="scanner__hint">Letakkan kode QR di dalam bingkai</p>
-          </div>
-
-          <p class="scan-status" id="scanStatus" role="status" aria-live="polite">Ketuk Nyalakan Kamera untuk mulai.</p>
-
-          <div class="scan-controls">
-            <button class="btn btn--primary" type="button" id="scanStart"><i data-icon="camera"></i> Nyalakan Kamera</button>
-            <button class="btn btn--primary" type="button" id="scanStop" hidden><i data-icon="stop"></i> Matikan Kamera</button>
-            <button class="icon-btn scan-controls__switch" type="button" id="scanSwitch" aria-label="Ganti kamera" disabled><i data-icon="switchCam"></i></button>
-            <button class="btn btn--ghost" type="button" id="scanUpload"><i data-icon="upload"></i> Unggah Gambar QR</button>
-            <input class="sr-only" type="file" id="scanFile" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" tabindex="-1" aria-hidden="true">
-          </div>
-
-          <div class="scan-result" id="scanResult" hidden>
-            <div class="scan-result__check" aria-hidden="true"><i data-icon="check"></i></div>
-            <h2 class="scan-result__title" id="scanResultTitle" tabindex="-1">Kode QR terdeteksi!</h2>
-            <p class="chip chip--soft scan-result__badge" id="scanResultBadge" hidden><i data-icon="heart"></i> Ini hadiah ulang tahunmu</p>
-            <p class="scan-domain" id="scanResultDomain" hidden></p>
-            <p class="scan-result__value" id="scanResultValue"></p>
-            <div class="scan-result__warn" id="scanResultWarn" hidden></div>
-            <div class="scan-result__actions">
-              <a class="btn btn--primary" id="scanOpen" hidden><i data-icon="external"></i> Buka Tautan</a>
-              <button class="btn btn--soft" type="button" id="scanAgain"><i data-icon="replay"></i> Pindai Lagi</button>
-              <button class="btn btn--ghost btn--sm" type="button" id="scanCopy"><i data-icon="copy"></i> Salin</button>
-            </div>
-          </div>
-
-          <p class="scan-privacy"><i data-icon="lock"></i> Semuanya dibaca di perangkatmu. Tidak ada yang diunggah atau disimpan.</p>
-        </div>
-      </section>
-      <!-- ============ 11 · BIRTHDAY QUEST — mini treasure hunt ============ -->
+      <!-- ============ 09 · BIRTHDAY QUEST — mini treasure hunt ============ -->
       <section class="screen screen--quest" id="screen-quest" data-route="quest" aria-label="Misi ulang tahun" hidden>
         <header class="app-header">
           <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
@@ -587,7 +439,7 @@
         </div>
       </section>
 
-      <!-- ============ 12 · INTERACTIVE BIRTHDAY CAKE ============ -->
+      <!-- ============ 10 · INTERACTIVE BIRTHDAY CAKE ============ -->
       <section class="screen screen--cake" id="screen-cake" data-route="cake" aria-label="Kue ulang tahun" hidden>
         <header class="app-header">
           <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
@@ -636,7 +488,7 @@
         </div>
       </section>
 
-      <!-- ============ 13 · MULTIPLE BIRTHDAY GIFTS ============ -->
+      <!-- ============ 11 · MULTIPLE BIRTHDAY GIFTS ============ -->
       <section class="screen screen--gifts" id="screen-gifts" data-route="gifts" aria-label="Hadiah ulang tahun" hidden>
         <header class="app-header">
           <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
@@ -719,13 +571,9 @@
   <script src="js/animations.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/gallery.js"></script>
-  <script src="js/vendor/qrcode-generator.min.js"></script>
-  <script src="js/qr-generator.js"></script>
-  <script src="js/qr-scanner.js"></script>
   <script src="js/quest.js"></script>
   <script src="js/cake.js"></script>
   <script src="js/gifts.js"></script>
   <script src="js/main.js"></script>
-  <!-- js/vendor/jsQR.min.js is loaded on demand by qr-scanner.js -->
 </body>
 </html>

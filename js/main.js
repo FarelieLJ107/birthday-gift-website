@@ -505,8 +505,6 @@
     initLetter();
     initSurprise();
     Music.init();
-    if (window.QRGift) QRGift.init();     // "A Secret Message Just For You"
-    if (window.QRScan) QRScan.init();     // "Scan Your Little Surprise"
     if (window.Quest) Quest.init();       // Birthday Quest (before Gifts: the final gift listens to it)
     if (window.BirthdayCake) BirthdayCake.init();
     if (window.Gifts) Gifts.init();

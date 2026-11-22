@@ -22,19 +22,15 @@ atau API berbayar. Cukup buka `index.html` di browser.
 | 05 | Momen Kecil | `#moments` | Timeline vertikal dengan polaroid & stiker, statistik hari bersama |
 | 06 | Alasan Aku Sayang Kamu | `#reasons` | 12 kartu yang bisa dibalik (flip), ledakan hati, progres, tombol "Kejutkan aku", confetti saat semua terbuka |
 | 07 | Suratku | `#letter` | Amplop terbuka, kertas surat bergaris, efek typewriter, "Tampilkan semua", "Baca lagi" |
-| 08 | Kejutan Ulang Tahun | `#surprise` | Kado bergetar & tutupnya terbang, confetti, hati & bintang, pesan, foto, kartu hadiah, tombol ke Hadiah QR |
-| 09 | Hadiah QR: "Sebuah Rahasia Kecil" | `#qr` | QR berbentuk hati & QR standar yang berisi URL website, verifikasi scan otomatis, unduh PNG (1000/2000 px, transparan) & SVG, Bagikan, Salin Tautan |
-| 10 | Pemindai QR: "Pindai Kode QR" | `#scan` | Scanner kamera real-time (kamera depan/belakang), upload gambar QR, validasi & pemblokiran link berbahaya |
-| 11 | Misi Ulang Tahun | `#quest` | Mini treasure hunt 3 tahap: objek tersembunyi, trivia ringan, puzzle foto; 3 token + progress + final unlock |
-| 12 | Kue Ulang Tahun | `#cake` | Kue dengan lilin menyala, Buat Permohonan, Tiup Lilinnya (tombol, tanpa mikrofon), confetti + ucapan, nyalakan lagi |
-| 13 | Hadiah Ulang Tahunmu | `#gifts` | 4 kotak hadiah (pesan lucu, foto, voice note, surat final), animasi buka, bisa dibuka ulang; hadiah terakhir terbuka setelah Misi selesai |
+| 08 | Kejutan Ulang Tahun | `#surprise` | Kado bergetar & tutupnya terbang, confetti, hati & bintang, pesan, foto, kartu hadiah, tautan ke Misi/Kue/Hadiah |
+| 09 | Misi Ulang Tahun | `#quest` | Mini treasure hunt 3 tahap: objek tersembunyi, trivia ringan, puzzle foto; 3 token + progress + final unlock |
+| 10 | Kue Ulang Tahun | `#cake` | Kue dengan lilin menyala, Buat Permohonan, Tiup Lilinnya (tombol, tanpa mikrofon), confetti + ucapan, nyalakan lagi |
+| 11 | Hadiah Ulang Tahunmu | `#gifts` | 4 kotak hadiah (pesan lucu, foto, voice note, surat final), animasi buka, bisa dibuka ulang; hadiah terakhir terbuka setelah Misi selesai |
 
 Misi, Kue, dan Hadiah dibuka dari kartu di grid **Buka halaman** (Beranda) dan dari tautan
 **Tiup lilinnya · Buka hadiahmu · Misi Ulang Tahun** di halaman Kejutan.
 
-Hadiah QR bisa dibuka dari kartu **Pesan Rahasia** di Beranda dan tombol **Pesan rahasia untukmu**
-di halaman Kejutan; pemindai dibuka dari halaman Hadiah QR. Bottom navigation tetap 5 menu
-(di halaman QR, Pemindai, Misi, Kue, dan Hadiah, menu **Kejutan** yang aktif).
+Bottom navigation tetap 5 menu; di halaman Misi, Kue, dan Hadiah, menu **Kejutan** yang aktif.
 
 Fitur global: bottom navigation (Beranda · Kenangan · Momen · Surat · Kejutan), transisi
 antarhalaman, scroll reveal, indikator progres scroll di atas layar, tombol kembali,
@@ -50,7 +46,6 @@ birthday-gift-website/
 ├── css/
 │   ├── style.css         ← design system (token warna, font, radius) + komponen
 │   ├── animations.css    ← keyframes, transisi halaman, micro-interactions
-│   ├── qr.css            ← halaman QR Gift & QR Scanner
 │   ├── party.css         ← Birthday Quest, Birthday Cake, Gift collection
 │   └── responsive.css    ← tablet & desktop "app preview"
 ├── js/
@@ -60,18 +55,10 @@ birthday-gift-website/
 │   ├── animations.js     ← hati melayang, confetti, typewriter, scroll reveal
 │   ├── navigation.js     ← router (#home, #memories, …) + bottom nav
 │   ├── gallery.js        ← galeri, filter, lightbox, halaman detail
-│   ├── qr-generator.js   ← QR hati + QR standar, PNG/SVG, share, copy link
-│   ├── qr-scanner.js     ← kamera real-time, upload gambar, validasi URL
 │   ├── quest.js          ← Birthday Quest: token, objek tersembunyi, trivia, puzzle
 │   ├── cake.js           ← kue interaktif (wish → tiup lilin → perayaan)
 │   ├── gifts.js          ← koleksi kado, modal isi kado, kunci gift terakhir
-│   ├── main.js           ← render semua halaman, surat, kejutan, musik
-│   └── vendor/           ← library QR open-source (disimpan lokal, tanpa CDN)
-│       ├── qrcode-generator.min.js   (MIT, Kazuhiko Arase)
-│       ├── jsQR.min.js               (Apache-2.0, dimuat hanya saat dibutuhkan)
-│       └── LICENSE-jsQR.txt
-├── docs/
-│   └── QR-TESTING.md     ← hasil pengujian QR + checklist uji di HP
+│   └── main.js           ← render semua halaman, surat, kejutan, musik
 ├── assets/
 │   ├── images/           ← foto (saat ini berisi ilustrasi placeholder .svg)
 │   ├── music/            ← taruh lagu kamu di sini (our-song.mp3)
@@ -188,99 +175,6 @@ Progres disimpan di browser penerima memakai penyimpanan yang sama dengan fitur 
 - Saat voice note diputar, musik latar otomatis di-pause.
 - **Konten Gift 01, 02, dan 04 saat ini adalah contoh.** Gift 02 memakai ilustrasi placeholder
   yang sudah ada. Ganti dengan lelucon pribadi, foto/screenshot, dan surat kalian sendiri.
-
----
-
-## Hadiah QR — "Pesan Rahasia Khusus Untukmu"
-
-QR berbentuk hati yang membuka website ini saat dipindai dengan Google Lens, kamera HP,
-WhatsApp, atau aplikasi scanner lain. QR-nya **asli dan standar**: isinya URL website, bukan
-gambar yang hanya mirip QR.
-
-### Konfigurasi (`js/config.js` → `qrSettings`)
-
-```js
-qrSettings: {
-  enabled: true,                       // false = sembunyikan semua tautan ke QR Gift
-  destinationUrl: "https://farelielj107.github.io/birthday-gift-website/",
-  redirectPage: "",                    // "" atau "index.html"
-  redirectHash: "",                    // "" / "#intro" = halaman pembuka, "#surprise" = langsung ke kejutan
-  autoRedirect: false,                 // lihat catatan keamanan di bawah
-  scannerEnabled: true,                // false = sembunyikan tautan ke scanner
-  allowCameraScanning: true,           // false = scanner hanya lewat upload gambar
-  allowImageUpload: true,              // false = sembunyikan tombol Upload QR Image
-  allowExternalScanner: true,          // tampilkan panduan scan via Google Lens / kamera
-  design: {
-    theme: "romantic-pink",
-    style: "heart",                    // tampilan awal: "heart" atau "standard"
-    foreground: "#D83F72",             // warna modul (harus cukup gelap)
-    background: "#FFFFFF",             // background (harus terang)
-    errorCorrection: "H",              // wajib H untuk QR hati
-    size: 1000,                        // ukuran PNG default; ada pilihan 2000 px
-    margin: 4,                         // quiet zone (minimal 4, nilai lebih kecil diabaikan)
-    centerHeart: true                  // hati kecil di tengah QR
-  }
-}
-```
-
-- **Ganti `destinationUrl`** jika alamat website berubah (misalnya pindah ke Netlify).
-  QR langsung dibuat ulang dari URL ini. Halaman QR menampilkan peringatan jika URL berupa
-  `localhost`, alamat IP lokal, `http://`, atau masih placeholder (`username`).
-- File QR yang sudah pernah diunduh **tidak ikut berubah**. Unduh ulang setelah mengganti URL.
-- URL yang lebih pendek menghasilkan QR dengan modul lebih besar, sehingga lebih mudah dipindai.
-
-### Cara QR hati tetap bisa dipindai
-
-1. QR dibuat dengan error correction **H** (hingga 30% kode boleh rusak).
-2. QR diletakkan di **kartu putih dengan quiet zone 4 modul**. Hati merah muda tidak pernah
-   menyentuh kode.
-3. **Finder pattern** (tiga kotak di sudut) mempertahankan proporsi standar dan hanya sedikit
-   dibulatkan. Dalam pengujian, sudut yang sangat bulat membuat OpenCV gagal membaca.
-4. Hati kecil di tengah menutupi ±3–4% modul dan hanya dipasang pada QR versi ≤ 6, agar tidak
-   menimpa alignment pattern.
-5. Setiap kali QR dibuat, website **membaca ulang gambar PNG-nya sendiri** di browser dan
-   menampilkan status "Bisa dipindai" atau peringatan.
-6. Jika ada scanner yang kesulitan, pilih **Standar** (QR kotak klasik tanpa dekorasi).
-
-### Unduh & bagikan
-
-| Tombol | Hasil |
-|---|---|
-| Unduh PNG | `birthday-gift-heart-qr.png` (hati) / `birthday-gift-qr.png` (standar), 1000 px atau 2000 px (HD) |
-| SVG | Versi vektor yang tajam di ukuran berapa pun, cocok untuk dicetak |
-| Latar transparan | Area di luar hati menjadi transparan (kartu QR tetap putih). Untuk QR standar, letakkan hanya di atas background terang |
-| Bagikan | Web Share API (mengirim gambar QR + link jika didukung). Di browser lain: link disalin dan PNG diunduh |
-| Salin Tautan | Menyalin URL tujuan ke clipboard |
-
-### Pemindai QR ("Pindai Kejutan Kecilmu")
-
-- **Kamera real-time:** kamera baru menyala setelah **Nyalakan Kamera** ditekan, dengan kamera
-  belakang sebagai prioritas. Tombol **Ganti kamera** aktif jika perangkat punya lebih dari satu
-  kamera. Kamera dimatikan saat menekan **Matikan Kamera**, setelah QR terbaca, saat meninggalkan halaman
-  scanner, dan saat tab disembunyikan.
-- **Mesin pembaca:** memakai `BarcodeDetector` bawaan browser bila tersedia (misalnya Chrome
-  Android), dengan cadangan otomatis **jsQR** (iPhone Safari, Firefox, dan browser lain).
-- **Unggah Gambar QR:** PNG, JPG, JPEG, atau WEBP dari galeri. Tidak butuh izin kamera, dan di
-  desktop bisa juga dengan drag & drop.
-- **Privasi:** semua gambar diproses di HP/komputer pengguna. Tidak ada yang diunggah ke
-  server, dan hasil scan tidak disimpan.
-- **Kamera butuh HTTPS.** `getUserMedia` hanya jalan di halaman `https://` (GitHub Pages atau
-  Netlify) atau `localhost`. Jika website dibuka langsung dari file, scanner kamera
-  menampilkan pesan, sedangkan upload gambar tetap berfungsi.
-
-### Keamanan hasil scan
-
-- Link **tidak pernah dibuka otomatis**. Pengguna harus menekan **Buka Tautan**.
-- Hanya `https://` dan `http://` yang bisa dibuka; `http://` diberi label "Tidak aman".
-- `javascript:`, `data:`, `vbscript:`, `file:`, `blob:`, `intent:`, dan skema lain **diblokir**
-  (tidak peka huruf besar/kecil maupun spasi di depan).
-- Domain tujuan ditampilkan jelas sebelum dibuka, dengan peringatan untuk link yang
-  menyembunyikan login (`user:pass@`) atau domain dengan karakter mirip (`xn--`).
-- Link ke situs lain dibuka di tab baru dengan `rel="noopener noreferrer"`.
-- `autoRedirect: true` hanya berlaku untuk **URL website ini sendiri** (https). Link lain
-  tetap menunggu tombol.
-
-Hasil pengujian lengkap dan checklist uji di HP ada di [`docs/QR-TESTING.md`](docs/QR-TESTING.md).
 
 ---
 
