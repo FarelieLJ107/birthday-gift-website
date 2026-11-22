@@ -26,232 +26,232 @@ window.BIRTHDAY_CONFIG = {
 
   /* ---------- Tanggal penting ---------- */
   birthday: "1999-11-12",       // tanggal lahir — tahun dipakai untuk menghitung umur
-  showAge: true,                // tampilkan "turning 27" di dashboard
+  showAge: true,                // tampilkan "menuju 27" di dashboard
   firstMet: "2023-02-14",       // tanggal pertama bertemu / jadian
 
   /* ---------- Halaman pembuka ---------- */
   intro: {
-    title: "A Little Surprise For You",
-    subtitle: "Someone made something special just for you.",
-    button: "Open Your Gift"
+    title: "Sebuah Kejutan Kecil Untukmu",
+    subtitle: "Seseorang membuat sesuatu yang istimewa khusus untukmu.",
+    button: "Buka Hadiahmu"
   },
 
   /* ---------- Dashboard ---------- */
   home: {
-    greeting: "Hello, birthday girl",     // sapaan kecil di header
-    headline: "Happy Birthday, My Favorite Person",
+    greeting: "Halo, yang lagi ulang tahun",     // sapaan kecil di header
+    headline: "Selamat Ulang Tahun, Orang Favoritku",
     heroPhoto: "assets/images/hero.svg",
-    heroCaption: "the best thing that ever happened to me",
-    note: "I made this little book so you can carry a piece of us wherever you go. Take your time, open every page, and remember — every page is about you."
+    heroCaption: "hal terbaik yang pernah terjadi dalam hidupku",
+    note: "Aku membuat buku kecil ini supaya kamu bisa membawa sepotong cerita kita ke mana pun kamu pergi. Pelan-pelan saja, buka setiap halamannya, dan ingat — setiap halaman ini tentang kamu."
   },
 
   /* ---------- Musik latar ----------
      Musik TIDAK diputar otomatis — penerima menekan tombol musik dulu. */
   music: {
     src: "assets/music/our-song.mp3",
-    title: "Our Song",
-    artist: "for you, always",
+    title: "Lagu Kita",
+    artist: "untukmu, selalu",
     fallbackMelody: true,        // true = mainkan melodi music box jika file tidak ada
-    playOnGiftOpen: true         // true = musik mulai saat tombol "Open Your Gift" ditekan
+    playOnGiftOpen: true         // true = musik mulai saat tombol "Buka Hadiahmu" ditekan
   },
 
-  /* ---------- Our Memories (galeri + halaman detail) ----------
+  /* ---------- Kenangan Kita (galeri + halaman detail) ----------
      size  : "normal" | "tall" | "wide"  (mengatur bentuk kartu di grid)
      tag   : kategori untuk filter chip di atas galeri
      extraPhotos : foto tambahan di halaman detail (boleh kosong [])          */
   memories: [
     {
       id: "first-photo",
-      title: "Our First Photo",
+      title: "Foto Pertama Kita",
       date: "2023-02-18",
-      tag: "Dates",
+      tag: "Kencan",
       size: "tall",
       photo: "assets/images/memory-01.svg",
-      caption: "Blurry, awkward, and my favorite picture ever.",
-      story: "We didn't even know how to stand next to each other yet. You laughed right when the shutter clicked, and I've been chasing that laugh ever since.",
-      note: "you said delete it. I never did.",
-      location: "Little café on 5th street",
+      caption: "Buram, canggung, dan tetap foto favoritku sepanjang masa.",
+      story: "Waktu itu kita bahkan belum tahu cara berdiri berdampingan. Kamu tertawa tepat saat kamera berbunyi, dan sejak itu aku terus mengejar tawa itu.",
+      note: "kamu bilang hapus aja. aku nggak pernah hapus.",
+      location: "Kafe kecil di ujung jalan",
       extraPhotos: ["assets/images/memory-02.svg", "assets/images/memory-03.svg"]
     },
     {
       id: "coffee-dates",
-      title: "Endless Coffee Dates",
+      title: "Kencan Kopi Tanpa Akhir",
       date: "2023-04-02",
-      tag: "Dates",
+      tag: "Kencan",
       size: "normal",
       photo: "assets/images/memory-02.svg",
-      caption: "Two cups, a hundred stories.",
-      story: "Every Sunday became our Sunday. Your order never changes, and somehow that's one of my favorite things about you.",
-      note: "oat latte, less sugar. I remember.",
-      location: "Our usual corner",
+      caption: "Dua cangkir, seratus cerita.",
+      story: "Setiap Minggu jadi Minggu kita. Pesananmu tidak pernah berubah, dan entah kenapa itu salah satu hal favoritku tentangmu.",
+      note: "oat latte, gulanya sedikit. aku ingat.",
+      location: "Sudut favorit kita",
       extraPhotos: ["assets/images/memory-01.svg"]
     },
     {
       id: "sunset-walk",
-      title: "The Golden Hour Walk",
+      title: "Jalan Sore di Golden Hour",
       date: "2023-07-21",
-      tag: "Trips",
+      tag: "Jalan-jalan",
       size: "wide",
       photo: "assets/images/memory-03.svg",
-      caption: "The sky was pink, and so were your cheeks.",
-      story: "We walked until the sun gave up. You stopped to take a picture of the sky, and I took a picture of you instead.",
-      note: "best view: you.",
-      location: "Hill behind the city",
+      caption: "Langitnya merah muda, begitu juga pipimu.",
+      story: "Kita berjalan sampai mataharinya menyerah. Kamu berhenti untuk memotret langit, dan aku malah memotret kamu.",
+      note: "pemandangan terbaik: kamu.",
+      location: "Bukit di belakang kota",
       extraPhotos: ["assets/images/memory-05.svg", "assets/images/memory-04.svg"]
     },
     {
       id: "flower-market",
-      title: "Flower Market Morning",
+      title: "Pagi di Pasar Bunga",
       date: "2023-09-09",
-      tag: "Trips",
+      tag: "Jalan-jalan",
       size: "normal",
       photo: "assets/images/memory-04.svg",
-      caption: "You picked the tiniest bouquet.",
-      story: "You spent twenty minutes choosing between two almost identical bouquets. I bought both when you weren't looking.",
-      note: "they lasted 9 days. I counted.",
-      location: "Saturday flower market",
+      caption: "Kamu memilih buket paling mungil.",
+      story: "Kamu menghabiskan dua puluh menit memilih di antara dua buket yang hampir sama. Diam-diam aku membeli keduanya.",
+      note: "bunganya bertahan 9 hari. aku menghitungnya.",
+      location: "Pasar bunga hari Sabtu",
       extraPhotos: []
     },
     {
       id: "birthday-balloons",
-      title: "Your Last Birthday",
+      title: "Ulang Tahunmu Tahun Lalu",
       date: "2023-11-12",
-      tag: "Celebrations",
+      tag: "Perayaan",
       size: "tall",
       photo: "assets/images/memory-05.svg",
-      caption: "Balloons everywhere, smile even bigger.",
-      story: "I tried so hard to keep it a secret and failed by noon. You pretended to be surprised anyway, which is exactly why I love you.",
-      note: "this year I kept the secret. 🤍",
-      location: "Your living room",
+      caption: "Balon di mana-mana, senyummu lebih lebar lagi.",
+      story: "Aku sudah berusaha keras merahasiakannya dan gagal sebelum siang. Kamu tetap pura-pura terkejut, dan justru itu alasan aku sayang kamu.",
+      note: "tahun ini rahasianya aman. 🤍",
+      location: "Ruang tamu rumahmu",
       extraPhotos: ["assets/images/memory-07.svg"]
     },
     {
       id: "late-night-talks",
-      title: "Late Night Talks",
+      title: "Obrolan Tengah Malam",
       date: "2024-01-30",
-      tag: "Silly",
+      tag: "Konyol",
       size: "normal",
       photo: "assets/images/memory-06.svg",
-      caption: "3 a.m. and still not sleepy.",
-      story: "We talked about everything and nothing — aliens, our future dog, the perfect fried rice. I didn't want the night to end.",
-      note: "our future dog is named Mochi.",
-      location: "On the phone, as always",
+      caption: "Jam 3 pagi dan masih belum ngantuk.",
+      story: "Kita membicarakan segalanya dan bukan apa-apa — alien, anjing kita nanti, nasi goreng yang sempurna. Aku tidak ingin malam itu berakhir.",
+      note: "anjing kita nanti namanya Mochi.",
+      location: "Lewat telepon, seperti biasa",
       extraPhotos: []
     },
     {
       id: "anniversary",
-      title: "One Year of Us",
+      title: "Setahun Bersama",
       date: "2024-02-14",
-      tag: "Celebrations",
+      tag: "Perayaan",
       size: "wide",
       photo: "assets/images/memory-07.svg",
-      caption: "365 days, and I'd choose you every single one.",
-      story: "A whole year of you. We went back to the café where it all started and ordered the exact same things.",
-      note: "here's to forever, okay?",
-      location: "Where it all began",
+      caption: "365 hari, dan aku akan memilihmu di setiap harinya.",
+      story: "Satu tahun penuh bersamamu. Kita kembali ke kafe tempat semuanya dimulai dan memesan menu yang persis sama.",
+      note: "untuk selamanya, ya?",
+      location: "Tempat semuanya dimulai",
       extraPhotos: ["assets/images/memory-01.svg", "assets/images/memory-02.svg"]
     },
     {
       id: "little-notes",
-      title: "Your Little Notes",
+      title: "Catatan-Catatan Kecilmu",
       date: "2024-06-05",
-      tag: "Silly",
+      tag: "Konyol",
       size: "normal",
       photo: "assets/images/memory-08.svg",
-      caption: "I keep every one of them.",
-      story: "Sticky notes in my bag, on my mirror, inside my books. Tiny reminders that someone out there is thinking about me.",
-      note: "the 'drink water!!' one is my favorite.",
-      location: "Everywhere",
+      caption: "Aku menyimpan semuanya.",
+      story: "Sticky note di tasku, di cermin, di dalam buku-bukuku. Pengingat kecil bahwa ada seseorang yang sedang memikirkanku.",
+      note: "yang 'jangan lupa minum air!!' itu favoritku.",
+      location: "Di mana-mana",
       extraPhotos: []
     }
   ],
 
-  /* ---------- Little Moments (timeline) ---------- */
+  /* ---------- Momen Kecil (lini masa) ---------- */
   moments: [
     {
       date: "2023-02-14",
-      title: "The Day We Met",
+      title: "Hari Kita Bertemu",
       photo: "assets/images/moment-01.svg",
-      story: "A random Tuesday that turned into the most important day of my year. I still remember what you were wearing.",
+      story: "Selasa biasa yang berubah jadi hari terpenting di tahun itu. Aku masih ingat baju yang kamu pakai.",
       sticker: "heart"
     },
     {
       date: "2023-02-18",
-      title: "Our First Picture",
+      title: "Foto Pertama Kita",
       photo: "assets/images/moment-02.svg",
-      story: "Four days later — one photo, slightly out of focus, completely perfect.",
+      story: "Empat hari kemudian — satu foto, sedikit buram, tapi benar-benar sempurna.",
       sticker: "star"
     },
     {
       date: "2023-07-21",
-      title: "Our Favorite Moment",
+      title: "Momen Favorit Kita",
       photo: "assets/images/moment-03.svg",
-      story: "Golden hour, sore feet, and the first time you held my hand without me asking.",
+      story: "Golden hour, kaki pegal, dan pertama kalinya kamu menggenggam tanganku tanpa kuminta.",
       sticker: "flower"
     },
     {
       date: "2024-01-30",
-      title: "Little Things I Remember",
+      title: "Hal-Hal Kecil yang Kuingat",
       photo: "assets/images/moment-04.svg",
-      story: "How you hum when you cook. How you say 'wait wait wait' before every punchline. I remember all of it.",
+      story: "Caramu bersenandung saat memasak. Caramu bilang 'bentar bentar bentar' sebelum setiap lelucon. Aku ingat semuanya.",
       sticker: "sparkles"
     },
     {
       date: "today",                 // "today" = otomatis tanggal hari ini
-      title: "Today, Your Special Day",
+      title: "Hari Ini, Hari Spesialmu",
       photo: "assets/images/moment-05.svg",
-      story: "And now here we are. Another year of you in this world — the luckiest thing for all of us, especially me.",
+      story: "Dan sekarang, di sinilah kita. Satu tahun lagi kamu ada di dunia ini — keberuntungan terbesar bagi kami semua, terutama aku.",
       sticker: "gift"
     }
   ],
 
-  /* ---------- Reasons Why I Love You ----------
+  /* ---------- Alasan Aku Sayang Kamu ----------
      icon: heart | smile | sun | coffee | moon | flower | star | sparkles |
            book | music | shield | feather | camera | gift                     */
   reasons: [
-    { icon: "smile",    title: "Your laugh",            description: "It's loud, it's contagious, and it fixes my worst days in about three seconds." },
-    { icon: "sun",      title: "You're my morning",     description: "Your 'good morning' text is the first thing I look for every single day." },
-    { icon: "shield",   title: "You make me feel safe", description: "With you I never have to pretend. I can just be me, and that's enough." },
-    { icon: "coffee",   title: "Our little rituals",    description: "Sunday coffee, Friday movies, the way we always share dessert." },
-    { icon: "heart",    title: "Your kind heart",       description: "You're gentle with everyone — strangers, animals, even me when I'm grumpy." },
-    { icon: "star",     title: "You dream big",         description: "Watching you chase your goals makes me want to be better too." },
-    { icon: "moon",     title: "Late night you",        description: "Sleepy, silly, honest you at 2 a.m. is one of my favorite people." },
-    { icon: "book",     title: "You remember things",   description: "The small details I mention once — you keep them like treasures." },
-    { icon: "music",    title: "Your terrible singing", description: "Off-key in the car, full volume, zero shame. Never stop." },
-    { icon: "flower",   title: "You make things pretty",description: "Flowers on the table, doodles on receipts — you make ordinary days lovely." },
-    { icon: "feather",  title: "Your patience",         description: "You wait for me, explain things twice, and never make me feel small." },
-    { icon: "sparkles", title: "Simply, you're you",    description: "There isn't a reason big enough. It's just you — all of you — always." }
+    { icon: "smile",    title: "Tawamu",                description: "Keras, menular, dan bisa memperbaiki hari terburukku dalam sekitar tiga detik." },
+    { icon: "sun",      title: "Kamu pagiku",           description: "Pesan 'selamat pagi' darimu adalah hal pertama yang kucari setiap hari." },
+    { icon: "shield",   title: "Kamu membuatku tenang", description: "Di dekatmu aku tidak perlu berpura-pura. Aku cukup jadi diriku sendiri, dan itu sudah cukup." },
+    { icon: "coffee",   title: "Ritual kecil kita",     description: "Kopi hari Minggu, nonton film hari Jumat, dan cara kita selalu berbagi makanan penutup." },
+    { icon: "heart",    title: "Hatimu yang baik",      description: "Kamu lembut pada semua orang — orang asing, hewan, bahkan aku saat sedang cemberut." },
+    { icon: "star",     title: "Mimpimu besar",         description: "Melihatmu mengejar cita-cita membuatku ingin jadi lebih baik juga." },
+    { icon: "moon",     title: "Kamu di tengah malam",  description: "Kamu yang mengantuk, konyol, dan jujur jam 2 pagi adalah salah satu orang favoritku." },
+    { icon: "book",     title: "Kamu selalu ingat",     description: "Detail kecil yang hanya sekali kusebut — kamu simpan seperti harta karun." },
+    { icon: "music",    title: "Suara nyanyianmu",      description: "Fals di mobil, volume penuh, tanpa malu sedikit pun. Jangan pernah berhenti." },
+    { icon: "flower",   title: "Kamu membuat segalanya indah", description: "Bunga di meja, coretan di struk belanja — kamu membuat hari biasa jadi menyenangkan." },
+    { icon: "feather",  title: "Kesabaranmu",           description: "Kamu menungguku, menjelaskan dua kali, dan tidak pernah membuatku merasa kecil." },
+    { icon: "sparkles", title: "Karena kamu adalah kamu", description: "Tidak ada alasan yang cukup besar. Hanya kamu — seutuhnya — selalu." }
   ],
 
-  /* ---------- My Letter ---------- */
+  /* ---------- Suratku ---------- */
   letter: {
-    title: "A Letter Just For You",
-    subtitle: "Sealed with love, opened only by you.",
-    button: "Open My Letter",
-    greeting: "Dear Lia,",
+    title: "Surat Khusus Untukmu",
+    subtitle: "Disegel dengan cinta, hanya untuk dibuka olehmu.",
+    button: "Buka Suratku",
+    greeting: "Lia sayang,",
     paragraphs: [
-      "Happy birthday, my love. I've rewritten this letter more times than I want to admit, because no words ever feel big enough for you.",
-      "Thank you for every ordinary day you turned into something I want to remember. For the patience, the laughter, the late-night talks and the quiet mornings.",
-      "I hope this year is soft to you. I hope it gives you everything you've been brave enough to wish for — and I hope I get to be right there next to you for all of it.",
-      "No matter where we are or how busy life gets, please remember this: you are so, so loved."
+      "Selamat ulang tahun, sayang. Aku sudah menulis ulang surat ini lebih sering dari yang ingin kuakui, karena tidak ada kata yang terasa cukup besar untukmu.",
+      "Terima kasih untuk setiap hari biasa yang kamu ubah menjadi sesuatu yang ingin kuingat. Untuk kesabaranmu, tawamu, obrolan tengah malam, dan pagi-pagi yang tenang.",
+      "Semoga tahun ini lembut padamu. Semoga tahun ini memberimu semua yang sudah berani kamu harapkan — dan semoga aku bisa ada tepat di sampingmu untuk semuanya.",
+      "Di mana pun kita berada dan sesibuk apa pun hidup nanti, tolong ingat ini: kamu sangat, sangat dicintai."
     ],
-    closing: "Forever yours,",
+    closing: "Selamanya milikmu,",
     signature: "Rafi"
   },
 
-  /* ---------- Birthday Surprise ---------- */
+  /* ---------- Kejutan Ulang Tahun ---------- */
   surprise: {
-    title: "One Last Surprise",
-    subtitle: "You made it to the very last page.",
-    button: "Open Your Present",
-    message: "Happy Birthday, Lia! Thank you for being the most beautiful part of my life. This is only the beginning of another year full of us.",
+    title: "Satu Kejutan Terakhir",
+    subtitle: "Kamu sudah sampai di halaman paling akhir.",
+    button: "Buka Kadomu",
+    message: "Selamat ulang tahun, Lia! Terima kasih sudah menjadi bagian terindah dalam hidupku. Ini baru awal dari satu tahun lagi yang penuh dengan kita.",
     photo: "assets/images/surprise-photo.svg",
-    giftTitle: "Your Present",
-    giftDescription: "A weekend getaway — just the two of us. Pack a small bag, I'll handle the rest.",
-    giftNote: "valid forever, redeemable with one hug"
+    giftTitle: "Kadomu",
+    giftDescription: "Liburan akhir pekan — hanya kita berdua. Siapkan tas kecil, sisanya biar aku yang urus.",
+    giftNote: "berlaku selamanya, bisa ditukar dengan satu pelukan"
   },
 
-  /* ---------- QR Gift: "A Secret Message Just For You" ----------
+  /* ---------- Hadiah QR: "Pesan Rahasia Khusus Untukmu" ----------
      QR berbentuk hati yang membuka website ini saat dipindai dengan
      Google Lens, kamera HP, WhatsApp, atau aplikasi scanner lain.
 
@@ -262,7 +262,7 @@ window.BIRTHDAY_CONFIG = {
                       "#surprise", "#letter", dst.
      autoRedirect   : true = scanner internal langsung membuka link, TAPI
                       hanya untuk link milik website ini sendiri (https).
-                      Link lain selalu menunggu tombol "Open Link".        */
+                      Link lain selalu menunggu tombol "Buka Tautan".      */
   qrSettings: {
     enabled: true,
 
@@ -289,7 +289,7 @@ window.BIRTHDAY_CONFIG = {
     }
   },
 
-  /* ---------- Birthday Quest: mini treasure hunt (3 token) ----------
+  /* ---------- Misi Ulang Tahun: perburuan harta karun mini (3 token) ----------
      Quest 1  hiddenObject : ikon kecil tersembunyi di salah satu halaman.
                              page: "home" | "memories" | "moments" | "reasons" | "letter"
                              icon: "star" | "heart" | "gift" | "sparkles" | "flower"
@@ -302,86 +302,86 @@ window.BIRTHDAY_CONFIG = {
      Quest 3  puzzle       : susun ulang potongan foto (ketuk 2 kotak untuk menukar). */
   quest: {
     enabled: true,
-    title: "Birthday Quest",
-    subtitle: "Three tiny challenges, three tokens, one last gift.",
+    title: "Misi Ulang Tahun",
+    subtitle: "Tiga tantangan kecil, tiga token, satu hadiah terakhir.",
     hiddenObject: {
       page: "moments",
       icon: "star",
-      hint: "A tiny star is hiding somewhere in Little Moments. Look closely ✨",
-      foundMessage: "You found it! Token 1 is yours."
+      hint: "Ada bintang kecil yang bersembunyi di halaman Momen Kecil. Lihat baik-baik ✨",
+      foundMessage: "Ketemu! Token 1 jadi milikmu."
     },
     trivia: {
-      intro: "Just for fun — there are no wrong people here, only wrong answers.",
+      intro: "Cuma buat seru-seruan — tidak ada orang yang salah di sini, hanya jawaban yang salah.",
       questions: []
     },
     puzzle: {
       image: "assets/images/hero.svg",   // foto untuk puzzle (persegi lebih bagus)
       grid: 3,                           // 3 = 3×3 kotak (2–4)
-      intro: "Tap two pieces to swap them until the picture is whole again."
+      intro: "Ketuk dua potongan untuk menukarnya sampai gambarnya utuh lagi."
     },
-    completeMessage: "All three tokens collected. Your final gift is unlocked!"
+    completeMessage: "Ketiga token sudah terkumpul. Hadiah terakhirmu sudah terbuka!"
   },
 
-  /* ---------- Interactive Birthday Cake ---------- */
+  /* ---------- Kue Ulang Tahun Interaktif ---------- */
   cake: {
     enabled: true,
     candles: 3,                          // jumlah lilin (1–9)
-    wishMessage: "Close your eyes and make a wish…",
-    wishHint: "Take your time. When you're ready, blow out the candles.",
-    celebrationTitle: "Happy Birthday!",
-    celebrationMessage: "May every wish you just made find its way to you."
+    wishMessage: "Pejamkan mata dan buat permohonan…",
+    wishHint: "Pelan-pelan saja. Kalau sudah siap, tiup lilinnya.",
+    celebrationTitle: "Selamat Ulang Tahun!",
+    celebrationMessage: "Semoga setiap permohonan yang baru saja kamu buat menemukan jalannya padamu."
   },
 
-  /* ---------- Multiple Birthday Gifts ----------
+  /* ---------- Koleksi Hadiah Ulang Tahun ----------
      type: "message" | "photos" | "audio" | "letter"
      Semua teks & file bisa diganti tanpa mengubah kode. Isi `insideJoke`
      dengan lelucon pribadi kalian (kosong = tidak ditampilkan).
      Audio: taruh file di assets/audio/ lalu tulis path-nya di `audio`.
-     Gift dengan `requiresQuest: true` baru terbuka setelah Birthday Quest selesai. */
+     Gift dengan `requiresQuest: true` baru terbuka setelah Misi Ulang Tahun selesai. */
   gifts: {
     enabled: true,
-    title: "Your Birthday Gifts",
-    subtitle: "Four little boxes. Open them in any order — except the last one.",
+    title: "Hadiah Ulang Tahunmu",
+    subtitle: "Empat kotak kecil. Buka dengan urutan apa pun — kecuali yang terakhir.",
     items: [
       {
         id: "funny",
         type: "message",
-        label: "Something silly",
-        title: "A Gift of Pure Nonsense",
-        message: "Warning: this box contains 100% affection, 0% calories, and absolutely no refunds.",
+        label: "Sesuatu yang konyol",
+        title: "Hadiah Penuh Kekonyolan",
+        message: "Peringatan: kotak ini berisi 100% kasih sayang, 0% kalori, dan tidak bisa dikembalikan.",
         insideJoke: "",
-        note: "laugh first, ask questions later"
+        note: "ketawa dulu, tanya belakangan"
       },
       {
         id: "memory",
         type: "photos",
-        label: "A digital memory",
-        title: "A Little Memory Box",
-        message: "A few pictures I keep coming back to.",
+        label: "Kenangan digital",
+        title: "Kotak Kenangan Kecil",
+        message: "Beberapa foto yang selalu ingin kulihat lagi.",
         photos: [
-          { src: "assets/images/memory-01.svg", caption: "Our First Photo" },
-          { src: "assets/images/memory-03.svg", caption: "The Golden Hour Walk" },
-          { src: "assets/images/memory-07.svg", caption: "One Year of Us" }
+          { src: "assets/images/memory-01.svg", caption: "Foto Pertama Kita" },
+          { src: "assets/images/memory-03.svg", caption: "Jalan Sore di Golden Hour" },
+          { src: "assets/images/memory-07.svg", caption: "Setahun Bersama" }
         ]
       },
       {
         id: "voice",
         type: "audio",
-        label: "Press play",
-        title: "A Voice Note For You",
-        message: "Find a quiet spot and turn the volume up.",
+        label: "Tekan putar",
+        title: "Pesan Suara Untukmu",
+        message: "Cari tempat yang tenang dan besarkan volumenya.",
         audio: "assets/audio/birthday-message.mp3",
-        missingMessage: "The voice note is still being recorded — check back soon ♡"
+        missingMessage: "Pesan suaranya masih direkam — coba lagi nanti ya ♡"
       },
       {
         id: "final",
         type: "letter",
-        label: "The final gift",
-        title: "The Last Little Thing",
-        message: "You found every token, solved every puzzle, and opened every box. The real gift was never inside a box — it's getting to celebrate you, today and every year after.",
+        label: "Hadiah terakhir",
+        title: "Satu Hal Kecil Terakhir",
+        message: "Kamu sudah menemukan setiap token, menyelesaikan setiap puzzle, dan membuka setiap kotak. Hadiah yang sebenarnya tidak pernah ada di dalam kotak — melainkan kesempatan untuk merayakanmu, hari ini dan setiap tahun setelahnya.",
         signature: "",                   // kosong = pakai sender.name
         requiresQuest: true,
-        lockedMessage: "This one opens after you finish the Birthday Quest."
+        lockedMessage: "Hadiah ini terbuka setelah kamu menyelesaikan Misi Ulang Tahun."
       }
     ]
   }

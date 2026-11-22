@@ -26,7 +26,7 @@
     var deco = "";
     if (i % 3 === 0) deco = '<span class="tape ' + (i % 2 ? "tape--tr" : "tape--tl") + (i % 4 === 0 ? "" : " tape--cream") + '" aria-hidden="true"></span>';
     else if (i % 3 === 1) deco = '<span class="sticker" style="--rot:' + (i * 17 % 30 - 15) + 'deg" aria-hidden="true">' + Icons.svg(STICKERS[i % STICKERS.length]) + "</span>";
-    return '<button type="button" class="memory-card' + size + '" data-id="' + U.esc(m.id) + '" style="--rot:' + ROT[i % ROT.length] + 'deg" aria-label="Open photo: ' + U.esc(m.title) + '">' +
+    return '<button type="button" class="memory-card' + size + '" data-id="' + U.esc(m.id) + '" style="--rot:' + ROT[i % ROT.length] + 'deg" aria-label="Buka foto: ' + U.esc(m.title) + '">' +
       deco +
       U.img(m.photo, m.title, "memory-card__img") +
       '<span class="memory-card__cap"><span class="memory-card__title">' + U.esc(m.title) + '</span>' +
@@ -36,7 +36,7 @@
   function renderGrid() {
     var grid = document.getElementById("memoryGrid");
     if (!memories.length) {
-      grid.innerHTML = '<p class="page-sub">Add memories in <code>js/config.js</code> to fill this page.</p>';
+      grid.innerHTML = '<p class="page-sub">Tambahkan kenangan di <code>js/config.js</code> untuk mengisi halaman ini.</p>';
       return;
     }
     grid.innerHTML = memories.map(cardHTML).join("");
@@ -50,7 +50,7 @@
 
   function renderFilters() {
     var wrap = document.getElementById("memoryFilters");
-    var tags = ["All"];
+    var tags = ["Semua"];
     memories.forEach(function (m) { if (m.tag && tags.indexOf(m.tag) === -1) tags.push(m.tag); });
     if (tags.length < 3) { wrap.hidden = true; return; }
     wrap.innerHTML = tags.map(function (t, i) {
@@ -66,10 +66,10 @@
 
   function applyFilter(tag) {
     var n = 0;
-    visible = memories.filter(function (m) { return tag === "All" || m.tag === tag; });
+    visible = memories.filter(function (m) { return tag === "Semua" || m.tag === tag; });
     U.$$("#memoryGrid .memory-card").forEach(function (card) {
       var m = byId(card.dataset.id);
-      var show = tag === "All" || m.tag === tag;
+      var show = tag === "Semua" || m.tag === tag;
       card.classList.toggle("is-filtered-out", !show);
       card.classList.remove("is-appearing");
       if (show) {
@@ -201,12 +201,12 @@
     if (photos.length > 1) {
       thumbs.hidden = false;
       thumbs.innerHTML = photos.map(function (p, i) {
-        return '<button type="button" data-src="' + U.esc(p) + '" aria-label="Show photo ' + (i + 1) + '" aria-current="' + (i === 0) + '">' + U.img(p, "") + "</button>";
+        return '<button type="button" data-src="' + U.esc(p) + '" aria-label="Tampilkan foto ' + (i + 1) + '" aria-current="' + (i === 0) + '">' + U.img(p, "") + "</button>";
       }).join("");
     } else { thumbs.hidden = true; thumbs.innerHTML = ""; }
 
-    U.setText("detailTag", m.tag || "Memory");
-    U.setText("detailCount", "Memory " + (m.index + 1) + " of " + memories.length);
+    U.setText("detailTag", m.tag || "Kenangan");
+    U.setText("detailCount", "Kenangan " + (m.index + 1) + " dari " + memories.length);
     U.setText("detailTitle", m.title);
     U.setText("detailDate", dateLabel(m));
     U.setText("detailLocation", m.location || "");
@@ -229,7 +229,7 @@
     var favs = U.store.get("favorites", []);
     var on = favs.indexOf(m.id) > -1;
     fav.setAttribute("aria-pressed", String(on));
-    fav.setAttribute("aria-label", on ? "Remove from favorites" : "Mark as favorite");
+    fav.setAttribute("aria-label", on ? "Hapus dari favorit" : "Tandai sebagai favorit");
     fav.dataset.id = m.id;
   }
 
@@ -255,9 +255,9 @@
       U.store.set("favorites", favs);
       var on = i === -1;
       fav.setAttribute("aria-pressed", String(on));
-      fav.setAttribute("aria-label", on ? "Remove from favorites" : "Mark as favorite");
+      fav.setAttribute("aria-label", on ? "Hapus dari favorit" : "Tandai sebagai favorit");
       fav.classList.remove("is-popping"); void fav.offsetWidth; fav.classList.add("is-popping");
-      if (on) { Anim.burst(e.clientX || fav.getBoundingClientRect().left + 24, e.clientY || fav.getBoundingClientRect().top + 24); U.toast("Saved to your favorites ♡"); }
+      if (on) { Anim.burst(e.clientX || fav.getBoundingClientRect().left + 24, e.clientY || fav.getBoundingClientRect().top + 24); U.toast("Disimpan ke favorit ♡"); }
     });
   }
 

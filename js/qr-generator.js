@@ -41,18 +41,18 @@
       url = new URL(raw || "invalid:");
       if (!/^https?:$/.test(url.protocol)) throw new Error("protocol");
     } catch (e) {
-      return { ok: false, url: "", host: "", warnings: ["The destination URL in js/config.js (qrSettings.destinationUrl) is not a valid web address."] };
+      return { ok: false, url: "", host: "", warnings: ["URL tujuan di js/config.js (qrSettings.destinationUrl) bukan alamat web yang valid."] };
     }
     if (S.redirectPage) url = new URL(String(S.redirectPage).replace(/^\//, ""), url);
     if (S.redirectHash) url.hash = String(S.redirectHash).replace(/^#?/, "#");
 
     var h = url.hostname;
-    if (url.protocol !== "https:") warnings.push("The destination uses http:// — use the https:// address from GitHub Pages or Netlify.");
+    if (url.protocol !== "https:") warnings.push("Tujuan memakai http:// — gunakan alamat https:// dari GitHub Pages atau Netlify.");
     if (/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1\]?$)/.test(h) || /\.local$/.test(h) || /^\d+\.\d+\.\d+\.\d+$/.test(h)) {
-      warnings.push("The destination is a local address (" + h + "). Other phones cannot open it — use your public website URL.");
+      warnings.push("Tujuan berupa alamat lokal (" + h + "). HP lain tidak bisa membukanya — gunakan URL publik website-mu.");
     }
     if (/username|your-?name|example\.com/i.test(url.href)) {
-      warnings.push("The destination still looks like a placeholder. Put your real website URL in js/config.js.");
+      warnings.push("Tujuan masih terlihat seperti placeholder. Isi URL website aslimu di js/config.js.");
     }
     return { ok: true, url: url.href, host: h, warnings: warnings };
   }
@@ -61,7 +61,7 @@
      QR matrix (qrcode-generator, UTF-8, auto version)
      ====================================================================== */
   function makeMatrix(text) {
-    if (typeof window.qrcode !== "function") throw new Error("QR library failed to load");
+    if (typeof window.qrcode !== "function") throw new Error("Library QR gagal dimuat");
     qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"];
     var qr = qrcode(0, ECL);
     qr.addData(text, "Byte");
@@ -235,7 +235,7 @@
       }
       body += '<path d="' + o.d + '" fill="' + fill + '"' + (o.opacity != null ? ' fill-opacity="' + o.opacity + '"' : "") + (o.rule ? ' fill-rule="' + o.rule + '"' : "") + "/>";
     });
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + f(dr.w) + " " + f(dr.h) + '" width="' + f(dr.w) + '" height="' + f(dr.h) + '" role="img" aria-label="' + U.esc(label || "QR code") + '">' +
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + f(dr.w) + " " + f(dr.h) + '" width="' + f(dr.w) + '" height="' + f(dr.h) + '" role="img" aria-label="' + U.esc(label || "Kode QR") + '">' +
       (defs ? "<defs>" + defs + "</defs>" : "") + body + "</svg>";
   }
 
@@ -305,25 +305,25 @@
       (state.transparent ? "-transparent" : "") + (state.res > 1000 ? "-" + state.res : "") + "." + ext;
   }
 
-  function label() { return "QR code that opens " + (state.dest ? state.dest.host : "the birthday website"); }
+  function label() { return "Kode QR yang membuka " + (state.dest ? state.dest.host : "website ulang tahun"); }
 
   function render() {
     var stage = document.getElementById("qrPreview");
     var verify = document.getElementById("qrVerify");
     if (!state.dest.ok) {
-      stage.innerHTML = '<p class="qr-empty">Add your website address in <code>js/config.js</code> to create the QR code.</p>';
+      stage.innerHTML = '<p class="qr-empty">Tambahkan alamat website-mu di <code>js/config.js</code> untuk membuat kode QR.</p>';
       verify.hidden = true;
       return;
     }
     var dr;
     // on screen the heart floats on the card (its QR keeps its own white card either way)
     try { dr = design(state.dest.url, state.style, 720, state.transparent || state.style === "heart"); }
-    catch (e) { stage.innerHTML = '<p class="qr-empty">The QR code could not be created (' + U.esc(e.message) + ").</p>"; return; }
+    catch (e) { stage.innerHTML = '<p class="qr-empty">Kode QR tidak bisa dibuat (' + U.esc(e.message) + ").</p>"; return; }
     stage.innerHTML = toSVG(dr, label());
     stage.classList.toggle("is-standard", state.style === "standard");
     stage.classList.toggle("is-transparent", state.transparent);
     stage.classList.remove("is-new"); void stage.offsetWidth; stage.classList.add("is-new");
-    U.setText("qrMeta", "QR version " + dr.matrix.version + " · " + dr.matrix.n + "×" + dr.matrix.n + " modules · error correction " + ECL + " · quiet zone " + MARGIN);
+    U.setText("qrMeta", "QR versi " + dr.matrix.version + " · " + dr.matrix.n + "×" + dr.matrix.n + " modul · koreksi error " + ECL + " · zona tepi " + MARGIN);
     verifyCurrent();
   }
 
@@ -335,7 +335,7 @@
     var token = ++verifyToken;
     el.hidden = false;
     el.className = "qr-verify is-checking";
-    el.innerHTML = Icons.svg("scan") + "<span>Checking that this QR scans…</span>";
+    el.innerHTML = Icons.svg("scan") + "<span>Memeriksa apakah QR ini bisa dipindai…</span>";
     var dr = design(state.dest.url, state.style, 1000, false);  // same art, on white like a printed/shared image
     var cv = toCanvas(dr);
     setTimeout(function () {
@@ -344,15 +344,15 @@
         if (token !== verifyToken) return;
         if (res && res.text === state.dest.url) {
           el.className = "qr-verify is-ok";
-          el.innerHTML = Icons.svg("check") + "<span>Scannable — decoded in your browser with " + U.esc(res.engine) + "</span>";
+          el.innerHTML = Icons.svg("check") + "<span>Bisa dipindai — terbaca di browser-mu dengan " + U.esc(res.engine) + "</span>";
         } else {
           el.className = "qr-verify is-bad";
-          el.innerHTML = Icons.svg("alert") + "<span>This version could not be verified. Try the Standard QR.</span>";
+          el.innerHTML = Icons.svg("alert") + "<span>Versi ini tidak bisa diverifikasi. Coba QR Standar.</span>";
         }
       }, function () {
         if (token !== verifyToken) return;
         el.className = "qr-verify is-bad";
-        el.innerHTML = Icons.svg("alert") + "<span>Verification unavailable in this browser.</span>";
+        el.innerHTML = Icons.svg("alert") + "<span>Verifikasi tidak tersedia di browser ini.</span>";
       });
     }, 60);
   }
@@ -362,18 +362,18 @@
     var dr = design(state.dest.url, state.style, state.res, state.transparent);
     if (kind === "svg") {
       saveBlob(new Blob([toSVG(dr, label())], { type: "image/svg+xml" }), fileName("svg"));
-      U.toast("SVG saved ♡");
+      U.toast("SVG tersimpan ♡");
       return;
     }
-    canvasToBlob(toCanvas(dr)).then(function (b) { saveBlob(b, fileName("png")); U.toast("QR code saved ♡"); },
-      function () { U.toast("Sorry, this browser could not create the image."); });
+    canvasToBlob(toCanvas(dr)).then(function (b) { saveBlob(b, fileName("png")); U.toast("Kode QR tersimpan ♡"); },
+      function () { U.toast("Maaf, browser ini tidak bisa membuat gambarnya."); });
   }
 
   function share() {
     if (!state.dest.ok) return;
     var url = state.dest.url;
-    var title = "A Secret Message Just For You";
-    var text = "Scan this little heart (or open the link) to discover something special.";
+    var title = "Pesan Rahasia Khusus Untukmu";
+    var text = "Pindai hati kecil ini (atau buka tautannya) untuk menemukan sesuatu yang istimewa.";
     var dr = design(state.dest.url, state.style, 1000, false);
     canvasToBlob(toCanvas(dr)).then(function (blob) {
       var file = null;
@@ -385,11 +385,11 @@
       // fallback: copy the link and save the image
       return copyText(url).then(function (ok) {
         saveBlob(blob, fileName("png"));
-        U.toast(ok ? "Sharing isn't supported here — link copied & QR saved" : "QR saved. Copy the link below to share it.", 3600);
+        U.toast(ok ? "Berbagi tidak didukung di sini — tautan disalin & QR disimpan" : "QR tersimpan. Salin tautan di bawah untuk membagikannya.", 3600);
       });
     }).catch(function (err) {
       if (err && err.name === "AbortError") return;    // user closed the share sheet
-      copyText(url).then(function (ok) { U.toast(ok ? "Link copied — paste it anywhere ♡" : "Couldn't share. Copy the link below instead."); });
+      copyText(url).then(function (ok) { U.toast(ok ? "Tautan disalin — tempel di mana saja ♡" : "Gagal membagikan. Salin tautan di bawah saja."); });
     });
   }
 
@@ -407,7 +407,7 @@
       warn.hidden = false;
       warn.innerHTML = Icons.svg("alert") + "<div>" + state.dest.warnings.map(function (w) { return "<p>" + U.esc(w) + "</p>"; }).join("") + "</div>";
     }
-    U.setText("qrDestHost", state.dest.host || "not set");
+    U.setText("qrDestHost", state.dest.host || "belum diatur");
     var link = document.getElementById("qrDestUrl");
     link.textContent = state.dest.url || "—";
     if (state.dest.ok) link.href = state.dest.url; else link.removeAttribute("href");
@@ -437,8 +437,8 @@
       state.transparent = tr.checked;
       render();
       if (tr.checked) U.toast(state.style === "heart"
-        ? "The QR keeps its white card, so it still scans."
-        : "Tip: only place a transparent QR on a light background.", 3400);
+        ? "QR tetap berada di kartu putih, jadi masih bisa dipindai."
+        : "Tips: letakkan QR transparan hanya di atas latar yang terang.", 3400);
     });
 
     var res = document.getElementById("qrRes");
@@ -450,7 +450,7 @@
     document.getElementById("qrShare").addEventListener("click", share);
     document.getElementById("qrCopy").addEventListener("click", function () {
       if (!state.dest.ok) return;
-      copyText(state.dest.url).then(function (ok) { U.toast(ok ? "Link copied ♡" : "Couldn't copy — press and hold the link to copy it."); });
+      copyText(state.dest.url).then(function (ok) { U.toast(ok ? "Tautan disalin ♡" : "Gagal menyalin — tekan lama tautannya untuk menyalin."); });
     });
 
     var rendered = false;

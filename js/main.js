@@ -8,17 +8,17 @@
   var C = window.BIRTHDAY_CONFIG || {};
   var partner = C.partner || {};
   var sender = C.sender || {};
-  var displayName = partner.nickname || partner.name || "you";
+  var displayName = partner.nickname || partner.name || "kamu";
 
   /* ======================================================================
      INTRO
      ====================================================================== */
   function initIntro() {
     var intro = C.intro || {};
-    U.setText("introTitle", intro.title || "A Little Surprise For You");
-    U.setText("introSubtitle", intro.subtitle || "Someone made something special just for you.");
-    U.setText("openGiftLabel", intro.button || "Open Your Gift");
-    U.setText("introTo", "for " + displayName);
+    U.setText("introTitle", intro.title || "Sebuah Kejutan Kecil Untukmu");
+    U.setText("introSubtitle", intro.subtitle || "Seseorang membuat sesuatu yang istimewa khusus untukmu.");
+    U.setText("openGiftLabel", intro.button || "Buka Hadiahmu");
+    U.setText("introTo", "untuk " + displayName);
     Anim.floatingHearts(document.getElementById("introHearts"), { count: 16 });
 
     var btn = document.getElementById("openGiftBtn");
@@ -44,7 +44,7 @@
           gift.classList.remove("is-opening");
           wrap.classList.remove("is-leaving");
           busy = false;
-          if (!Music.isPlaying()) U.toast("Tip: tap ♪ at the top for our song", 3200);
+          if (!Music.isPlaying()) U.toast("Tips: ketuk ♪ di atas untuk memutar lagu kita", 3200);
         }, 520);
       }, total);
     }
@@ -60,10 +60,10 @@
     var home = C.home || {};
     var avatar = document.getElementById("homeAvatar");
     U.setImg(avatar, partner.photo, displayName);
-    U.setText("homeGreeting", home.greeting || "Hello");
+    U.setText("homeGreeting", home.greeting || "Halo");
     U.setText("homeName", partner.name || displayName);
-    U.setImg(document.getElementById("heroImg"), home.heroPhoto, "A photo of " + displayName);
-    U.setText("heroHeadline", home.headline || "Happy Birthday, My Favorite Person");
+    U.setImg(document.getElementById("heroImg"), home.heroPhoto, "Foto " + displayName);
+    U.setText("heroHeadline", home.headline || "Selamat Ulang Tahun, Orang Favoritku");
     U.setText("heroCaption", home.heroCaption || "");
     U.setText("homeNote", home.note || "");
     U.setText("homeSender", sender.name || "");
@@ -73,15 +73,15 @@
     var age = document.getElementById("ageChip");
     if (C.showAge !== false && nb.age > 0 && nb.age < 130) {
       age.hidden = false;
-      age.textContent = nb.isToday ? nb.age + " today" : "turning " + nb.age;
+      age.textContent = nb.isToday ? nb.age + " hari ini" : "menuju " + nb.age;
     }
 
     var met = U.parseDate(C.firstMet);
     var together = Math.max(0, U.daysBetween(met, U.today()));
-    U.setText("daysTogether", together.toLocaleString("en-US"));
+    U.setText("daysTogether", U.formatNumber(together));
 
-    U.setText("exploreMemoriesMeta", (C.memories || []).length + " photos");
-    U.setText("exploreReasonsMeta", (C.reasons || []).length + " reasons");
+    U.setText("exploreMemoriesMeta", (C.memories || []).length + " foto");
+    U.setText("exploreReasonsMeta", (C.reasons || []).length + " alasan");
 
     tickCountdown(nb);
   }
@@ -91,7 +91,7 @@
     var todayMsg = document.getElementById("countdownToday");
     if (nb.isToday) {
       cd.hidden = true; todayMsg.hidden = false;
-      U.setText("countdownLabel", "Today is the day");
+      U.setText("countdownLabel", "Hari ini harinya");
       return;
     }
     var els = {};
@@ -109,7 +109,7 @@
     clearInterval(countdownTimer);
     countdownTimer = setInterval(update, 1000);
     cd.setAttribute("aria-live", "off"); // don't announce every second
-    cd.setAttribute("aria-label", "Countdown to " + U.formatDate(nb.date));
+    cd.setAttribute("aria-label", "Hitung mundur ke " + U.formatDate(nb.date));
   }
 
   function updateJourney(visited) {
@@ -134,23 +134,23 @@
       var d = U.parseDate(m.date);
       var isLast = i === list.length - 1;
       var isToday = m.date === "today" || d.getTime() === U.today().getTime();
-      var special = isLast && isToday || (isLast && /today/i.test(m.title || ""));
+      var special = isLast && isToday || (isLast && /today|hari ini/i.test(m.title || ""));
       var sticker = Icons.has(m.sticker) ? m.sticker : "heart";
       return '<li class="t-item reveal' + (special ? " t-item--today" : "") + '" style="--d:' + (i ? 60 : 0) + 'ms">' +
         '<span class="t-item__dot" aria-hidden="true">' + Icons.svg(sticker) + "</span>" +
         '<div class="t-item__body">' +
-          '<p class="t-item__date">' + U.esc(isToday ? "Today · " + U.formatDate(d) : U.formatDate(d)) + "</p>" +
+          '<p class="t-item__date">' + U.esc(isToday ? "Hari ini · " + U.formatDate(d) : U.formatDate(d)) + "</p>" +
           '<h2 class="t-item__title">' + U.esc(m.title) + "</h2>" +
           (m.photo ? '<div class="polaroid t-item__photo" style="--rot:' + rots[i % rots.length] + 'deg">' +
             '<span class="tape ' + (i % 2 ? "tape--tr tape--cream" : "tape--tl") + '" aria-hidden="true"></span>' +
             U.img(m.photo, m.title) + "</div>" : "") +
           '<p class="t-item__story">' + U.esc(m.story) + "</p>" +
-          (special ? '<a class="btn btn--primary btn--sm t-item__cta" href="#surprise">Open your surprise ' + Icons.svg("gift") + "</a>" : "") +
+          (special ? '<a class="btn btn--primary btn--sm t-item__cta" href="#surprise">Buka kejutanmu ' + Icons.svg("gift") + "</a>" : "") +
         "</div></li>";
     }).join("");
 
     var met = U.parseDate(C.firstMet);
-    U.setText("momentsDays", Math.max(0, U.daysBetween(met, U.today())).toLocaleString("en-US"));
+    U.setText("momentsDays", U.formatNumber(Math.max(0, U.daysBetween(met, U.today()))));
     U.setText("momentsCount", list.length);
   }
 
@@ -165,17 +165,17 @@
     grid.innerHTML = reasons.map(function (r, i) {
       var num = String(i + 1).padStart(2, "0");
       var icon = Icons.has(r.icon) ? r.icon : "heart";
-      return '<button type="button" class="reason-card' + (read.indexOf(i) > -1 ? " is-read" : "") + '" data-i="' + i + '" aria-pressed="false" aria-label="Reason ' + (i + 1) + ': ' + U.esc(r.title) + '">' +
+      return '<button type="button" class="reason-card' + (read.indexOf(i) > -1 ? " is-read" : "") + '" data-i="' + i + '" aria-pressed="false" aria-label="Alasan ' + (i + 1) + ': ' + U.esc(r.title) + '">' +
         '<span class="reason-card__inner">' +
           '<span class="reason-card__face reason-card__front">' +
             '<span class="reason-card__num">No. ' + num + "</span>" +
             '<span class="reason-card__icon">' + Icons.svg(icon) + "</span>" +
             '<span class="reason-card__title">' + U.esc(r.title) + "</span>" +
-            '<span class="reason-card__tap">tap to open</span>' +
+            '<span class="reason-card__tap">ketuk untuk membuka</span>' +
           "</span>" +
           '<span class="reason-card__face reason-card__back" aria-live="polite">' +
             '<span class="reason-card__desc">' + U.esc(r.description) + "</span>" +
-            '<span class="hand">— reason no. ' + (i + 1) + "</span>" +
+            '<span class="hand">— alasan no. ' + (i + 1) + "</span>" +
           "</span>" +
         "</span></button>";
     }).join("");
@@ -200,7 +200,7 @@
           card.classList.add("is-read");
           progress();
           if (read.length === reasons.length) {
-            setTimeout(function () { Anim.confetti({ count: 90, y: 0.3 }); U.toast("You found every reason ♡"); }, 500);
+            setTimeout(function () { Anim.confetti({ count: 90, y: 0.3 }); U.toast("Kamu sudah membuka semua alasannya ♡"); }, 500);
           }
         }
         var r = card.getBoundingClientRect();
@@ -231,9 +231,9 @@
   var letterTyper = null;
   function initLetter() {
     var L = C.letter || {};
-    U.setText("letterTitle", L.title || "A Letter Just For You");
+    U.setText("letterTitle", L.title || "Surat Khusus Untukmu");
     U.setText("letterSubtitle", L.subtitle || "");
-    U.setText("openLetterLabel", L.button || "Open My Letter");
+    U.setText("openLetterLabel", L.button || "Buka Suratku");
     var nb = U.nextBirthday(C.birthday);
     U.setText("letterDate", U.formatDate(nb.date));
 
@@ -302,15 +302,15 @@
      ====================================================================== */
   function initSurprise() {
     var S = C.surprise || {};
-    U.setText("surpriseTitle", S.title || "One Last Surprise");
+    U.setText("surpriseTitle", S.title || "Satu Kejutan Terakhir");
     U.setText("surpriseSubtitle", S.subtitle || "");
-    U.setText("openPresentLabel", S.button || "Open Your Present");
+    U.setText("openPresentLabel", S.button || "Buka Kadomu");
     U.setText("surpriseName", displayName);
-    U.setImg(document.getElementById("surprisePhoto"), S.photo, "A special photo for " + displayName);
+    U.setImg(document.getElementById("surprisePhoto"), S.photo, "Foto spesial untuk " + displayName);
     var nb = U.nextBirthday(C.birthday);
-    U.setText("surpriseAge", C.showAge !== false && nb.age > 0 ? "hello, " + nb.age + " ♡" : "another year of you");
+    U.setText("surpriseAge", C.showAge !== false && nb.age > 0 ? "halo, " + nb.age + " ♡" : "satu tahun lagi bersamamu");
     U.setText("surpriseMessage", S.message || "");
-    U.setText("presentTitle", S.giftTitle || "Your present");
+    U.setText("presentTitle", S.giftTitle || "Hadiahmu");
     U.setText("presentDesc", S.giftDescription || "");
     U.setText("presentNote", S.giftNote || "");
     U.setText("surpriseSender", sender.name || "");
@@ -371,14 +371,14 @@
     function setUI() {
       btn.classList.toggle("is-playing", playing);
       btn.setAttribute("aria-pressed", String(playing));
-      btn.setAttribute("aria-label", playing ? "Pause music" : "Play music");
-      btn.title = playing ? "Pause · " + (cfg.title || "music") : "Play · " + (cfg.title || "music");
+      btn.setAttribute("aria-label", playing ? "Jeda musik" : "Putar musik");
+      btn.title = playing ? "Jeda · " + (cfg.title || "musik") : "Putar · " + (cfg.title || "musik");
     }
 
     function playFallback() {
-      if (cfg.fallbackMelody === false) { U.toast("Add a song in assets/music to play music"); return; }
+      if (cfg.fallbackMelody === false) { U.toast("Tambahkan lagu di assets/music untuk memutar musik"); return; }
       if (!box) box = MusicBox();
-      if (!box) { U.toast("Music isn't supported on this browser"); return; }
+      if (!box) { U.toast("Musik tidak didukung di browser ini"); return; }
       box.start(); mode = "box"; playing = true; setUI();
     }
 
@@ -495,7 +495,7 @@
      ====================================================================== */
   function boot() {
     Icons.render();
-    document.title = "A Little Book About " + (partner.name || "You");
+    document.title = "Buku Kecil Tentang " + (partner.name || "Kamu");
 
     initIntro();
     initHome();
