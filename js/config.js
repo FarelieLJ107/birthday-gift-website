@@ -287,5 +287,102 @@ window.BIRTHDAY_CONFIG = {
       margin: 4,                  // quiet zone, minimal 4 modul
       centerHeart: true           // hati kecil di tengah QR (aman berkat level H)
     }
+  },
+
+  /* ---------- Birthday Quest: mini treasure hunt (3 token) ----------
+     Quest 1  hiddenObject : ikon kecil tersembunyi di salah satu halaman.
+                             page: "home" | "memories" | "moments" | "reasons" | "letter"
+                             icon: "star" | "heart" | "gift" | "sparkles" | "flower"
+     Quest 2  trivia       : kuis ringan. Kosongkan `questions` ([]) agar pertanyaan
+                             dibuat OTOMATIS dari isi config ini (tanggal pertama
+                             bertemu, lokasi di `memories`, daftar `reasons`), jadi
+                             tidak ada jawaban yang dikarang. Isi sendiri dengan format:
+                             { question: "...", options: ["A","B","C"], answer: 0 }
+                             (answer = nomor urut jawaban benar, mulai dari 0).
+     Quest 3  puzzle       : susun ulang potongan foto (ketuk 2 kotak untuk menukar). */
+  quest: {
+    enabled: true,
+    title: "Birthday Quest",
+    subtitle: "Three tiny challenges, three tokens, one last gift.",
+    hiddenObject: {
+      page: "moments",
+      icon: "star",
+      hint: "A tiny star is hiding somewhere in Little Moments. Look closely ✨",
+      foundMessage: "You found it! Token 1 is yours."
+    },
+    trivia: {
+      intro: "Just for fun — there are no wrong people here, only wrong answers.",
+      questions: []
+    },
+    puzzle: {
+      image: "assets/images/hero.svg",   // foto untuk puzzle (persegi lebih bagus)
+      grid: 3,                           // 3 = 3×3 kotak (2–4)
+      intro: "Tap two pieces to swap them until the picture is whole again."
+    },
+    completeMessage: "All three tokens collected. Your final gift is unlocked!"
+  },
+
+  /* ---------- Interactive Birthday Cake ---------- */
+  cake: {
+    enabled: true,
+    candles: 3,                          // jumlah lilin (1–9)
+    wishMessage: "Close your eyes and make a wish…",
+    wishHint: "Take your time. When you're ready, blow out the candles.",
+    celebrationTitle: "Happy Birthday!",
+    celebrationMessage: "May every wish you just made find its way to you."
+  },
+
+  /* ---------- Multiple Birthday Gifts ----------
+     type: "message" | "photos" | "audio" | "letter"
+     Semua teks & file bisa diganti tanpa mengubah kode. Isi `insideJoke`
+     dengan lelucon pribadi kalian (kosong = tidak ditampilkan).
+     Audio: taruh file di assets/audio/ lalu tulis path-nya di `audio`.
+     Gift dengan `requiresQuest: true` baru terbuka setelah Birthday Quest selesai. */
+  gifts: {
+    enabled: true,
+    title: "Your Birthday Gifts",
+    subtitle: "Four little boxes. Open them in any order — except the last one.",
+    items: [
+      {
+        id: "funny",
+        type: "message",
+        label: "Something silly",
+        title: "A Gift of Pure Nonsense",
+        message: "Warning: this box contains 100% affection, 0% calories, and absolutely no refunds.",
+        insideJoke: "",
+        note: "laugh first, ask questions later"
+      },
+      {
+        id: "memory",
+        type: "photos",
+        label: "A digital memory",
+        title: "A Little Memory Box",
+        message: "A few pictures I keep coming back to.",
+        photos: [
+          { src: "assets/images/memory-01.svg", caption: "Our First Photo" },
+          { src: "assets/images/memory-03.svg", caption: "The Golden Hour Walk" },
+          { src: "assets/images/memory-07.svg", caption: "One Year of Us" }
+        ]
+      },
+      {
+        id: "voice",
+        type: "audio",
+        label: "Press play",
+        title: "A Voice Note For You",
+        message: "Find a quiet spot and turn the volume up.",
+        audio: "assets/audio/birthday-message.mp3",
+        missingMessage: "The voice note is still being recorded — check back soon ♡"
+      },
+      {
+        id: "final",
+        type: "letter",
+        label: "The final gift",
+        title: "The Last Little Thing",
+        message: "You found every token, solved every puzzle, and opened every box. The real gift was never inside a box — it's getting to celebrate you, today and every year after.",
+        signature: "",                   // kosong = pakai sender.name
+        requiresQuest: true,
+        lockedMessage: "This one opens after you finish the Birthday Quest."
+      }
+    ]
   }
 };

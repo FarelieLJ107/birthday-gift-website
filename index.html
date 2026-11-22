@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/qr.css">
+  <link rel="stylesheet" href="css/party.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -140,6 +141,24 @@
                 <span>
                   <span class="explore-card__title">A Secret Message</span>
                   <span class="explore-card__meta">a little heart you can scan</span>
+                </span>
+                <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
+              </a>
+              <a class="explore-card explore-card--quest" href="#quest">
+                <span class="explore-card__icon"><i data-icon="star"></i></span>
+                <span class="explore-card__title">Birthday Quest</span>
+                <span class="explore-card__meta" id="exploreQuestMeta">0/3 tokens</span>
+              </a>
+              <a class="explore-card explore-card--cake" href="#cake">
+                <span class="explore-card__icon"><i data-icon="cake"></i></span>
+                <span class="explore-card__title">Birthday Cake</span>
+                <span class="explore-card__meta">make a wish</span>
+              </a>
+              <a class="explore-card explore-card--gifts explore-card--wide" href="#gifts">
+                <span class="explore-card__icon"><i data-icon="gift"></i></span>
+                <span>
+                  <span class="explore-card__title">Your Birthday Gifts</span>
+                  <span class="explore-card__meta" id="exploreGiftsMeta">little boxes to open</span>
                 </span>
                 <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
               </a>
@@ -355,6 +374,11 @@
                 <p class="hand present-card__note" id="presentNote"></p>
               </div>
             </div>
+            <nav class="more-surprises" aria-label="More surprises">
+              <a href="#cake"><i data-icon="cake"></i><span>Blow the candles</span></a>
+              <a href="#gifts"><i data-icon="gift"></i><span>Open your gifts</span></a>
+              <a href="#quest"><i data-icon="star"></i><span>Birthday Quest</span></a>
+            </nav>
             <p class="hand surprise-reveal__sign">with all my love, <span id="surpriseSender"></span></p>
             <div class="surprise-reveal__actions">
               <a class="btn btn--primary" href="#qr"><i data-icon="qr"></i> A secret message for you</a>
@@ -502,6 +526,137 @@
           <p class="scan-privacy"><i data-icon="lock"></i> Everything is read on your device. Nothing is uploaded or saved.</p>
         </div>
       </section>
+      <!-- ============ 11 · BIRTHDAY QUEST — mini treasure hunt ============ -->
+      <section class="screen screen--quest" id="screen-quest" data-route="quest" aria-label="Birthday quest" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Quest</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro page-intro--center">
+            <p class="eyebrow">a mini treasure hunt</p>
+            <h1 class="page-title" id="questTitle">Birthday Quest</h1>
+            <p class="page-sub" id="questSubtitle"></p>
+          </div>
+
+          <section class="quest-progress" aria-label="Quest progress">
+            <div class="quest-tokens">
+              <span class="quest-token" data-token="1"><i data-icon="star"></i></span>
+              <span class="quest-token" data-token="2"><i data-icon="help"></i></span>
+              <span class="quest-token" data-token="3"><i data-icon="puzzle"></i></span>
+            </div>
+            <p class="quest-progress__text"><strong id="questCount">0</strong> of 3 tokens collected</p>
+            <div class="journey" aria-hidden="true"><span id="questBar"></span></div>
+          </section>
+
+          <ol class="quest-steps">
+            <li class="quest-step" data-step="1">
+              <div class="quest-step__head">
+                <span class="quest-step__num">1</span>
+                <div><h2 class="quest-step__title">Hidden Object</h2><span class="chip chip--soft quest-step__status">In progress</span></div>
+              </div>
+              <p class="quest-step__text" id="questHint"></p>
+              <p class="quest-done-note" id="questHiddenStatus" hidden><i data-icon="check"></i> Found — token 1 collected.</p>
+              <button class="btn btn--soft btn--sm" type="button" id="questHintBtn"><i data-icon="help"></i> Show me where to look</button>
+            </li>
+            <li class="quest-step" data-step="2">
+              <div class="quest-step__head">
+                <span class="quest-step__num">2</span>
+                <div><h2 class="quest-step__title">Birthday Trivia</h2><span class="chip chip--soft quest-step__status">Locked</span></div>
+              </div>
+              <p class="quest-step__text" id="questTriviaIntro"></p>
+              <div class="trivia" id="questTrivia"></div>
+            </li>
+            <li class="quest-step" data-step="3">
+              <div class="quest-step__head">
+                <span class="quest-step__num">3</span>
+                <div><h2 class="quest-step__title">Mini Puzzle</h2><span class="chip chip--soft quest-step__status">Locked</span></div>
+              </div>
+              <div id="questPuzzle"></div>
+            </li>
+          </ol>
+
+          <div class="quest-final" id="questFinal" hidden>
+            <span class="quest-final__icon"><i data-icon="unlock"></i></span>
+            <p class="quest-final__text" id="questComplete"></p>
+            <a class="btn btn--primary" href="#gifts"><i data-icon="gift"></i> Open your final gift</a>
+          </div>
+
+          <button class="quest-reset" type="button" id="questReset">Reset quest progress</button>
+        </div>
+      </section>
+
+      <!-- ============ 12 · INTERACTIVE BIRTHDAY CAKE ============ -->
+      <section class="screen screen--cake" id="screen-cake" data-route="cake" aria-label="Birthday cake" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Cake</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro page-intro--center">
+            <p class="eyebrow">it's time</p>
+            <h1 class="page-title">Make a <em>Wish</em></h1>
+          </div>
+
+          <div class="cake-stage" id="cakeStage" data-state="lit">
+            <div class="cake-moment" id="cakeMoment" hidden aria-hidden="true">
+              <span class="cake-moment__star cake-moment__star--1"></span>
+              <span class="cake-moment__star cake-moment__star--2"></span>
+              <span class="cake-moment__star cake-moment__star--3"></span>
+            </div>
+            <div class="cake" id="cake" aria-hidden="true">
+              <div class="cake__candles" id="cakeCandles"></div>
+              <div class="cake__top"><span class="cake__drip"></span></div>
+              <div class="cake__tier cake__tier--top"></div>
+              <div class="cake__tier cake__tier--bottom"><span class="cake__dots"></span></div>
+              <div class="cake__plate"></div>
+            </div>
+          </div>
+
+          <p class="cake-status" id="cakeStatus" role="status" aria-live="polite"></p>
+          <div class="cake-wishtext" aria-live="polite">
+            <p class="cake-wishtext__main hand" id="cakeMomentText"></p>
+            <p class="cake-wishtext__hint" id="cakeMomentHint"></p>
+          </div>
+
+          <div class="cake-actions">
+            <button class="btn btn--primary btn--lg" type="button" id="cakeWish"><i data-icon="sparkles"></i> Make a Wish</button>
+            <button class="btn btn--primary btn--lg" type="button" id="cakeBlow" hidden><i data-icon="cake"></i> Blow the Candles</button>
+            <button class="btn btn--soft" type="button" id="cakeReplay" hidden><i data-icon="replay"></i> Light them again</button>
+          </div>
+
+          <section class="cake-done" id="cakeDone" hidden>
+            <span class="tape tape--top" aria-hidden="true"></span>
+            <h2 class="cake-done__title"><span id="cakeDoneTitle">Happy Birthday!</span> <em id="cakeDoneName"></em></h2>
+            <p class="cake-done__msg" id="cakeDoneMessage"></p>
+            <a class="btn btn--soft btn--sm" href="#gifts"><i data-icon="gift"></i> Now, your gifts</a>
+          </section>
+        </div>
+      </section>
+
+      <!-- ============ 13 · MULTIPLE BIRTHDAY GIFTS ============ -->
+      <section class="screen screen--gifts" id="screen-gifts" data-route="gifts" aria-label="Birthday gifts" hidden>
+        <header class="app-header">
+          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Gifts</p>
+          <span class="app-header__spacer"></span>
+        </header>
+        <div class="screen__body">
+          <div class="page-intro page-intro--center">
+            <p class="eyebrow">just for you</p>
+            <h1 class="page-title" id="giftsTitle">Your Birthday Gifts</h1>
+            <p class="page-sub" id="giftsSubtitle"></p>
+          </div>
+          <div class="gift-grid" id="giftGrid"></div>
+          <a class="cta-card gift-quest-hint" id="giftQuestHint" href="#quest" hidden>
+            <span class="cta-card__icon"><i data-icon="lock"></i></span>
+            <span><strong>One gift is still locked</strong><span id="giftQuestHintText">Finish the Birthday Quest to open it.</span></span>
+            <i data-icon="arrowRight"></i>
+          </a>
+        </div>
+      </section>
     </main>
 
     <!-- Bottom navigation -->
@@ -539,6 +694,15 @@
       </div>
     </div>
 
+    <!-- Gift content modal -->
+    <div class="gift-modal" id="giftModal" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle" hidden>
+      <div class="gift-modal__backdrop" data-gift-close></div>
+      <div class="gift-modal__panel">
+        <button class="icon-btn gift-modal__close" type="button" data-gift-close aria-label="Close gift"><i data-icon="x"></i></button>
+        <div class="gift-modal__body" id="giftModalBody"></div>
+      </div>
+    </div>
+
     <!-- Opening transition overlay + confetti -->
     <div class="reveal-overlay" id="revealOverlay" aria-hidden="true"></div>
     <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
@@ -558,6 +722,9 @@
   <script src="js/vendor/qrcode-generator.min.js"></script>
   <script src="js/qr-generator.js"></script>
   <script src="js/qr-scanner.js"></script>
+  <script src="js/quest.js"></script>
+  <script src="js/cake.js"></script>
+  <script src="js/gifts.js"></script>
   <script src="js/main.js"></script>
   <!-- js/vendor/jsQR.min.js is loaded on demand by qr-scanner.js -->
 </body>

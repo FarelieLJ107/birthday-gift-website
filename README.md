@@ -24,6 +24,12 @@ atau API berbayar. Cukup buka `index.html` di browser.
 | 08 | Birthday Surprise | `#surprise` | Kado bergetar & tutupnya terbang, confetti, hati & bintang, pesan, foto, kartu hadiah, tombol ke QR Gift |
 | 09 | QR Gift: "A Little Secret" | `#qr` | QR berbentuk hati & QR standar yang berisi URL website, verifikasi scan otomatis, download PNG (1000/2000 px, transparan) & SVG, Share, Copy Link |
 | 10 | QR Scanner: "Scan a QR Code" | `#scan` | Scanner kamera real-time (kamera depan/belakang), upload gambar QR, validasi & pemblokiran link berbahaya |
+| 11 | Birthday Quest | `#quest` | Mini treasure hunt 3 tahap: objek tersembunyi, trivia ringan, puzzle foto; 3 token + progress + final unlock |
+| 12 | Birthday Cake | `#cake` | Kue dengan lilin menyala, Make a Wish, Blow the Candles (tombol, tanpa mikrofon), confetti + ucapan, nyalakan lagi |
+| 13 | Birthday Gifts | `#gifts` | 4 kotak hadiah (pesan lucu, foto, voice note, surat final), animasi buka, bisa dibuka ulang; gift terakhir terbuka setelah Quest selesai |
+
+Quest, Cake, dan Gifts dibuka dari kartu di grid **Open a page** (Home) dan dari tautan
+**Blow the candles · Open your gifts · Birthday Quest** di halaman Surprise.
 
 QR Gift bisa dibuka dari kartu **A Secret Message** di Home dan tombol **A secret message for you**
 di halaman Surprise; scanner dibuka dari halaman QR Gift. Bottom navigation tetap 5 menu
@@ -44,6 +50,7 @@ birthday-gift-website/
 │   ├── style.css         ← design system (token warna, font, radius) + komponen
 │   ├── animations.css    ← keyframes, transisi halaman, micro-interactions
 │   ├── qr.css            ← halaman QR Gift & QR Scanner
+│   ├── party.css         ← Birthday Quest, Birthday Cake, Gift collection
 │   └── responsive.css    ← tablet & desktop "app preview"
 ├── js/
 │   ├── config.js         ← ✏️ SATU-SATUNYA FILE YANG PERLU DIEDIT
@@ -54,6 +61,9 @@ birthday-gift-website/
 │   ├── gallery.js        ← galeri, filter, lightbox, halaman detail
 │   ├── qr-generator.js   ← QR hati + QR standar, PNG/SVG, share, copy link
 │   ├── qr-scanner.js     ← kamera real-time, upload gambar, validasi URL
+│   ├── quest.js          ← Birthday Quest: token, objek tersembunyi, trivia, puzzle
+│   ├── cake.js           ← kue interaktif (wish → tiup lilin → perayaan)
+│   ├── gifts.js          ← koleksi kado, modal isi kado, kunci gift terakhir
 │   ├── main.js           ← render semua halaman, surat, kejutan, musik
 │   └── vendor/           ← library QR open-source (disimpan lokal, tanpa CDN)
 │       ├── qrcode-generator.min.js   (MIT, Kazuhiko Arase)
@@ -64,6 +74,7 @@ birthday-gift-website/
 ├── assets/
 │   ├── images/           ← foto (saat ini berisi ilustrasi placeholder .svg)
 │   ├── music/            ← taruh lagu kamu di sini (our-song.mp3)
+│   ├── audio/            ← voice note untuk Gift 03 (birthday-message.mp3)
 │   ├── icons/            ← favicon
 │   └── fonts/            ← opsional, untuk font offline
 ├── .nojekyll             ← agar GitHub Pages menyajikan file apa adanya
@@ -121,6 +132,61 @@ Tambahkan `featured: true` pada item tertentu untuk memilih yang tampil di "Feat
 ### Warna & font
 Token desain ada di bagian atas `css/style.css` (`--primary`, `--secondary`, `--soft`, …).
 Ubah satu variabel dan seluruh website ikut berubah.
+
+---
+
+## Birthday Quest, Cake & Gifts
+
+Semua konten diatur di `js/config.js`, bagian `quest`, `cake`, dan `gifts`.
+Progres disimpan di browser penerima memakai penyimpanan yang sama dengan fitur lain
+(`localStorage`, aman jika diblokir).
+
+### Birthday Quest (`quest`)
+
+| Tahap | Cara main | Pengaturan |
+|---|---|---|
+| 1 · Hidden Object | Ikon kecil yang berkelip di salah satu halaman. Ketuk untuk mendapat token 1. Tombol **Show me where to look** membuka halamannya dan menyorot ikonnya. | `hiddenObject.page` (`home`, `memories`, `moments`, `reasons`, `letter`, `surprise`), `icon`, `hint`, `foundMessage` |
+| 2 · Birthday Trivia | Beberapa pertanyaan pilihan ganda. Jawaban salah hanya dinonaktifkan ("Almost! Try another one"), tanpa skor atau hukuman. | `trivia.questions` |
+| 3 · Mini Puzzle | Foto dipotong 3×3. Ketuk dua potongan untuk menukarnya sampai gambar utuh. | `puzzle.image`, `puzzle.grid` (2–4), `puzzle.intro` |
+
+- **Trivia otomatis:** jika `trivia.questions` dibiarkan `[]`, pertanyaan dibuat **hanya dari isi
+  config yang sudah ada**: tanggal `firstMet`, `location` di `memories`, dan judul `reasons`.
+  Jawaban salahnya berupa tanggal lain, lokasi kenangan lain, atau pilihan yang jelas bercanda.
+  Tidak ada kenangan yang dikarang.
+- **Pertanyaan sendiri:**
+  ```js
+  questions: [
+    { question: "Apa minuman favoritku?", options: ["Teh", "Kopi susu", "Jus"], answer: 1 }
+  ]
+  ```
+  `answer` adalah nomor urut jawaban benar, mulai dari 0. Urutan pilihan diacak saat tampil.
+- Tahap terbuka berurutan (1 → 2 → 3). Setiap token hanya bisa didapat **satu kali**.
+- Setelah 3 token terkumpul, muncul kartu **Open your final gift** dan Gift 04 terbuka.
+- Tombol kecil **Reset quest progress** di bawah halaman Quest menghapus token (berguna untuk
+  mencoba ulang sebelum dikirim). Kado yang sudah dibuka tetap tercatat.
+
+### Birthday Cake (`cake`)
+
+`candles` (1–9), `wishMessage`, `wishHint`, `celebrationTitle`, dan `celebrationMessage`
+(nama di ucapan diambil dari `partner.nickname`). Alurnya: **Make a Wish** → momen wish
+(±2,5 detik) → **Blow the Candles** → lilin padam satu per satu → confetti + ucapan →
+**Light them again**. Tidak ada izin mikrofon; semuanya lewat tombol.
+
+### Birthday Gifts (`gifts.items`)
+
+| Gift | `type` | Isi yang bisa diatur |
+|---|---|---|
+| 01 | `message` | `title`, `label`, `message`, `insideJoke` (kosong = tidak tampil), `note` |
+| 02 | `photos` | `message`, `photos: [{ src, caption }]` (foto atau screenshot chat di `assets/images/`) |
+| 03 | `audio` | `message`, `audio` (file di `assets/audio/`), `missingMessage` (tampil selama file belum ada) |
+| 04 | `letter` | `message`, `signature` (kosong = `sender.name`), `requiresQuest`, `lockedMessage` |
+
+- Gift 01–03 selalu bisa dibuka. Gift dengan `requiresQuest: true` terkunci sampai Quest selesai;
+  ubah ke `false` jika ingin semua kado bebas dibuka.
+- Kado yang sudah dibuka ditandai **Opened** dan bisa dibuka ulang kapan saja.
+- Saat voice note diputar, musik latar otomatis di-pause.
+- **Konten Gift 01, 02, dan 04 saat ini adalah contoh.** Gift 02 memakai ilustrasi placeholder
+  yang sudah ada. Ganti dengan lelucon pribadi, foto/screenshot, dan surat kalian sendiri.
 
 ---
 
