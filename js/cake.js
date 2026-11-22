@@ -25,11 +25,11 @@
     el.done.hidden = s !== "done";
     el.wishtext.hidden = !(s === "wishing" || s === "ready");
     var msg = {
-      lit: "The candles are lit. Make a wish first ✨",
-      wishing: K.wishMessage || "Close your eyes and make a wish…",
-      ready: K.wishHint || "When you're ready, blow out the candles.",
-      blowing: "Whoooosh…",
-      done: "All candles are out — happy birthday!"
+      lit: "Lilinnya sudah menyala. Buat permohonan dulu ✨",
+      wishing: K.wishMessage || "Pejamkan mata dan buat permohonan…",
+      ready: K.wishHint || "Kalau sudah siap, tiup lilinnya.",
+      blowing: "Fuuuuh…",
+      done: "Semua lilin sudah padam — selamat ulang tahun!"
     }[s];
     el.status.textContent = msg;
   }
@@ -47,10 +47,10 @@
   function makeWish() {
     if (el.stage.dataset.state !== "lit") return;
     setState("wishing");
-    U.setText("cakeMomentText", K.wishMessage || "Close your eyes and make a wish…");
+    U.setText("cakeMomentText", K.wishMessage || "Pejamkan mata dan buat permohonan…");
     U.setText("cakeMomentHint", "");
     later(function () {
-      U.setText("cakeMomentHint", K.wishHint || "When you're ready, blow out the candles.");
+      U.setText("cakeMomentHint", K.wishHint || "Kalau sudah siap, tiup lilinnya.");
       setState("ready");
       el.blow.focus({ preventScroll: true });
     }, 2600);
@@ -99,7 +99,7 @@
       status: document.getElementById("cakeStatus"),
       wishtext: document.querySelector("#screen-cake .cake-wishtext")
     };
-    U.setText("cakeDoneTitle", K.celebrationTitle || "Happy Birthday!");
+    U.setText("cakeDoneTitle", K.celebrationTitle || "Selamat Ulang Tahun!");
     U.setText("cakeDoneName", partner.nickname || partner.name || "");
     U.setText("cakeDoneMessage", K.celebrationMessage || "");
     buildCandles();

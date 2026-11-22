@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FCE4EC">
-  <meta name="description" content="A Little Book About You — an interactive birthday experience.">
-  <title>A Little Book About You</title>
+  <meta name="description" content="Buku Kecil Tentangmu — pengalaman ulang tahun interaktif.">
+  <title>Buku Kecil Tentangmu</title>
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,16 +22,16 @@
 
   <!-- Desktop-only side caption (hidden on phones) -->
   <aside class="desktop-aside" aria-hidden="true">
-    <p class="desktop-aside__eyebrow">an interactive birthday experience</p>
-    <h2 class="desktop-aside__title">A Little Book<br><em>About You</em></h2>
-    <p class="desktop-aside__hint">Best enjoyed on your phone — but this little window works too.</p>
+    <p class="desktop-aside__eyebrow">pengalaman ulang tahun interaktif</p>
+    <h2 class="desktop-aside__title">Buku Kecil<br><em>Tentangmu</em></h2>
+    <p class="desktop-aside__hint">Paling seru dibuka di HP — tapi jendela kecil ini juga bisa.</p>
   </aside>
 
   <div class="app" id="app">
     <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
     <!-- Global music button -->
-    <button class="music-btn" id="musicBtn" type="button" aria-label="Play music" aria-pressed="false" hidden>
+    <button class="music-btn" id="musicBtn" type="button" aria-label="Putar musik" aria-pressed="false" hidden>
       <span class="music-btn__icon" data-state="play"><i data-icon="music"></i></span>
       <span class="music-btn__bars" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
@@ -39,7 +39,7 @@
     <main class="screens" id="screens">
 
       <!-- ============ 01 · INTRO ============ -->
-      <section class="screen screen--intro" id="screen-intro" data-route="intro" aria-label="Welcome">
+      <section class="screen screen--intro" id="screen-intro" data-route="intro" aria-label="Sambutan">
         <div class="floating-hearts" id="introHearts" aria-hidden="true"></div>
         <div class="intro">
           <div class="intro__gift" id="introGift" aria-hidden="true">
@@ -51,22 +51,22 @@
             <span class="intro__sparkle intro__sparkle--2"></span>
             <span class="intro__sparkle intro__sparkle--3"></span>
           </div>
-          <p class="hand intro__to" id="introTo">for you</p>
-          <h1 class="intro__title" id="introTitle">A Little Surprise For You</h1>
-          <p class="intro__subtitle" id="introSubtitle">Someone made something special just for you.</p>
+          <p class="hand intro__to" id="introTo">untukmu</p>
+          <h1 class="intro__title" id="introTitle">Sebuah Kejutan Kecil Untukmu</h1>
+          <p class="intro__subtitle" id="introSubtitle">Seseorang membuat sesuatu yang istimewa khusus untukmu.</p>
           <button class="btn btn--primary btn--lg" id="openGiftBtn" type="button">
-            <span id="openGiftLabel">Open Your Gift</span> <i data-icon="gift"></i>
+            <span id="openGiftLabel">Buka Hadiahmu</span> <i data-icon="gift"></i>
           </button>
-          <p class="intro__hint">tap to begin · sound optional</p>
+          <p class="intro__hint">ketuk untuk mulai · suara opsional</p>
         </div>
       </section>
 
       <!-- ============ 02 · HOME ============ -->
-      <section class="screen screen--home" id="screen-home" data-route="home" aria-label="Home" hidden>
+      <section class="screen screen--home" id="screen-home" data-route="home" aria-label="Beranda" hidden>
         <header class="app-header app-header--home">
           <img class="avatar" id="homeAvatar" src="" alt="" width="44" height="44">
           <div class="app-header__text">
-            <p class="app-header__eyebrow" id="homeGreeting">Hello</p>
+            <p class="app-header__eyebrow" id="homeGreeting">Halo</p>
             <p class="app-header__name" id="homeName">—</p>
           </div>
         </header>
@@ -78,87 +78,87 @@
             <span class="tape tape--tl" aria-hidden="true"></span>
             <div class="hero-card__content">
               <span class="chip chip--glass"><i data-icon="calendar"></i> <span id="heroDate">—</span></span>
-              <h1 class="hero-card__title" id="heroHeadline">Happy Birthday</h1>
+              <h1 class="hero-card__title" id="heroHeadline">Selamat Ulang Tahun</h1>
               <p class="hand hero-card__caption" id="heroCaption"></p>
             </div>
           </article>
 
           <section class="countdown-card reveal" aria-labelledby="countdownLabel">
             <div class="countdown-card__head">
-              <p class="eyebrow" id="countdownLabel">Counting down to your day</p>
+              <p class="eyebrow" id="countdownLabel">Menghitung mundur ke hari spesialmu</p>
               <span class="chip chip--soft" id="ageChip" hidden></span>
             </div>
             <div class="countdown" id="countdown" aria-live="polite">
-              <div><strong data-cd="d">0</strong><span>days</span></div>
-              <div><strong data-cd="h">0</strong><span>hours</span></div>
-              <div><strong data-cd="m">0</strong><span>mins</span></div>
-              <div><strong data-cd="s">0</strong><span>secs</span></div>
+              <div><strong data-cd="d">0</strong><span>hari</span></div>
+              <div><strong data-cd="h">0</strong><span>jam</span></div>
+              <div><strong data-cd="m">0</strong><span>menit</span></div>
+              <div><strong data-cd="s">0</strong><span>detik</span></div>
             </div>
-            <p class="countdown-card__today hand" id="countdownToday" hidden>It's today! Happy birthday, my love.</p>
+            <p class="countdown-card__today hand" id="countdownToday" hidden>Hari ini harinya! Selamat ulang tahun, sayang.</p>
             <div class="together">
               <i data-icon="heart"></i>
-              <p><strong id="daysTogether">0</strong> days of us — and counting</p>
+              <p><strong id="daysTogether">0</strong> hari bersama — dan terus bertambah</p>
             </div>
           </section>
 
           <section class="section reveal" aria-labelledby="exploreTitle">
             <div class="section__head">
-              <h2 class="section__title" id="exploreTitle">Open a page</h2>
-              <p class="section__meta"><span id="journeyCount">0</span>/6 explored</p>
+              <h2 class="section__title" id="exploreTitle">Buka halaman</h2>
+              <p class="section__meta"><span id="journeyCount">0</span>/6 dijelajahi</p>
             </div>
             <div class="journey" aria-hidden="true"><span id="journeyBar"></span></div>
             <div class="explore-grid">
               <a class="explore-card explore-card--memories" href="#memories">
                 <span class="explore-card__icon"><i data-icon="images"></i></span>
-                <span class="explore-card__title">Our Memories</span>
-                <span class="explore-card__meta" id="exploreMemoriesMeta">photos</span>
+                <span class="explore-card__title">Kenangan Kita</span>
+                <span class="explore-card__meta" id="exploreMemoriesMeta">foto</span>
               </a>
               <a class="explore-card explore-card--moments" href="#moments">
                 <span class="explore-card__icon"><i data-icon="clock"></i></span>
-                <span class="explore-card__title">Little Moments</span>
-                <span class="explore-card__meta">our timeline</span>
+                <span class="explore-card__title">Momen Kecil</span>
+                <span class="explore-card__meta">perjalanan kita</span>
               </a>
               <a class="explore-card explore-card--reasons" href="#reasons">
                 <span class="explore-card__icon"><i data-icon="heart"></i></span>
-                <span class="explore-card__title">Reasons I Love You</span>
-                <span class="explore-card__meta" id="exploreReasonsMeta">reasons</span>
+                <span class="explore-card__title">Alasan Aku Sayang Kamu</span>
+                <span class="explore-card__meta" id="exploreReasonsMeta">alasan</span>
               </a>
               <a class="explore-card explore-card--letter" href="#letter">
                 <span class="explore-card__icon"><i data-icon="mail"></i></span>
-                <span class="explore-card__title">My Letter</span>
-                <span class="explore-card__meta">sealed for you</span>
+                <span class="explore-card__title">Suratku</span>
+                <span class="explore-card__meta">tersegel untukmu</span>
               </a>
               <a class="explore-card explore-card--surprise explore-card--wide" href="#surprise">
                 <span class="explore-card__icon"><i data-icon="gift"></i></span>
                 <span>
-                  <span class="explore-card__title">Birthday Surprise</span>
-                  <span class="explore-card__meta">save this one for last</span>
+                  <span class="explore-card__title">Kejutan Ulang Tahun</span>
+                  <span class="explore-card__meta">simpan untuk yang terakhir</span>
                 </span>
                 <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
               </a>
               <a class="explore-card explore-card--qr explore-card--wide" href="#qr">
                 <span class="explore-card__icon"><i data-icon="qr"></i></span>
                 <span>
-                  <span class="explore-card__title">A Secret Message</span>
-                  <span class="explore-card__meta">a little heart you can scan</span>
+                  <span class="explore-card__title">Pesan Rahasia</span>
+                  <span class="explore-card__meta">hati kecil yang bisa dipindai</span>
                 </span>
                 <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
               </a>
               <a class="explore-card explore-card--quest" href="#quest">
                 <span class="explore-card__icon"><i data-icon="star"></i></span>
-                <span class="explore-card__title">Birthday Quest</span>
-                <span class="explore-card__meta" id="exploreQuestMeta">0/3 tokens</span>
+                <span class="explore-card__title">Misi Ulang Tahun</span>
+                <span class="explore-card__meta" id="exploreQuestMeta">0/3 token</span>
               </a>
               <a class="explore-card explore-card--cake" href="#cake">
                 <span class="explore-card__icon"><i data-icon="cake"></i></span>
-                <span class="explore-card__title">Birthday Cake</span>
-                <span class="explore-card__meta">make a wish</span>
+                <span class="explore-card__title">Kue Ulang Tahun</span>
+                <span class="explore-card__meta">buat permohonan</span>
               </a>
               <a class="explore-card explore-card--gifts explore-card--wide" href="#gifts">
                 <span class="explore-card__icon"><i data-icon="gift"></i></span>
                 <span>
-                  <span class="explore-card__title">Your Birthday Gifts</span>
-                  <span class="explore-card__meta" id="exploreGiftsMeta">little boxes to open</span>
+                  <span class="explore-card__title">Hadiah Ulang Tahunmu</span>
+                  <span class="explore-card__meta" id="exploreGiftsMeta">kotak kecil untuk dibuka</span>
                 </span>
                 <span class="explore-card__arrow"><i data-icon="arrowRight"></i></span>
               </a>
@@ -167,13 +167,13 @@
 
           <section class="section reveal" aria-labelledby="featuredTitle">
             <div class="section__head">
-              <h2 class="section__title" id="featuredTitle">Featured memories</h2>
-              <a class="link" href="#memories">See all <i data-icon="chevronRight"></i></a>
+              <h2 class="section__title" id="featuredTitle">Kenangan pilihan</h2>
+              <a class="link" href="#memories">Lihat semua <i data-icon="chevronRight"></i></a>
             </div>
             <div class="h-scroll" id="featuredList"></div>
           </section>
 
-          <section class="note-card reveal" aria-label="A little note">
+          <section class="note-card reveal" aria-label="Catatan kecil">
             <span class="tape tape--top" aria-hidden="true"></span>
             <i data-icon="quote" class="note-card__quote"></i>
             <p class="note-card__text hand" id="homeNote"></p>
@@ -183,32 +183,32 @@
       </section>
 
       <!-- ============ 03 · OUR MEMORIES ============ -->
-      <section class="screen screen--memories" id="screen-memories" data-route="memories" aria-label="Our memories" hidden>
+      <section class="screen screen--memories" id="screen-memories" data-route="memories" aria-label="Kenangan kita" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Gallery</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Galeri</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro reveal">
-            <p class="eyebrow">chapter one</p>
-            <h1 class="page-title">Our Little <em>Memories</em></h1>
-            <p class="page-sub">Tiny pieces of us, kept safe in one place. Tap a photo to look closer.</p>
+            <p class="eyebrow">bab satu</p>
+            <h1 class="page-title">Kenangan <em>Kecil</em> Kita</h1>
+            <p class="page-sub">Kepingan kecil tentang kita, tersimpan aman di satu tempat. Ketuk foto untuk melihat lebih dekat.</p>
           </div>
-          <div class="chips" id="memoryFilters" role="tablist" aria-label="Filter memories"></div>
+          <div class="chips" id="memoryFilters" role="tablist" aria-label="Saring kenangan"></div>
           <div class="memory-grid" id="memoryGrid"></div>
-          <p class="hand end-note">more pages coming, every year ♡</p>
+          <p class="hand end-note">halaman baru menyusul, setiap tahun ♡</p>
         </div>
       </section>
 
       <!-- ============ 04 · MEMORY DETAIL ============ -->
-      <section class="screen screen--detail" id="screen-memory" data-route="memory" aria-label="Memory detail" hidden>
+      <section class="screen screen--detail" id="screen-memory" data-route="memory" aria-label="Detail kenangan" hidden>
         <div class="detail-media">
           <img class="detail-media__img" id="detailImg" src="" alt="">
           <div class="detail-media__top">
-            <button class="icon-btn icon-btn--glass" type="button" data-back aria-label="Back to gallery"><i data-icon="chevronLeft"></i></button>
+            <button class="icon-btn icon-btn--glass" type="button" data-back aria-label="Kembali ke galeri"><i data-icon="chevronLeft"></i></button>
           </div>
-          <button class="icon-btn icon-btn--glass detail-fav" type="button" id="detailFav" aria-pressed="false" aria-label="Mark as favorite"><i data-icon="heart"></i></button>
+          <button class="icon-btn icon-btn--glass detail-fav" type="button" id="detailFav" aria-pressed="false" aria-label="Tandai sebagai favorit"><i data-icon="heart"></i></button>
           <div class="detail-thumbs" id="detailThumbs"></div>
         </div>
         <div class="detail-sheet">
@@ -227,77 +227,77 @@
             <span class="clip" aria-hidden="true"></span>
             <p class="hand" id="detailNote"></p>
           </div>
-          <h2 class="section__title section__title--sm">More memories</h2>
+          <h2 class="section__title section__title--sm">Kenangan lainnya</h2>
           <div class="h-scroll h-scroll--sm" id="detailMore"></div>
         </div>
         <div class="action-bar">
-          <a class="btn btn--ghost" href="#memories"><i data-icon="grid"></i> Gallery</a>
-          <a class="btn btn--primary" id="detailNext" href="#memories">Next memory <i data-icon="arrowRight"></i></a>
+          <a class="btn btn--ghost" href="#memories"><i data-icon="grid"></i> Galeri</a>
+          <a class="btn btn--primary" id="detailNext" href="#memories" aria-label="Kenangan berikutnya">Berikutnya <i data-icon="arrowRight"></i></a>
         </div>
       </section>
 
       <!-- ============ 05 · LITTLE MOMENTS ============ -->
-      <section class="screen screen--moments" id="screen-moments" data-route="moments" aria-label="Little moments" hidden>
+      <section class="screen screen--moments" id="screen-moments" data-route="moments" aria-label="Momen kecil" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Timeline</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Lini Masa</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro page-intro--center reveal">
-            <p class="eyebrow">chapter two</p>
-            <h1 class="page-title">Little <em>Moments</em></h1>
-            <p class="page-sub">The story of us, one small moment at a time.</p>
+            <p class="eyebrow">bab dua</p>
+            <h1 class="page-title">Momen <em>Kecil</em></h1>
+            <p class="page-sub">Kisah kita, satu momen kecil demi satu.</p>
             <div class="stat-row">
-              <div class="stat"><strong id="momentsDays">0</strong><span>days together</span></div>
-              <div class="stat"><strong id="momentsCount">0</strong><span>moments</span></div>
-              <div class="stat"><strong>∞</strong><span>to come</span></div>
+              <div class="stat"><strong id="momentsDays">0</strong><span>hari bersama</span></div>
+              <div class="stat"><strong id="momentsCount">0</strong><span>momen</span></div>
+              <div class="stat"><strong>∞</strong><span>yang akan datang</span></div>
             </div>
           </div>
           <ol class="timeline" id="timeline"></ol>
           <a class="cta-card reveal" href="#reasons">
             <span class="cta-card__icon"><i data-icon="heart"></i></span>
-            <span><strong>Want to know why?</strong><span>Read the reasons I love you</span></span>
+            <span><strong>Mau tahu kenapa?</strong><span>Baca alasan aku sayang kamu</span></span>
             <i data-icon="arrowRight"></i>
           </a>
         </div>
       </section>
 
       <!-- ============ 06 · REASONS ============ -->
-      <section class="screen screen--reasons" id="screen-reasons" data-route="reasons" aria-label="Reasons why I love you" hidden>
+      <section class="screen screen--reasons" id="screen-reasons" data-route="reasons" aria-label="Alasan aku sayang kamu" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Reasons</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Alasan</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro reveal">
-            <p class="eyebrow">chapter three</p>
-            <h1 class="page-title">Reasons Why <em>I Love You</em></h1>
-            <p class="page-sub">Tap each card to open it. (There are way more, but these were a start.)</p>
+            <p class="eyebrow">bab tiga</p>
+            <h1 class="page-title">Alasan Aku <em>Sayang Kamu</em></h1>
+            <p class="page-sub">Ketuk setiap kartu untuk membukanya. (Sebenarnya masih banyak lagi, ini baru permulaan.)</p>
           </div>
           <div class="reasons-progress reveal">
-            <div class="reasons-progress__text"><span id="reasonsOpened">0</span> of <span id="reasonsTotal">0</span> opened</div>
+            <div class="reasons-progress__text"><span id="reasonsOpened">0</span> dari <span id="reasonsTotal">0</span> dibuka</div>
             <div class="journey"><span id="reasonsBar"></span></div>
-            <button class="btn btn--soft btn--sm" type="button" id="reasonRandom"><i data-icon="shuffle"></i> Surprise me</button>
+            <button class="btn btn--soft btn--sm" type="button" id="reasonRandom"><i data-icon="shuffle"></i> Kejutkan aku</button>
           </div>
           <div class="reasons-grid" id="reasonsGrid"></div>
-          <p class="reasons-done hand" id="reasonsDone" hidden>…and a million more I haven't written yet.</p>
+          <p class="reasons-done hand" id="reasonsDone" hidden>…dan sejuta lagi yang belum sempat kutulis.</p>
         </div>
       </section>
 
       <!-- ============ 07 · LETTER ============ -->
-      <section class="screen screen--letter" id="screen-letter" data-route="letter" aria-label="My letter" hidden>
+      <section class="screen screen--letter" id="screen-letter" data-route="letter" aria-label="Suratku" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Letter</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Surat</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="letter-stage" id="letterStage">
             <div class="page-intro page-intro--center">
-              <p class="eyebrow">chapter four</p>
-              <h1 class="page-title" id="letterTitle">A Letter Just For You</h1>
+              <p class="eyebrow">bab empat</p>
+              <h1 class="page-title" id="letterTitle">Surat Khusus Untukmu</h1>
               <p class="page-sub" id="letterSubtitle"></p>
             </div>
 
@@ -310,7 +310,7 @@
             </div>
 
             <button class="btn btn--primary btn--lg" type="button" id="openLetterBtn">
-              <span id="openLetterLabel">Open My Letter</span> <i data-icon="mail"></i>
+              <span id="openLetterLabel">Buka Suratku</span> <i data-icon="mail"></i>
             </button>
           </div>
 
@@ -322,27 +322,27 @@
               <i data-icon="heart"></i><i data-icon="heart"></i><i data-icon="heart"></i>
             </div>
             <div class="letter-paper__actions">
-              <button class="btn btn--ghost btn--sm" type="button" id="letterSkip"><i data-icon="skip"></i> Show all</button>
-              <button class="btn btn--ghost btn--sm" type="button" id="letterReplay" hidden><i data-icon="replay"></i> Read again</button>
-              <a class="btn btn--primary btn--sm" href="#surprise" id="letterNext" hidden>One more thing <i data-icon="arrowRight"></i></a>
+              <button class="btn btn--ghost btn--sm" type="button" id="letterSkip"><i data-icon="skip"></i> Tampilkan semua</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="letterReplay" hidden><i data-icon="replay"></i> Baca lagi</button>
+              <a class="btn btn--primary btn--sm" href="#surprise" id="letterNext" hidden>Satu hal lagi <i data-icon="arrowRight"></i></a>
             </div>
           </article>
         </div>
       </section>
 
       <!-- ============ 08 · SURPRISE ============ -->
-      <section class="screen screen--surprise" id="screen-surprise" data-route="surprise" aria-label="Birthday surprise" hidden>
+      <section class="screen screen--surprise" id="screen-surprise" data-route="surprise" aria-label="Kejutan ulang tahun" hidden>
         <div class="floating-hearts floating-hearts--stars" id="surpriseHearts" aria-hidden="true"></div>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Surprise</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Kejutan</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="surprise-stage" id="surpriseStage">
             <div class="page-intro page-intro--center">
-              <p class="eyebrow">the last page</p>
-              <h1 class="page-title" id="surpriseTitle">One Last Surprise</h1>
+              <p class="eyebrow">halaman terakhir</p>
+              <h1 class="page-title" id="surpriseTitle">Satu Kejutan Terakhir</h1>
               <p class="page-sub" id="surpriseSubtitle"></p>
             </div>
             <div class="big-gift" id="bigGift" aria-hidden="true">
@@ -352,54 +352,54 @@
               <div class="big-gift__shadow"></div>
             </div>
             <button class="btn btn--primary btn--lg" type="button" id="openPresentBtn">
-              <span id="openPresentLabel">Open Your Present</span> <i data-icon="sparkles"></i>
+              <span id="openPresentLabel">Buka Kadomu</span> <i data-icon="sparkles"></i>
             </button>
           </div>
 
           <div class="surprise-reveal" id="surpriseReveal" hidden>
-            <p class="eyebrow eyebrow--center">surprise!</p>
-            <h1 class="surprise-reveal__title">Happy Birthday,<br><em id="surpriseName">you</em></h1>
+            <p class="eyebrow eyebrow--center">kejutan!</p>
+            <h1 class="surprise-reveal__title">Selamat Ulang Tahun,<br><em id="surpriseName">kamu</em></h1>
             <div class="polaroid polaroid--hero">
               <span class="tape tape--tl" aria-hidden="true"></span>
               <span class="tape tape--tr" aria-hidden="true"></span>
               <img id="surprisePhoto" src="" alt="">
-              <p class="hand polaroid__caption" id="surpriseAge">another year of you</p>
+              <p class="hand polaroid__caption" id="surpriseAge">satu tahun lagi bersamamu</p>
             </div>
             <p class="surprise-reveal__message" id="surpriseMessage"></p>
             <div class="present-card">
               <span class="present-card__icon"><i data-icon="gift"></i></span>
               <div>
-                <p class="eyebrow" id="presentTitle">Your present</p>
+                <p class="eyebrow" id="presentTitle">Hadiahmu</p>
                 <p class="present-card__desc" id="presentDesc"></p>
                 <p class="hand present-card__note" id="presentNote"></p>
               </div>
             </div>
-            <nav class="more-surprises" aria-label="More surprises">
-              <a href="#cake"><i data-icon="cake"></i><span>Blow the candles</span></a>
-              <a href="#gifts"><i data-icon="gift"></i><span>Open your gifts</span></a>
-              <a href="#quest"><i data-icon="star"></i><span>Birthday Quest</span></a>
+            <nav class="more-surprises" aria-label="Kejutan lainnya">
+              <a href="#cake"><i data-icon="cake"></i><span>Tiup lilinnya</span></a>
+              <a href="#gifts"><i data-icon="gift"></i><span>Buka hadiahmu</span></a>
+              <a href="#quest"><i data-icon="star"></i><span>Misi Ulang Tahun</span></a>
             </nav>
-            <p class="hand surprise-reveal__sign">with all my love, <span id="surpriseSender"></span></p>
+            <p class="hand surprise-reveal__sign">dengan segenap cintaku, <span id="surpriseSender"></span></p>
             <div class="surprise-reveal__actions">
-              <a class="btn btn--primary" href="#qr"><i data-icon="qr"></i> A secret message for you</a>
-              <button class="btn btn--soft" type="button" id="celebrateBtn"><i data-icon="sparkles"></i> Celebrate again</button>
-              <button class="btn btn--ghost" type="button" id="restartBtn"><i data-icon="replay"></i> Start from the beginning</button>
+              <a class="btn btn--primary" href="#qr"><i data-icon="qr"></i> Pesan rahasia untukmu</a>
+              <button class="btn btn--soft" type="button" id="celebrateBtn"><i data-icon="sparkles"></i> Rayakan lagi</button>
+              <button class="btn btn--ghost" type="button" id="restartBtn"><i data-icon="replay"></i> Mulai dari awal</button>
             </div>
           </div>
         </div>
       </section>
       <!-- ============ 09 · QR GIFT — "A Secret Message Just For You" ============ -->
-      <section class="screen screen--qr" id="screen-qr" data-route="qr" aria-label="QR gift" hidden>
+      <section class="screen screen--qr" id="screen-qr" data-route="qr" aria-label="Hadiah QR" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">QR Gift</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Hadiah QR</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro page-intro--center">
-            <p class="eyebrow">a secret message just for you</p>
-            <h1 class="page-title">A Little <em>Secret</em></h1>
-            <p class="page-sub">Scan this little heart to discover something special.</p>
+            <p class="eyebrow">pesan rahasia khusus untukmu</p>
+            <h1 class="page-title">Sebuah <em>Rahasia</em> Kecil</h1>
+            <p class="page-sub">Pindai hati kecil ini untuk menemukan sesuatu yang istimewa.</p>
           </div>
 
           <div class="qr-warn" id="qrWarn" role="alert" hidden></div>
@@ -413,18 +413,18 @@
           </div>
 
           <div class="qr-options">
-            <div class="segmented" id="qrStyle" role="radiogroup" aria-label="QR design">
-              <button type="button" role="radio" data-style="heart" aria-checked="true"><i data-icon="heart"></i> Heart</button>
-              <button type="button" role="radio" data-style="standard" aria-checked="false"><i data-icon="qr"></i> Standard</button>
+            <div class="segmented" id="qrStyle" role="radiogroup" aria-label="Desain QR">
+              <button type="button" role="radio" data-style="heart" aria-checked="true"><i data-icon="heart"></i> Hati</button>
+              <button type="button" role="radio" data-style="standard" aria-checked="false"><i data-icon="qr"></i> Standar</button>
             </div>
             <div class="qr-options__row">
               <label class="switch">
                 <input type="checkbox" id="qrTransparent">
                 <span class="switch__track" aria-hidden="true"></span>
-                <span>Transparent background</span>
+                <span>Latar transparan</span>
               </label>
               <label class="select">
-                <span class="sr-only">PNG size</span>
+                <span class="sr-only">Ukuran PNG</span>
                 <select id="qrRes">
                   <option value="1000">1000 px</option>
                   <option value="2000">2000 px (HD)</option>
@@ -434,16 +434,16 @@
           </div>
 
           <div class="qr-actions">
-            <button class="btn btn--primary" type="button" id="qrDownloadPng"><i data-icon="download"></i> Download PNG</button>
+            <button class="btn btn--primary" type="button" id="qrDownloadPng"><i data-icon="download"></i> Unduh PNG</button>
             <button class="btn btn--soft" type="button" id="qrDownloadSvg"><i data-icon="download"></i> SVG</button>
-            <button class="btn btn--ghost" type="button" id="qrShare"><i data-icon="share"></i> Share</button>
-            <button class="btn btn--ghost" type="button" id="qrCopy"><i data-icon="copy"></i> Copy Link</button>
+            <button class="btn btn--ghost" type="button" id="qrShare"><i data-icon="share"></i> Bagikan</button>
+            <button class="btn btn--ghost" type="button" id="qrCopy"><i data-icon="copy"></i> Salin Tautan</button>
           </div>
 
           <div class="qr-dest">
             <span class="qr-dest__icon"><i data-icon="link"></i></span>
             <div class="qr-dest__text">
-              <p class="eyebrow">opens</p>
+              <p class="eyebrow">membuka</p>
               <p class="qr-dest__host" id="qrDestHost">—</p>
               <a class="qr-dest__url" id="qrDestUrl" target="_blank" rel="noopener noreferrer">—</a>
             </div>
@@ -451,43 +451,43 @@
           <p class="qr-meta" id="qrMeta"></p>
 
           <section class="howto" id="qrHowTo" aria-labelledby="howtoTitle">
-            <h2 class="section__title section__title--sm" id="howtoTitle">How to open the secret</h2>
+            <h2 class="section__title section__title--sm" id="howtoTitle">Cara membuka rahasianya</h2>
             <ol class="howto__list">
-              <li><span>1</span><p>Open <strong>Google Lens</strong>, your <strong>phone camera</strong>, or the QR scanner in <strong>WhatsApp</strong>.</p></li>
-              <li><span>2</span><p>Point it at the heart so the whole white square is visible.</p></li>
-              <li><span>3</span><p>Tap the link that appears — your little book opens.</p></li>
+              <li><span>1</span><p>Buka <strong>Google Lens</strong>, <strong>kamera HP</strong>, atau pemindai QR di <strong>WhatsApp</strong>.</p></li>
+              <li><span>2</span><p>Arahkan ke hati sampai seluruh kotak putihnya terlihat.</p></li>
+              <li><span>3</span><p>Ketuk tautan yang muncul — buku kecilmu akan terbuka.</p></li>
             </ol>
-            <p class="howto__tip hand">if the heart is shy, try the Standard version ♡</p>
+            <p class="howto__tip hand">kalau hatinya malu-malu, coba versi Standar ♡</p>
           </section>
 
           <a class="cta-card" href="#scan">
             <span class="cta-card__icon"><i data-icon="scan"></i></span>
-            <span><strong>Scan Your Little Surprise</strong><span>Use this website's own QR scanner</span></span>
+            <span><strong>Pindai Kejutan Kecilmu</strong><span>Pakai pemindai QR milik website ini</span></span>
             <i data-icon="arrowRight"></i>
           </a>
         </div>
       </section>
 
       <!-- ============ 10 · QR SCANNER — "Scan Your Little Surprise" ============ -->
-      <section class="screen screen--scan" id="screen-scan" data-route="scan" aria-label="QR scanner" hidden>
+      <section class="screen screen--scan" id="screen-scan" data-route="scan" aria-label="Pemindai QR" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Scanner</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Pemindai</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro page-intro--center">
-            <p class="eyebrow">scan your little surprise</p>
-            <h1 class="page-title">Scan a <em>QR Code</em></h1>
+            <p class="eyebrow">pindai kejutan kecilmu</p>
+            <h1 class="page-title">Pindai <em>Kode QR</em></h1>
           </div>
 
           <div class="scanner" id="scanView" data-mode="idle">
-            <video class="scanner__video" id="scanVideo" playsinline muted aria-label="Camera preview"></video>
+            <video class="scanner__video" id="scanVideo" playsinline muted aria-label="Pratinjau kamera"></video>
             <canvas class="scanner__freeze" id="scanFreeze" hidden aria-hidden="true"></canvas>
-            <img class="scanner__preview" id="scanPreview" alt="Uploaded image" hidden>
+            <img class="scanner__preview" id="scanPreview" alt="Gambar yang diunggah" hidden>
             <div class="scanner__idle" aria-hidden="true">
               <span class="scanner__idle-icon"><i data-icon="camera"></i></span>
-              <p>Your camera stays off until you tap <strong>Start Camera</strong>.</p>
+              <p>Kamera tetap mati sampai kamu mengetuk <strong>Nyalakan Kamera</strong>.</p>
             </div>
             <div class="scanner__frame" aria-hidden="true">
               <span class="scanner__corner scanner__corner--tl"></span>
@@ -496,57 +496,57 @@
               <span class="scanner__corner scanner__corner--br"></span>
               <span class="scanner__line"></span>
             </div>
-            <p class="scanner__hint">Place the QR Code inside the frame</p>
+            <p class="scanner__hint">Letakkan kode QR di dalam bingkai</p>
           </div>
 
-          <p class="scan-status" id="scanStatus" role="status" aria-live="polite">Tap Start Camera to begin.</p>
+          <p class="scan-status" id="scanStatus" role="status" aria-live="polite">Ketuk Nyalakan Kamera untuk mulai.</p>
 
           <div class="scan-controls">
-            <button class="btn btn--primary" type="button" id="scanStart"><i data-icon="camera"></i> Start Camera</button>
-            <button class="btn btn--primary" type="button" id="scanStop" hidden><i data-icon="stop"></i> Stop Camera</button>
-            <button class="icon-btn scan-controls__switch" type="button" id="scanSwitch" aria-label="Switch camera" disabled><i data-icon="switchCam"></i></button>
-            <button class="btn btn--ghost" type="button" id="scanUpload"><i data-icon="upload"></i> Upload QR Image</button>
+            <button class="btn btn--primary" type="button" id="scanStart"><i data-icon="camera"></i> Nyalakan Kamera</button>
+            <button class="btn btn--primary" type="button" id="scanStop" hidden><i data-icon="stop"></i> Matikan Kamera</button>
+            <button class="icon-btn scan-controls__switch" type="button" id="scanSwitch" aria-label="Ganti kamera" disabled><i data-icon="switchCam"></i></button>
+            <button class="btn btn--ghost" type="button" id="scanUpload"><i data-icon="upload"></i> Unggah Gambar QR</button>
             <input class="sr-only" type="file" id="scanFile" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" tabindex="-1" aria-hidden="true">
           </div>
 
           <div class="scan-result" id="scanResult" hidden>
             <div class="scan-result__check" aria-hidden="true"><i data-icon="check"></i></div>
-            <h2 class="scan-result__title" id="scanResultTitle" tabindex="-1">QR Code detected!</h2>
-            <p class="chip chip--soft scan-result__badge" id="scanResultBadge" hidden><i data-icon="heart"></i> This is your birthday gift</p>
+            <h2 class="scan-result__title" id="scanResultTitle" tabindex="-1">Kode QR terdeteksi!</h2>
+            <p class="chip chip--soft scan-result__badge" id="scanResultBadge" hidden><i data-icon="heart"></i> Ini hadiah ulang tahunmu</p>
             <p class="scan-domain" id="scanResultDomain" hidden></p>
             <p class="scan-result__value" id="scanResultValue"></p>
             <div class="scan-result__warn" id="scanResultWarn" hidden></div>
             <div class="scan-result__actions">
-              <a class="btn btn--primary" id="scanOpen" hidden><i data-icon="external"></i> Open Link</a>
-              <button class="btn btn--soft" type="button" id="scanAgain"><i data-icon="replay"></i> Scan Again</button>
-              <button class="btn btn--ghost btn--sm" type="button" id="scanCopy"><i data-icon="copy"></i> Copy</button>
+              <a class="btn btn--primary" id="scanOpen" hidden><i data-icon="external"></i> Buka Tautan</a>
+              <button class="btn btn--soft" type="button" id="scanAgain"><i data-icon="replay"></i> Pindai Lagi</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="scanCopy"><i data-icon="copy"></i> Salin</button>
             </div>
           </div>
 
-          <p class="scan-privacy"><i data-icon="lock"></i> Everything is read on your device. Nothing is uploaded or saved.</p>
+          <p class="scan-privacy"><i data-icon="lock"></i> Semuanya dibaca di perangkatmu. Tidak ada yang diunggah atau disimpan.</p>
         </div>
       </section>
       <!-- ============ 11 · BIRTHDAY QUEST — mini treasure hunt ============ -->
-      <section class="screen screen--quest" id="screen-quest" data-route="quest" aria-label="Birthday quest" hidden>
+      <section class="screen screen--quest" id="screen-quest" data-route="quest" aria-label="Misi ulang tahun" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Quest</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Misi</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro page-intro--center">
-            <p class="eyebrow">a mini treasure hunt</p>
-            <h1 class="page-title" id="questTitle">Birthday Quest</h1>
+            <p class="eyebrow">perburuan harta karun mini</p>
+            <h1 class="page-title" id="questTitle">Misi Ulang Tahun</h1>
             <p class="page-sub" id="questSubtitle"></p>
           </div>
 
-          <section class="quest-progress" aria-label="Quest progress">
+          <section class="quest-progress" aria-label="Progres misi">
             <div class="quest-tokens">
               <span class="quest-token" data-token="1"><i data-icon="star"></i></span>
               <span class="quest-token" data-token="2"><i data-icon="help"></i></span>
               <span class="quest-token" data-token="3"><i data-icon="puzzle"></i></span>
             </div>
-            <p class="quest-progress__text"><strong id="questCount">0</strong> of 3 tokens collected</p>
+            <p class="quest-progress__text"><strong id="questCount">0</strong> dari 3 token terkumpul</p>
             <div class="journey" aria-hidden="true"><span id="questBar"></span></div>
           </section>
 
@@ -554,16 +554,16 @@
             <li class="quest-step" data-step="1">
               <div class="quest-step__head">
                 <span class="quest-step__num">1</span>
-                <div><h2 class="quest-step__title">Hidden Object</h2><span class="chip chip--soft quest-step__status">In progress</span></div>
+                <div><h2 class="quest-step__title">Benda Tersembunyi</h2><span class="chip chip--soft quest-step__status">Sedang berjalan</span></div>
               </div>
               <p class="quest-step__text" id="questHint"></p>
-              <p class="quest-done-note" id="questHiddenStatus" hidden><i data-icon="check"></i> Found — token 1 collected.</p>
-              <button class="btn btn--soft btn--sm" type="button" id="questHintBtn"><i data-icon="help"></i> Show me where to look</button>
+              <p class="quest-done-note" id="questHiddenStatus" hidden><i data-icon="check"></i> Ketemu — token 1 terkumpul.</p>
+              <button class="btn btn--soft btn--sm" type="button" id="questHintBtn"><i data-icon="help"></i> Tunjukkan tempatnya</button>
             </li>
             <li class="quest-step" data-step="2">
               <div class="quest-step__head">
                 <span class="quest-step__num">2</span>
-                <div><h2 class="quest-step__title">Birthday Trivia</h2><span class="chip chip--soft quest-step__status">Locked</span></div>
+                <div><h2 class="quest-step__title">Kuis Ulang Tahun</h2><span class="chip chip--soft quest-step__status">Terkunci</span></div>
               </div>
               <p class="quest-step__text" id="questTriviaIntro"></p>
               <div class="trivia" id="questTrivia"></div>
@@ -571,7 +571,7 @@
             <li class="quest-step" data-step="3">
               <div class="quest-step__head">
                 <span class="quest-step__num">3</span>
-                <div><h2 class="quest-step__title">Mini Puzzle</h2><span class="chip chip--soft quest-step__status">Locked</span></div>
+                <div><h2 class="quest-step__title">Puzzle Mini</h2><span class="chip chip--soft quest-step__status">Terkunci</span></div>
               </div>
               <div id="questPuzzle"></div>
             </li>
@@ -580,24 +580,24 @@
           <div class="quest-final" id="questFinal" hidden>
             <span class="quest-final__icon"><i data-icon="unlock"></i></span>
             <p class="quest-final__text" id="questComplete"></p>
-            <a class="btn btn--primary" href="#gifts"><i data-icon="gift"></i> Open your final gift</a>
+            <a class="btn btn--primary" href="#gifts"><i data-icon="gift"></i> Buka hadiah terakhirmu</a>
           </div>
 
-          <button class="quest-reset" type="button" id="questReset">Reset quest progress</button>
+          <button class="quest-reset" type="button" id="questReset">Atur ulang progres misi</button>
         </div>
       </section>
 
       <!-- ============ 12 · INTERACTIVE BIRTHDAY CAKE ============ -->
-      <section class="screen screen--cake" id="screen-cake" data-route="cake" aria-label="Birthday cake" hidden>
+      <section class="screen screen--cake" id="screen-cake" data-route="cake" aria-label="Kue ulang tahun" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Cake</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Kue</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro page-intro--center">
-            <p class="eyebrow">it's time</p>
-            <h1 class="page-title">Make a <em>Wish</em></h1>
+            <p class="eyebrow">sudah waktunya</p>
+            <h1 class="page-title">Buat <em>Permohonan</em></h1>
           </div>
 
           <div class="cake-stage" id="cakeStage" data-state="lit">
@@ -622,37 +622,37 @@
           </div>
 
           <div class="cake-actions">
-            <button class="btn btn--primary btn--lg" type="button" id="cakeWish"><i data-icon="sparkles"></i> Make a Wish</button>
-            <button class="btn btn--primary btn--lg" type="button" id="cakeBlow" hidden><i data-icon="cake"></i> Blow the Candles</button>
-            <button class="btn btn--soft" type="button" id="cakeReplay" hidden><i data-icon="replay"></i> Light them again</button>
+            <button class="btn btn--primary btn--lg" type="button" id="cakeWish"><i data-icon="sparkles"></i> Buat Permohonan</button>
+            <button class="btn btn--primary btn--lg" type="button" id="cakeBlow" hidden><i data-icon="cake"></i> Tiup Lilinnya</button>
+            <button class="btn btn--soft" type="button" id="cakeReplay" hidden><i data-icon="replay"></i> Nyalakan lagi</button>
           </div>
 
           <section class="cake-done" id="cakeDone" hidden>
             <span class="tape tape--top" aria-hidden="true"></span>
-            <h2 class="cake-done__title"><span id="cakeDoneTitle">Happy Birthday!</span> <em id="cakeDoneName"></em></h2>
+            <h2 class="cake-done__title"><span id="cakeDoneTitle">Selamat Ulang Tahun!</span> <em id="cakeDoneName"></em></h2>
             <p class="cake-done__msg" id="cakeDoneMessage"></p>
-            <a class="btn btn--soft btn--sm" href="#gifts"><i data-icon="gift"></i> Now, your gifts</a>
+            <a class="btn btn--soft btn--sm" href="#gifts"><i data-icon="gift"></i> Sekarang, hadiahmu</a>
           </section>
         </div>
       </section>
 
       <!-- ============ 13 · MULTIPLE BIRTHDAY GIFTS ============ -->
-      <section class="screen screen--gifts" id="screen-gifts" data-route="gifts" aria-label="Birthday gifts" hidden>
+      <section class="screen screen--gifts" id="screen-gifts" data-route="gifts" aria-label="Hadiah ulang tahun" hidden>
         <header class="app-header">
-          <button class="icon-btn" type="button" data-back aria-label="Go back"><i data-icon="chevronLeft"></i></button>
-          <p class="app-header__title">Gifts</p>
+          <button class="icon-btn" type="button" data-back aria-label="Kembali"><i data-icon="chevronLeft"></i></button>
+          <p class="app-header__title">Hadiah</p>
           <span class="app-header__spacer"></span>
         </header>
         <div class="screen__body">
           <div class="page-intro page-intro--center">
-            <p class="eyebrow">just for you</p>
-            <h1 class="page-title" id="giftsTitle">Your Birthday Gifts</h1>
+            <p class="eyebrow">khusus untukmu</p>
+            <h1 class="page-title" id="giftsTitle">Hadiah Ulang Tahunmu</h1>
             <p class="page-sub" id="giftsSubtitle"></p>
           </div>
           <div class="gift-grid" id="giftGrid"></div>
           <a class="cta-card gift-quest-hint" id="giftQuestHint" href="#quest" hidden>
             <span class="cta-card__icon"><i data-icon="lock"></i></span>
-            <span><strong>One gift is still locked</strong><span id="giftQuestHintText">Finish the Birthday Quest to open it.</span></span>
+            <span><strong>Satu hadiah masih terkunci</strong><span id="giftQuestHintText">Selesaikan Misi Ulang Tahun untuk membukanya.</span></span>
             <i data-icon="arrowRight"></i>
           </a>
         </div>
@@ -660,12 +660,12 @@
     </main>
 
     <!-- Bottom navigation -->
-    <nav class="bottom-nav" id="bottomNav" aria-label="Main" hidden>
-      <a class="bottom-nav__item" href="#home" data-nav="home"><i data-icon="home"></i><span>Home</span></a>
-      <a class="bottom-nav__item" href="#memories" data-nav="memories"><i data-icon="images"></i><span>Memories</span></a>
-      <a class="bottom-nav__item" href="#moments" data-nav="moments"><i data-icon="clock"></i><span>Moments</span></a>
-      <a class="bottom-nav__item" href="#letter" data-nav="letter"><i data-icon="mail"></i><span>Letter</span></a>
-      <a class="bottom-nav__item" href="#surprise" data-nav="surprise"><i data-icon="gift"></i><span>Surprise</span></a>
+    <nav class="bottom-nav" id="bottomNav" aria-label="Navigasi utama" hidden>
+      <a class="bottom-nav__item" href="#home" data-nav="home"><i data-icon="home"></i><span>Beranda</span></a>
+      <a class="bottom-nav__item" href="#memories" data-nav="memories"><i data-icon="images"></i><span>Kenangan</span></a>
+      <a class="bottom-nav__item" href="#moments" data-nav="moments"><i data-icon="clock"></i><span>Momen</span></a>
+      <a class="bottom-nav__item" href="#letter" data-nav="letter"><i data-icon="mail"></i><span>Surat</span></a>
+      <a class="bottom-nav__item" href="#surprise" data-nav="surprise"><i data-icon="gift"></i><span>Kejutan</span></a>
     </nav>
 
     <!-- Lightbox -->
@@ -674,7 +674,7 @@
       <div class="lightbox__panel">
         <div class="lightbox__top">
           <span class="lightbox__counter" id="lbCounter">1 / 1</span>
-          <button class="icon-btn icon-btn--glass" type="button" data-lb-close aria-label="Close photo"><i data-icon="x"></i></button>
+          <button class="icon-btn icon-btn--glass" type="button" data-lb-close aria-label="Tutup foto"><i data-icon="x"></i></button>
         </div>
         <figure class="lightbox__figure">
           <div class="lightbox__frame">
@@ -687,9 +687,9 @@
           </figcaption>
         </figure>
         <div class="lightbox__controls">
-          <button class="icon-btn icon-btn--light" type="button" id="lbPrev" aria-label="Previous photo"><i data-icon="chevronLeft"></i></button>
-          <a class="btn btn--primary btn--sm" id="lbStory" href="#memories">Read the story <i data-icon="book"></i></a>
-          <button class="icon-btn icon-btn--light" type="button" id="lbNext" aria-label="Next photo"><i data-icon="chevronRight"></i></button>
+          <button class="icon-btn icon-btn--light" type="button" id="lbPrev" aria-label="Foto sebelumnya"><i data-icon="chevronLeft"></i></button>
+          <a class="btn btn--primary btn--sm" id="lbStory" href="#memories">Baca ceritanya <i data-icon="book"></i></a>
+          <button class="icon-btn icon-btn--light" type="button" id="lbNext" aria-label="Foto berikutnya"><i data-icon="chevronRight"></i></button>
         </div>
       </div>
     </div>
@@ -698,7 +698,7 @@
     <div class="gift-modal" id="giftModal" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle" hidden>
       <div class="gift-modal__backdrop" data-gift-close></div>
       <div class="gift-modal__panel">
-        <button class="icon-btn gift-modal__close" type="button" data-gift-close aria-label="Close gift"><i data-icon="x"></i></button>
+        <button class="icon-btn gift-modal__close" type="button" data-gift-close aria-label="Tutup hadiah"><i data-icon="x"></i></button>
         <div class="gift-modal__body" id="giftModalBody"></div>
       </div>
     </div>
@@ -710,7 +710,7 @@
   </div>
 
   <noscript>
-    <p class="noscript">This little gift needs JavaScript turned on to open. 💌</p>
+    <p class="noscript">Hadiah kecil ini butuh JavaScript agar bisa dibuka. 💌</p>
   </noscript>
 
   <script src="js/config.js"></script>

@@ -4,8 +4,9 @@
 (function () {
   "use strict";
 
-  var MONTHS = ["January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"];
+  var MONTHS = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
+                "Agustus", "September", "Oktober", "November", "Desember"];
+  var MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
 
   var U = {};
 
@@ -36,12 +37,17 @@
     return new Date(+m[1], +m[2] - 1, +m[3]);
   };
 
+  /** Indonesian style: "14 Februari 2023", short "14 Feb 2023", noYear "12 November". */
   U.formatDate = function (d, opts) {
     opts = opts || {};
-    var month = MONTHS[d.getMonth()];
-    if (opts.short) month = month.slice(0, 3);
-    if (opts.noYear) return month + " " + d.getDate();
-    return month + " " + d.getDate() + ", " + d.getFullYear();
+    var month = (opts.short ? MONTHS_SHORT : MONTHS)[d.getMonth()];
+    if (opts.noYear) return d.getDate() + " " + month;
+    return d.getDate() + " " + month + " " + d.getFullYear();
+  };
+
+  /** 1361 → "1.361" (Indonesian thousands separator). */
+  U.formatNumber = function (n) {
+    return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
   U.daysBetween = function (a, b) {
@@ -74,7 +80,7 @@
 
   /* ---------- Images with automatic placeholder ---------- */
   U.placeholder = function (label) {
-    var text = U.esc(label || "photo coming soon");
+    var text = U.esc(label || "foto segera hadir");
     var svg =
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">' +
       '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCE4EC"/><stop offset="1" stop-color="#F5B8CB"/></linearGradient></defs>' +

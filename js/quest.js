@@ -68,13 +68,13 @@
     var b = document.createElement("button");
     b.type = "button";
     b.className = "quest-hidden";
-    b.setAttribute("aria-label", "A tiny hidden " + icon + " — tap to collect it");
+    b.setAttribute("aria-label", "Benda kecil tersembunyi — ketuk untuk mengambilnya");
     b.innerHTML = Icons.svg(icon);
     b.addEventListener("click", function (e) {
       if (!award(1)) return;
       Anim.burst(e.clientX || 0, e.clientY || 0, { count: 12 });
       b.classList.add("is-found");
-      U.toast(cfg.foundMessage || "You found it! Token 1 is yours.", 3000);
+      U.toast(cfg.foundMessage || "Ketemu! Token 1 jadi milikmu.", 3000);
       setTimeout(function () { b.remove(); }, 700);
     });
     host.appendChild(b);
@@ -110,21 +110,21 @@
       var right = U.formatDate(met);
       var near = [37, -61, 120].map(function (d) { return U.formatDate(new Date(met.getFullYear(), met.getMonth(), met.getDate() + d)); });
       var o = uniq([right].concat(near)).slice(0, 3);
-      qs.push({ question: "When did our story begin?", options: shuffle(o), answerText: right });
+      qs.push({ question: "Kapan kisah kita dimulai?", options: shuffle(o), answerText: right });
     }
     var mems = (C.memories || []).filter(function (m) { return m.title && m.location; });
     var locs = uniq(mems.map(function (m) { return m.location; }));
     if (mems.length && locs.length >= 3) {
       var m = mems[Math.floor(Math.random() * mems.length)];
       var others = shuffle(locs.filter(function (l) { return l !== m.location; })).slice(0, 2);
-      qs.push({ question: "Where was “" + m.title + "”?", options: shuffle([m.location].concat(others)), answerText: m.location });
+      qs.push({ question: "Di mana momen “" + m.title + "” terjadi?", options: shuffle([m.location].concat(others)), answerText: m.location });
     }
     var reasons = (C.reasons || []).filter(function (r) { return r.title; });
     if (reasons.length) {
       var r = reasons[Math.floor(Math.random() * reasons.length)];
       // obviously-silly wrong answers (jokes, not memories)
-      var silly = shuffle(["Your perfect parallel parking", "Your love of Monday mornings", "Your thrilling tax returns", "Your 6 a.m. alarm"]).slice(0, 2);
-      qs.push({ question: "Which one is on my list of reasons I love you?", options: shuffle([r.title].concat(silly)), answerText: r.title });
+      var silly = shuffle(["Keahlianmu parkir paralel", "Cintamu pada hari Senin", "Laporan pajakmu yang seru", "Alarm jam 6 pagimu"]).slice(0, 2);
+      qs.push({ question: "Mana yang ada di daftar alasan aku sayang kamu?", options: shuffle([r.title].concat(silly)), answerText: r.title });
     }
     return qs.map(function (q) { return { question: q.question, options: q.options, answer: q.options.indexOf(q.answerText), note: "" }; });
   }
@@ -140,23 +140,23 @@
     var box = document.getElementById("questTrivia");
     if (!box) return;
     if (has(2)) {
-      box.innerHTML = '<p class="quest-done-note">' + Icons.svg("check") + " All answered — token 2 collected.</p>";
+      box.innerHTML = '<p class="quest-done-note">' + Icons.svg("check") + " Semua terjawab — token 2 terkumpul.</p>";
       return;
     }
     if (!has(1)) {
-      box.innerHTML = '<p class="quest-locked-note">' + Icons.svg("lock") + " Find the hidden object first.</p>";
+      box.innerHTML = '<p class="quest-locked-note">' + Icons.svg("lock") + " Temukan benda tersembunyi dulu.</p>";
       return;
     }
     if (!trivia.qs.length) { trivia.qs = triviaQuestions(); trivia.i = 0; }
     if (!trivia.qs.length) {
-      box.innerHTML = '<p class="quest-locked-note">No trivia questions yet.</p><button class="btn btn--soft btn--sm" type="button" data-trivia-skip>Collect token</button>';
+      box.innerHTML = '<p class="quest-locked-note">Belum ada pertanyaan kuis.</p><button class="btn btn--soft btn--sm" type="button" data-trivia-skip>Ambil token</button>';
       return;
     }
     var q = trivia.qs[trivia.i];
     box.innerHTML =
-      '<p class="trivia__count">Question ' + (trivia.i + 1) + " of " + trivia.qs.length + "</p>" +
+      '<p class="trivia__count">Pertanyaan ' + (trivia.i + 1) + " dari " + trivia.qs.length + "</p>" +
       '<p class="trivia__q">' + U.esc(q.question) + "</p>" +
-      '<div class="trivia__options" role="group" aria-label="Answers">' +
+      '<div class="trivia__options" role="group" aria-label="Pilihan jawaban">' +
       q.options.map(function (o, k) { return '<button type="button" class="trivia__opt" data-k="' + k + '">' + U.esc(o) + "</button>"; }).join("") +
       "</div>" +
       '<p class="trivia__feedback" aria-live="polite"></p>';
@@ -172,7 +172,7 @@
       trivia.busy = true;
       b.classList.add("is-right");
       U.$$("#questTrivia .trivia__opt").forEach(function (x) { x.disabled = true; });
-      fb.textContent = q.note || ["Yes! ♡", "Exactly right ✨", "You know us so well."][trivia.i % 3];
+      fb.textContent = q.note || ["Betul! ♡", "Tepat sekali ✨", "Kamu kenal kita banget."][trivia.i % 3];
       Anim.burst(e.clientX, e.clientY, { count: 7 });
       setTimeout(function () {
         trivia.busy = false;
@@ -183,7 +183,7 @@
     } else {
       b.classList.add("is-wrong");
       b.disabled = true;
-      fb.textContent = "Almost! Try another one ♡";
+      fb.textContent = "Hampir! Coba yang lain ♡";
     }
   }
 
@@ -220,7 +220,7 @@
     var done = has(3);
     var locked = !has(2) && !done;
     if (locked) {
-      box.innerHTML = '<p class="quest-locked-note">' + Icons.svg("lock") + " Answer the trivia first.</p>";
+      box.innerHTML = '<p class="quest-locked-note">' + Icons.svg("lock") + " Jawab kuisnya dulu.</p>";
       return;
     }
     if (done) {
@@ -229,15 +229,15 @@
     } else if (puzzle.order.length !== n * n) {
       puzzle.order = newOrder(n);
     }
-    var html = '<div class="puzzle' + (done ? " is-solved" : "") + '" style="--n:' + n + '" role="group" aria-label="Photo puzzle, ' + n + " by " + n + '">';
+    var html = '<div class="puzzle' + (done ? " is-solved" : "") + '" style="--n:' + n + '" role="group" aria-label="Puzzle foto, ' + n + " kali " + n + '">';
     puzzle.order.forEach(function (piece, pos) {
       html += '<button type="button" class="puzzle__piece' + (piece === pos ? " is-home" : "") + '" data-pos="' + pos + '"' + (done ? " disabled" : "") +
-        ' aria-pressed="false" aria-label="Piece ' + (piece + 1) + ", in spot " + (pos + 1) + '"></button>';
+        ' aria-pressed="false" aria-label="Potongan ' + (piece + 1) + ", di posisi " + (pos + 1) + '"></button>';
     });
     html += "</div>";
     html += done
-      ? '<p class="quest-done-note">' + Icons.svg("check") + " Picture complete — token 3 collected.</p>"
-      : '<p class="puzzle__hint">' + U.esc((Q.puzzle || {}).intro || "Tap two pieces to swap them.") + "</p>";
+      ? '<p class="quest-done-note">' + Icons.svg("check") + " Gambar utuh — token 3 terkumpul.</p>"
+      : '<p class="puzzle__hint">' + U.esc((Q.puzzle || {}).intro || "Ketuk dua potongan untuk menukarnya.") + "</p>";
     box.innerHTML = html;
     // set the artwork through the DOM (safe for any file name)
     var bg = "url(" + JSON.stringify(String(puzzle.src)) + ")";
@@ -268,7 +268,7 @@
     [a, pos].forEach(function (p) {
       var piece = puzzle.order[p], n = puzzle.n, el = pieces[p];
       el.style.backgroundPosition = (piece % n) / (n - 1) * 100 + "% " + Math.floor(piece / n) / (n - 1) * 100 + "%";
-      el.setAttribute("aria-label", "Piece " + (piece + 1) + ", in spot " + (p + 1));
+      el.setAttribute("aria-label", "Potongan " + (piece + 1) + ", di posisi " + (p + 1));
       el.classList.remove("is-swapped"); void el.offsetWidth; el.classList.add("is-swapped");
       el.classList.toggle("is-home", piece === p);
     });
@@ -293,7 +293,7 @@
     U.$$(".quest-token").forEach(function (t) {
       var k = +t.dataset.token;
       t.classList.toggle("is-earned", has(k));
-      t.setAttribute("aria-label", "Token " + k + (has(k) ? " collected" : " not collected yet"));
+      t.setAttribute("aria-label", "Token " + k + (has(k) ? " terkumpul" : " belum terkumpul"));
       if (k === newToken) { t.classList.remove("is-new"); void t.offsetWidth; t.classList.add("is-new"); }
     });
     U.$$(".quest-step").forEach(function (s) {
@@ -302,12 +302,12 @@
       s.classList.toggle("is-done", done);
       s.classList.toggle("is-locked", !done && !open);
       var chip = s.querySelector(".quest-step__status");
-      chip.textContent = done ? "Completed" : open ? "In progress" : "Locked";
+      chip.textContent = done ? "Selesai" : open ? "Sedang berjalan" : "Terkunci";
     });
     var final = document.getElementById("questFinal");
     if (final) final.hidden = n < TOTAL;
     var meta = document.getElementById("exploreQuestMeta");
-    if (meta) meta.textContent = n >= TOTAL ? "all tokens found ✓" : n + "/" + TOTAL + " tokens";
+    if (meta) meta.textContent = n >= TOTAL ? "semua token ditemukan ✓" : n + "/" + TOTAL + " token";
     var q1 = document.getElementById("questHiddenStatus");
     if (q1) q1.hidden = !has(1);
     var hintBtn = document.getElementById("questHintBtn");
@@ -324,14 +324,14 @@
     puzzle.src = puzzleImage();
     // pre-check the puzzle image so a missing file still gives a pretty puzzle
     var probe = new Image();
-    probe.onerror = function () { puzzle.src = U.placeholder("our little puzzle"); if (!has(3)) renderPuzzle(); };
+    probe.onerror = function () { puzzle.src = U.placeholder("puzzle kecil kita"); if (!has(3)) renderPuzzle(); };
     probe.src = puzzle.src || "data:,";
 
-    U.setText("questTitle", Q.title || "Birthday Quest");
+    U.setText("questTitle", Q.title || "Misi Ulang Tahun");
     U.setText("questSubtitle", Q.subtitle || "");
-    U.setText("questHint", (Q.hiddenObject || {}).hint || "Something tiny is hiding on one of the pages.");
+    U.setText("questHint", (Q.hiddenObject || {}).hint || "Ada sesuatu yang kecil bersembunyi di salah satu halaman.");
     U.setText("questTriviaIntro", (Q.trivia || {}).intro || "");
-    U.setText("questComplete", Q.completeMessage || "All three tokens collected!");
+    U.setText("questComplete", Q.completeMessage || "Ketiga token sudah terkumpul!");
 
     placeHidden();
     document.getElementById("questHintBtn").addEventListener("click", function () {
@@ -346,13 +346,13 @@
     document.getElementById("questTrivia").addEventListener("click", onTriviaClick);
     document.getElementById("questPuzzle").addEventListener("click", onPuzzleClick);
     document.getElementById("questReset").addEventListener("click", function () {
-      if (!window.confirm("Reset the Birthday Quest? Your tokens will be cleared (opened gifts stay opened).")) return;
+      if (!window.confirm("Atur ulang Misi Ulang Tahun? Token akan dihapus (hadiah yang sudah dibuka tetap tercatat).")) return;
       reset();
       trivia = { qs: [], i: 0, busy: false };
       puzzle.order = [];
       placeHidden();
       renderTrivia(); renderPuzzle();
-      U.toast("Quest reset — happy hunting!");
+      U.toast("Misi diatur ulang — selamat berburu!");
     });
 
     listeners.push(function (s, newToken) {
@@ -360,7 +360,7 @@
       if (newToken === 2 || newToken === null) renderPuzzle();
       if (newToken === 1 || newToken === 2 || newToken === null) renderTrivia();
       if (newToken && count() >= TOTAL) {
-        setTimeout(function () { Anim.confetti({ count: 140, y: 0.3 }); U.toast(Q.completeMessage || "Quest complete!", 3400); }, 400);
+        setTimeout(function () { Anim.confetti({ count: 140, y: 0.3 }); U.toast(Q.completeMessage || "Misi selesai!", 3400); }, 400);
       }
     });
 

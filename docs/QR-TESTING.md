@@ -5,6 +5,12 @@ dan apa yang **belum** diuji. Tes otomatis dijalankan di cloud workspace (Linux,
 pada 6 November 2026 dengan URL tujuan `https://farelielj107.github.io/birthday-gift-website/`
 (QR versi 6, 41×41 modul, error correction H, quiet zone 4).
 
+> **Catatan bahasa:** pengujian di dokumen ini dilakukan saat tampilan website masih berbahasa
+> Inggris, jadi label yang dikutip di sini (misalnya "Start Camera", "Open Link", "Not secure")
+> adalah versi Inggris. Sejak 22 November 2026 seluruh tampilan sudah berbahasa Indonesia
+> ("Nyalakan Kamera", "Buka Tautan", "Tidak aman"). Tes scanner dan QR dijalankan ulang
+> setelah terjemahan dan tetap lolos (scanner 26/26, kasus khusus 12/12, verifikasi QR berhasil).
+
 > **Uji di HP fisik:** pemilik website memindai gambar QR hati (PNG 1000 px yang dihasilkan
 > website) dengan **Google Lens** di HP-nya, dan link **berhasil terbuka langsung ke website** ✅.
 > Jenis HP tidak dicatat. Kamera bawaan Android/iPhone, WhatsApp, dan scanner internal website

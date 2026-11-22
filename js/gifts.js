@@ -38,15 +38,15 @@
   function boxHTML(g) {
     var num = String(g.index + 1).padStart(2, "0");
     var state = isLocked(g) ? "locked" : isOpened(g) ? "opened" : "closed";
-    var statusText = state === "locked" ? "Locked" : state === "opened" ? "Opened · tap to reopen" : "Tap to open";
+    var statusText = state === "locked" ? "Terkunci" : state === "opened" ? "Sudah dibuka · ketuk untuk buka lagi" : "Ketuk untuk membuka";
     return '<button type="button" class="gift-box gift-box--' + (g.index % 4) + " is-" + state + '" data-id="' + U.esc(g.id) + '"' +
-      ' aria-label="Gift ' + num + ": " + U.esc(g.label || g.title || "") + " — " + statusText + '">' +
+      ' aria-label="Hadiah ' + num + ": " + U.esc(g.label || g.title || "") + " — " + statusText + '">' +
       '<span class="gift-box__art" aria-hidden="true">' +
         '<span class="gift-box__lid"><span class="gift-box__bow"></span></span>' +
         '<span class="gift-box__base"></span>' +
         (state === "locked" ? '<span class="gift-box__lock">' + Icons.svg("lock") + "</span>" : "") +
       "</span>" +
-      '<span class="gift-box__num">Gift ' + num + "</span>" +
+      '<span class="gift-box__num">Hadiah ' + num + "</span>" +
       '<span class="gift-box__label">' + U.esc(g.label || g.title || "") + "</span>" +
       '<span class="gift-box__status">' + (state === "opened" ? Icons.svg("check") : state === "locked" ? Icons.svg("lock") : "") + statusText + "</span>" +
       "</button>";
@@ -59,17 +59,17 @@
     var lockedOne = items.filter(isLocked)[0];
     var hint = document.getElementById("giftQuestHint");
     if (hint) hint.hidden = !lockedOne;
-    if (lockedOne) U.setText("giftQuestHintText", lockedOne.lockedMessage || "The last gift opens after the Birthday Quest.");
+    if (lockedOne) U.setText("giftQuestHintText", lockedOne.lockedMessage || "Hadiah terakhir terbuka setelah Misi Ulang Tahun selesai.");
     var meta = document.getElementById("exploreGiftsMeta");
-    if (meta) meta.textContent = opened.filter(function (id) { return items.some(function (g) { return g.id === id; }); }).length + "/" + items.length + " opened";
+    if (meta) meta.textContent = opened.filter(function (id) { return items.some(function (g) { return g.id === id; }); }).length + "/" + items.length + " dibuka";
   }
 
   /* ---------- modal ---------- */
   var modal, panel, body, opener = null, audioEl = null;
 
   function contentHTML(g) {
-    var h = '<p class="eyebrow">gift ' + String(g.index + 1).padStart(2, "0") + "</p>" +
-      '<h2 class="gift-modal__title" id="giftModalTitle">' + U.esc(g.title || g.label || "A little gift") + "</h2>";
+    var h = '<p class="eyebrow">hadiah ' + String(g.index + 1).padStart(2, "0") + "</p>" +
+      '<h2 class="gift-modal__title" id="giftModalTitle">' + U.esc(g.title || g.label || "Hadiah kecil") + "</h2>";
     var type = g.type || "message";
     if (type === "message") {
       h += '<div class="gift-note"><span class="tape tape--top" aria-hidden="true"></span><p class="hand">' + U.esc(g.message || "") + "</p></div>";
@@ -80,16 +80,16 @@
       var photos = (g.photos || []).filter(function (p) { return p && (p.src || typeof p === "string"); });
       h += '<div class="gift-photos">' + photos.map(function (p, i) {
         var src = typeof p === "string" ? p : p.src, cap = typeof p === "string" ? "" : (p.caption || "");
-        return '<figure class="polaroid gift-photo" style="--rot:' + [-2.5, 2, -1.2, 1.6][i % 4] + 'deg">' + U.img(src, cap || "Memory photo " + (i + 1)) +
+        return '<figure class="polaroid gift-photo" style="--rot:' + [-2.5, 2, -1.2, 1.6][i % 4] + 'deg">' + U.img(src, cap || "Foto kenangan " + (i + 1)) +
           (cap ? '<figcaption class="polaroid__caption hand">' + U.esc(cap) + "</figcaption>" : "") + "</figure>";
       }).join("") + "</div>";
-      if (!photos.length) h += '<p class="gift-modal__text">Photos are on their way ♡</p>';
+      if (!photos.length) h += '<p class="gift-modal__text">Fotonya sedang dalam perjalanan ♡</p>';
     } else if (type === "audio") {
       if (g.message) h += '<p class="gift-modal__text">' + U.esc(g.message) + "</p>";
       h += '<div class="gift-audio">' +
         '<span class="gift-audio__icon" aria-hidden="true">' + Icons.svg("volume") + "</span>" +
         '<audio class="gift-audio__player" controls preload="metadata"></audio>' +
-        '<p class="gift-audio__missing hand" hidden>' + U.esc(g.missingMessage || "The voice note is on its way ♡") + "</p>" +
+        '<p class="gift-audio__missing hand" hidden>' + U.esc(g.missingMessage || "Pesan suaranya sedang dalam perjalanan ♡") + "</p>" +
         "</div>";
     } else { // letter / final gift
       h += '<article class="gift-letter"><p class="hand">' + U.esc(g.message || "") + "</p>" +
@@ -117,7 +117,7 @@
     audioEl.addEventListener("error", showMissing);
     audioEl.addEventListener("play", function () {
       // let the voice note be heard: pause the background music (it isn't auto-resumed)
-      if (window.Music && Music.isPlaying()) { Music.pause(); U.toast("Background music paused for the voice note"); }
+      if (window.Music && Music.isPlaying()) { Music.pause(); U.toast("Musik latar dijeda untuk pesan suara"); }
     });
     audioEl.src = g.audio;
   }
@@ -145,7 +145,7 @@
     if (!g) return;
     if (isLocked(g)) {
       b.classList.remove("is-denied"); void b.offsetWidth; b.classList.add("is-denied");
-      U.toast(g.lockedMessage || "Finish the Birthday Quest to open this one ♡", 3000);
+      U.toast(g.lockedMessage || "Selesaikan Misi Ulang Tahun untuk membuka yang ini ♡", 3000);
       return;
     }
     var first = !isOpened(g);
@@ -170,7 +170,7 @@
       return;
     }
     if (!page) return;
-    U.setText("giftsTitle", G.title || "Your Birthday Gifts");
+    U.setText("giftsTitle", G.title || "Hadiah Ulang Tahunmu");
     U.setText("giftsSubtitle", G.subtitle || "");
     modal = document.getElementById("giftModal");
     panel = modal.querySelector(".gift-modal__panel");

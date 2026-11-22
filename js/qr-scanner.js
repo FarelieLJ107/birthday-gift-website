@@ -48,8 +48,8 @@
         var s = document.createElement("script");
         s.src = "js/vendor/jsQR.min.js";
         s.async = true;
-        s.onload = function () { window.jsQR ? resolve(window.jsQR) : reject(new Error("jsQR missing")); };
-        s.onerror = function () { jsqrPromise = null; reject(new Error("Could not load the QR decoder")); };
+        s.onload = function () { window.jsQR ? resolve(window.jsQR) : reject(new Error("jsQR tidak ditemukan")); };
+        s.onerror = function () { jsqrPromise = null; reject(new Error("Decoder QR gagal dimuat")); };
         document.head.appendChild(s);
       });
     }
@@ -120,23 +120,23 @@
         return out;
       }
     } else if (/^(www\.)?[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(text) && !/\s/.test(text)) {
-      out.warnings.push("This looks like a web address without https:// — it is shown as text only.");
+      out.warnings.push("Ini terlihat seperti alamat web tanpa https:// — hanya ditampilkan sebagai teks.");
       return out;
     } else {
       return out; // plain text message
     }
 
     var u;
-    try { u = new URL(text); } catch (e) { out.kind = "text"; out.warnings.push("This looks like a link but isn't a valid address."); return out; }
+    try { u = new URL(text); } catch (e) { out.kind = "text"; out.warnings.push("Ini terlihat seperti tautan, tapi bukan alamat yang valid."); return out; }
     if (/[\u0000-\u001F\u007F\s]/.test(text)) { out.kind = "blocked"; out.scheme = "malformed"; return out; }
 
     out.kind = "url";
     out.url = u.href;
     out.host = u.hostname;
     out.secure = u.protocol === "https:";
-    if (!out.secure) out.warnings.push("Not secure: this link uses http://, so the connection isn't encrypted.");
-    if (u.username || u.password) out.warnings.push("This link hides login details before the address — be careful.");
-    if (/(^|\.)xn--/i.test(u.hostname)) out.warnings.push("The domain uses special characters (" + u.hostname + ") and may imitate another site.");
+    if (!out.secure) out.warnings.push("Tidak aman: tautan ini memakai http://, jadi koneksinya tidak terenkripsi.");
+    if (u.username || u.password) out.warnings.push("Tautan ini menyembunyikan data login sebelum alamatnya — hati-hati.");
+    if (/(^|\.)xn--/i.test(u.hostname)) out.warnings.push("Domainnya memakai karakter khusus (" + u.hostname + ") dan mungkin meniru situs lain.");
 
     var dest = destination();
     if (dest && dest.ok) {
@@ -178,7 +178,7 @@
     if (el.video) { el.video.pause(); el.video.srcObject = null; }
     if (reason !== "keep-ui" && el.view && el.view.dataset.mode !== "result") {
       setMode("idle");
-      if (reason === "user") status("Camera stopped.", "");
+      if (reason === "user") status("Kamera dimatikan.", "");
     }
   }
 
@@ -186,13 +186,13 @@
     var name = err && err.name;
     var msg;
     if (name === "NotAllowedError" || name === "SecurityError" || name === "PermissionDeniedError") {
-      msg = "Camera permission was denied. Allow camera access in your browser settings, or use Upload QR Image.";
+      msg = "Izin kamera ditolak. Izinkan akses kamera di pengaturan browser, atau pakai Unggah Gambar QR.";
     } else if (name === "NotFoundError" || name === "DevicesNotFoundError" || name === "OverconstrainedError") {
-      msg = "No camera was found on this device. You can still use Upload QR Image.";
+      msg = "Tidak ada kamera di perangkat ini. Kamu tetap bisa memakai Unggah Gambar QR.";
     } else if (name === "NotReadableError" || name === "TrackStartError" || name === "AbortError") {
-      msg = "The camera is busy in another app. Close it and try again.";
+      msg = "Kamera sedang dipakai aplikasi lain. Tutup aplikasinya lalu coba lagi.";
     } else {
-      msg = "The camera couldn't start" + (err && err.message ? " (" + err.message + ")" : "") + ". Try Upload QR Image instead.";
+      msg = "Kamera tidak bisa dinyalakan" + (err && err.message ? " (" + err.message + ")" : "") + ". Coba Unggah Gambar QR saja.";
     }
     status(msg, "error");
     setMode("idle");
@@ -201,17 +201,17 @@
   function startCamera() {
     if (S.allowCameraScanning === false) return;
     if (!window.isSecureContext) {
-      status("The camera only works on a secure (https://) page. Open the website from its GitHub Pages / Netlify link.", "error");
+      status("Kamera hanya berfungsi di halaman aman (https://). Buka website dari link GitHub Pages / Netlify-nya.", "error");
       return;
     }
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      status("This browser can't use the camera. Use Upload QR Image instead.", "error");
+      status("Browser ini tidak bisa memakai kamera. Pakai Unggah Gambar QR saja.", "error");
       return;
     }
     hideResult();
     var gen = ++startGen;
     setMode("starting");
-    status("Waiting for camera permission…", "");
+    status("Menunggu izin kamera…", "");
 
     navigator.mediaDevices.getUserMedia({
       audio: false,
@@ -232,7 +232,7 @@
       }).then(function () {
         if (gen !== startGen) return;
         setMode("live");
-        status("Scanning… " + (videoCount > 1 ? (facing === "environment" ? "(back camera)" : "(front camera)") : ""), "live");
+        status("Memindai… " + (videoCount > 1 ? (facing === "environment" ? "(kamera belakang)" : "(kamera depan)") : ""), "live");
         scanning = true;
         frameNo = 0;
         loop();
@@ -272,7 +272,7 @@
       else timer = setTimeout(loop, 110);
     }, function (err) {
       busy = false;
-      status("The QR decoder couldn't load (" + (err && err.message) + "). Check your connection and reload.", "error");
+      status("Decoder QR gagal dimuat (" + (err && err.message) + "). Periksa koneksi lalu muat ulang.", "error");
       stopCamera("keep-ui"); setMode("idle");
     });
   }
@@ -312,7 +312,7 @@
     var open = document.getElementById("scanOpen");
     var copy = document.getElementById("scanCopy");
 
-    title.textContent = a.kind === "blocked" ? "QR Code detected — link blocked" : "QR Code detected!";
+    title.textContent = a.kind === "blocked" ? "Kode QR terdeteksi — tautan diblokir" : "Kode QR terdeteksi!";
     box.querySelector(".scan-result__check").innerHTML = Icons.svg(a.kind === "blocked" ? "alert" : "check");
     value.textContent = a.raw.length > 600 ? a.raw.slice(0, 600) + "…" : a.raw;
     badge.hidden = !a.ours;
@@ -332,20 +332,20 @@
       domain.hidden = true;
     }
     var warnings = a.warnings.slice();
-    if (a.kind === "blocked") warnings.unshift("For your safety, \"" + a.scheme + ":\" links can't be opened from this scanner.");
-    if (a.kind === "text") warnings.unshift("This QR contains text, not a link.");
+    if (a.kind === "blocked") warnings.unshift("Demi keamananmu, tautan \"" + a.scheme + ":\" tidak bisa dibuka dari pemindai ini.");
+    if (a.kind === "text") warnings.unshift("QR ini berisi teks, bukan tautan.");
     if (warnings.length) {
       warn.hidden = false;
       warn.innerHTML = warnings.map(function (w) { return "<p>" + Icons.svg("alert") + "<span>" + U.esc(w) + "</span></p>"; }).join("");
     }
-    status("Found with " + engine + (lastSource === "upload" ? " from your image." : " — camera stopped."), "ok");
+    status("Terbaca dengan " + engine + (lastSource === "upload" ? " dari gambarmu." : " — kamera dimatikan."), "ok");
 
     var r = el.view.getBoundingClientRect();
     Anim.burst(r.left + r.width / 2, r.top + r.height / 2, { count: 10 });
 
     clearTimeout(openTimer);
     if (S.autoRedirect === true && a.kind === "url" && a.ours && a.secure) {
-      status("This is your birthday gift — opening in a moment…", "ok");
+      status("Ini hadiah ulang tahunmu — sebentar lagi terbuka…", "ok");
       openTimer = setTimeout(function () { location.href = a.url; }, 1800);
     }
     // bring the result (and its buttons) into view, then focus the main action
@@ -375,7 +375,7 @@
     hideResult();
     setMode("idle");
     if (lastSource === "camera" && S.allowCameraScanning !== false) startCamera();
-    else { status("Ready. Start the camera or upload another image.", ""); el.fileBtn.focus(); }
+    else { status("Siap. Nyalakan kamera atau unggah gambar lain.", ""); el.fileBtn.focus(); }
   }
 
   /* ---------- upload ---------- */
@@ -383,13 +383,13 @@
   function handleFile(file) {
     if (!file) return;
     if (!TYPES.test(file.type) && !/\.(png|jpe?g|webp)$/i.test(file.name)) {
-      status("Please choose a PNG, JPG, JPEG or WEBP image.", "error"); return;
+      status("Pilih gambar PNG, JPG, JPEG, atau WEBP.", "error"); return;
     }
-    if (file.size > 20 * 1024 * 1024) { status("That image is too large (max 20 MB).", "error"); return; }
+    if (file.size > 20 * 1024 * 1024) { status("Gambar terlalu besar (maks. 20 MB).", "error"); return; }
     stopCamera("keep-ui");
     hideResult();
     setMode("idle");
-    status("Reading your image…", "");
+    status("Membaca gambarmu…", "");
     var url = URL.createObjectURL(file);
     var img = new Image();
     img.onload = function () {
@@ -397,12 +397,12 @@
       el.preview.hidden = false;
       decodeStill(img, img.naturalWidth, img.naturalHeight).then(function (res) {
         if (res) found(res, "upload");
-        else status("No QR code found in this image. Try a sharper, brighter photo where the whole code is visible.", "error");
+        else status("Tidak ada kode QR di gambar ini. Coba foto yang lebih tajam dan terang, dengan seluruh kode terlihat.", "error");
       }, function (err) {
-        status("The QR decoder couldn't load (" + (err && err.message) + ").", "error");
+        status("Decoder QR gagal dimuat (" + (err && err.message) + ").", "error");
       });
     };
-    img.onerror = function () { URL.revokeObjectURL(url); status("That file couldn't be opened as an image.", "error"); };
+    img.onerror = function () { URL.revokeObjectURL(url); status("File itu tidak bisa dibuka sebagai gambar.", "error"); };
     img.src = url;
     lastSource = "upload";
   }
@@ -433,7 +433,7 @@
 
     if (S.allowCameraScanning === false) {
       el.start.hidden = true; el.switchBtn.hidden = true;
-      status("Camera scanning is turned off — upload a QR image instead.", "");
+      status("Pemindaian kamera dimatikan — unggah gambar QR saja.", "");
     }
     if (S.allowImageUpload === false) el.fileBtn.hidden = true;
 
@@ -449,7 +449,7 @@
     document.getElementById("scanAgain").addEventListener("click", scanAgain);
     document.getElementById("scanCopy").addEventListener("click", function () {
       var t = document.getElementById("scanResultValue").textContent;
-      (window.QRGift ? QRGift.copyText(t) : Promise.resolve(false)).then(function (ok) { U.toast(ok ? "Copied" : "Couldn't copy — press and hold to select the text."); });
+      (window.QRGift ? QRGift.copyText(t) : Promise.resolve(false)).then(function (ok) { U.toast(ok ? "Disalin" : "Gagal menyalin — tekan lama untuk memilih teksnya."); });
     });
     document.getElementById("scanOpen").addEventListener("click", function () {
       clearTimeout(openTimer);  // explicit user action
@@ -466,18 +466,18 @@
     });
 
     if (!window.isSecureContext && S.allowCameraScanning !== false) {
-      status("Camera needs https:// (or localhost). Image upload works everywhere.", "");
+      status("Kamera butuh https:// (atau localhost). Unggah gambar bisa di mana saja.", "");
     }
 
     Router.on("scan", function () {
       if (el.view.dataset.mode !== "result") { setMode("idle"); }
       getNative(); // warm up
     });
-    Router.onLeave("scan", function () { stopCamera("leave"); hideResult(); setMode("idle"); status("Tap Start Camera to begin.", ""); });
+    Router.onLeave("scan", function () { stopCamera("leave"); hideResult(); setMode("idle"); status("Ketuk Nyalakan Kamera untuk mulai.", ""); });
 
     // never keep the camera running in a background tab
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden && stream) { stopCamera("keep-ui"); setMode("idle"); status("Camera paused while the page was hidden. Tap Start Camera to continue.", ""); }
+      if (document.hidden && stream) { stopCamera("keep-ui"); setMode("idle"); status("Kamera dijeda saat halaman tersembunyi. Ketuk Nyalakan Kamera untuk lanjut.", ""); }
     });
     window.addEventListener("pagehide", function () { stopCamera("leave"); });
 
