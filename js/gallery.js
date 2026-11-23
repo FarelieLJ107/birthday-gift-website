@@ -36,7 +36,7 @@
   function renderGrid() {
     var grid = document.getElementById("memoryGrid");
     if (!memories.length) {
-      grid.innerHTML = '<p class="page-sub">Tambahkan kenangan di <code>js/config.js</code> untuk mengisi halaman ini.</p>';
+      grid.innerHTML = '<p class="page-sub">Tambahkan foto di <code>js/config.js</code> untuk mengisi halaman ini.</p>';
       return;
     }
     grid.innerHTML = memories.map(cardHTML).join("");
@@ -205,8 +205,8 @@
       }).join("");
     } else { thumbs.hidden = true; thumbs.innerHTML = ""; }
 
-    U.setText("detailTag", m.tag || "Kenangan");
-    U.setText("detailCount", "Kenangan " + (m.index + 1) + " dari " + memories.length);
+    U.setText("detailTag", m.tag || "Foto");
+    U.setText("detailCount", "Foto " + (m.index + 1) + " dari " + memories.length);
     U.setText("detailTitle", m.title);
     U.setText("detailDate", dateLabel(m));
     U.setText("detailLocation", m.location || "");

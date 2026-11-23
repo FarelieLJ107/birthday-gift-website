@@ -55,113 +55,123 @@ window.BIRTHDAY_CONFIG = {
     playOnGiftOpen: true         // true = musik mulai saat tombol "Buka Hadiahmu" ditekan
   },
 
-  /* ---------- Kenangan Kita (galeri + halaman detail) ----------
-     size  : "normal" | "tall" | "wide"  (mengatur bentuk kartu di grid)
-     tag   : kategori untuk filter chip di atas galeri
-     extraPhotos : foto tambahan di halaman detail (boleh kosong [])          */
+  /* ---------- Galeri Kamu: "Potret Kesayanganku" (galeri + halaman detail) ----------
+     Isi dengan FOTO PASANGANMU (selfie, foto yang dia kirim, screenshot video call, dst).
+     Semua teks di bawah adalah CONTOH — ganti dengan kata-katamu sendiri.
+
+     title       : judul foto
+     date        : tanggal foto (YYYY-MM-DD)
+     tag         : album / kategori untuk filter di atas galeri
+     size        : "normal" | "tall" | "wide"  (bentuk kartu di grid)
+     photo       : path foto di assets/images/
+     caption     : kalimat singkat — kenapa kamu suka foto ini
+     story       : cerita lebih panjang di halaman detail
+     note        : catatan tulisan tangan (kosong = tidak ditampilkan)
+     location    : asal foto, misal "Dikirim lewat WhatsApp" (kosong = tidak ditampilkan)
+     extraPhotos : foto tambahan di halaman detail (boleh kosong [])                    */
   memories: [
     {
-      id: "first-photo",
-      title: "Foto Pertama Kita",
+      id: "senyum-favorit",
+      title: "Senyum Favoritku",
       date: "2023-02-18",
-      tag: "Kencan",
+      tag: "Senyummu",
       size: "tall",
       photo: "assets/images/memory-01.svg",
-      caption: "Buram, canggung, dan tetap foto favoritku sepanjang masa.",
-      story: "Waktu itu kita bahkan belum tahu cara berdiri berdampingan. Kamu tertawa tepat saat kamera berbunyi, dan sejak itu aku terus mengejar tawa itu.",
-      note: "kamu bilang hapus aja. aku nggak pernah hapus.",
-      location: "Kafe kecil di ujung jalan",
-      extraPhotos: ["assets/images/memory-02.svg", "assets/images/memory-03.svg"]
-    },
-    {
-      id: "coffee-dates",
-      title: "Kencan Kopi Tanpa Akhir",
-      date: "2023-04-02",
-      tag: "Kencan",
-      size: "normal",
-      photo: "assets/images/memory-02.svg",
-      caption: "Dua cangkir, seratus cerita.",
-      story: "Setiap Minggu jadi Minggu kita. Pesananmu tidak pernah berubah, dan entah kenapa itu salah satu hal favoritku tentangmu.",
-      note: "oat latte, gulanya sedikit. aku ingat.",
-      location: "Sudut favorit kita",
-      extraPhotos: ["assets/images/memory-01.svg"]
-    },
-    {
-      id: "sunset-walk",
-      title: "Jalan Sore di Golden Hour",
-      date: "2023-07-21",
-      tag: "Jalan-jalan",
-      size: "wide",
-      photo: "assets/images/memory-03.svg",
-      caption: "Langitnya merah muda, begitu juga pipimu.",
-      story: "Kita berjalan sampai mataharinya menyerah. Kamu berhenti untuk memotret langit, dan aku malah memotret kamu.",
-      note: "pemandangan terbaik: kamu.",
-      location: "Bukit di belakang kota",
-      extraPhotos: ["assets/images/memory-05.svg", "assets/images/memory-04.svg"]
-    },
-    {
-      id: "flower-market",
-      title: "Pagi di Pasar Bunga",
-      date: "2023-09-09",
-      tag: "Jalan-jalan",
-      size: "normal",
-      photo: "assets/images/memory-04.svg",
-      caption: "Kamu memilih buket paling mungil.",
-      story: "Kamu menghabiskan dua puluh menit memilih di antara dua buket yang hampir sama. Diam-diam aku membeli keduanya.",
-      note: "bunganya bertahan 9 hari. aku menghitungnya.",
-      location: "Pasar bunga hari Sabtu",
-      extraPhotos: []
-    },
-    {
-      id: "birthday-balloons",
-      title: "Ulang Tahunmu Tahun Lalu",
-      date: "2023-11-12",
-      tag: "Perayaan",
-      size: "tall",
-      photo: "assets/images/memory-05.svg",
-      caption: "Balon di mana-mana, senyummu lebih lebar lagi.",
-      story: "Aku sudah berusaha keras merahasiakannya dan gagal sebelum siang. Kamu tetap pura-pura terkejut, dan justru itu alasan aku sayang kamu.",
-      note: "tahun ini rahasianya aman. 🤍",
-      location: "Ruang tamu rumahmu",
+      caption: "Senyum yang selalu berhasil bikin hariku lebih ringan.",
+      story: "Kalau hariku lagi berat, aku buka lagi foto ini. Entah kenapa, semuanya langsung terasa baik-baik saja.",
+      note: "simpan senyum ini buat aku, ya.",
+      location: "Dikirim lewat WhatsApp",
       extraPhotos: ["assets/images/memory-07.svg"]
     },
     {
-      id: "late-night-talks",
-      title: "Obrolan Tengah Malam",
-      date: "2024-01-30",
-      tag: "Konyol",
+      id: "selfie-pagi",
+      title: "Selfie Pagi Hari",
+      date: "2023-04-02",
+      tag: "Selfie",
       size: "normal",
-      photo: "assets/images/memory-06.svg",
-      caption: "Jam 3 pagi dan masih belum ngantuk.",
-      story: "Kita membicarakan segalanya dan bukan apa-apa — alien, anjing kita nanti, nasi goreng yang sempurna. Aku tidak ingin malam itu berakhir.",
-      note: "anjing kita nanti namanya Mochi.",
-      location: "Lewat telepon, seperti biasa",
+      photo: "assets/images/memory-02.svg",
+      caption: "Masih ngantuk, rambut berantakan — tetap cantik.",
+      story: "Foto sederhana, tanpa filter, tanpa pose. Justru karena itu aku suka: ini kamu yang paling apa adanya.",
+      note: "cantik tanpa usaha itu curang, tahu.",
+      location: "Dikirim lewat WhatsApp",
       extraPhotos: []
     },
     {
-      id: "anniversary",
-      title: "Setahun Bersama",
-      date: "2024-02-14",
-      tag: "Perayaan",
+      id: "tawa-lepas",
+      title: "Tawa yang Tertangkap Kamera",
+      date: "2023-07-21",
+      tag: "Lucu",
       size: "wide",
-      photo: "assets/images/memory-07.svg",
-      caption: "365 hari, dan aku akan memilihmu di setiap harinya.",
-      story: "Satu tahun penuh bersamamu. Kita kembali ke kafe tempat semuanya dimulai dan memesan menu yang persis sama.",
-      note: "untuk selamanya, ya?",
-      location: "Tempat semuanya dimulai",
-      extraPhotos: ["assets/images/memory-01.svg", "assets/images/memory-02.svg"]
+      photo: "assets/images/memory-03.svg",
+      caption: "Tawamu yang ini bisa kudengar walau cuma lewat foto.",
+      story: "Ada foto yang bagus karena posenya, dan ada foto yang bagus karena orangnya bahagia. Yang ini jenis kedua.",
+      note: "tawa favoritku sedunia.",
+      location: "Dari story-mu",
+      extraPhotos: ["assets/images/memory-05.svg"]
     },
     {
-      id: "little-notes",
-      title: "Catatan-Catatan Kecilmu",
+      id: "video-call",
+      title: "Dari Layar Video Call",
+      date: "2023-09-09",
+      tag: "Video Call",
+      size: "normal",
+      photo: "assets/images/memory-04.svg",
+      caption: "Jarak boleh jauh, tapi kamu selalu terasa dekat.",
+      story: "Tangkapan layar dari salah satu video call kita. Kualitasnya pecah-pecah, tapi tetap jadi salah satu foto paling berharga buatku.",
+      note: "screenshot diam-diam, maaf ya.",
+      location: "Tangkapan layar video call",
+      extraPhotos: []
+    },
+    {
+      id: "gaya-andalan",
+      title: "Gaya Andalanmu",
+      date: "2023-11-12",
+      tag: "Selfie",
+      size: "tall",
+      photo: "assets/images/memory-05.svg",
+      caption: "Pose yang selalu kamu pakai, dan selalu berhasil.",
+      story: "Kamu punya satu gaya foto yang selalu kamu ulang. Aku nggak pernah bosan melihatnya.",
+      note: "jangan pernah ganti pose ini.",
+      location: "Dikirim lewat WhatsApp",
+      extraPhotos: []
+    },
+    {
+      id: "ekspresi-lucu",
+      title: "Ekspresi Paling Lucu",
+      date: "2024-01-30",
+      tag: "Lucu",
+      size: "normal",
+      photo: "assets/images/memory-06.svg",
+      caption: "Foto yang mungkin ingin kamu hapus. Maaf, sudah kusimpan.",
+      story: "Bukan foto paling rapi, tapi foto paling jujur. Setiap kali melihatnya aku pasti ikut tertawa.",
+      note: "aman di galeriku, selamanya.",
+      location: "Tangkapan layar video call",
+      extraPhotos: []
+    },
+    {
+      id: "senyum-malu",
+      title: "Senyum Malu-Malu",
+      date: "2024-02-14",
+      tag: "Senyummu",
+      size: "wide",
+      photo: "assets/images/memory-07.svg",
+      caption: "Senyum yang muncul waktu kamu berusaha menahannya.",
+      story: "Kamu bilang fotonya jelek. Aku bilang ini salah satu foto terbaikmu. Aku masih yakin aku yang benar.",
+      note: "terbukti: aku benar.",
+      location: "Dikirim lewat WhatsApp",
+      extraPhotos: ["assets/images/memory-01.svg"]
+    },
+    {
+      id: "selamat-malam",
+      title: "Selamat Malam Versi Kamu",
       date: "2024-06-05",
-      tag: "Konyol",
+      tag: "Video Call",
       size: "normal",
       photo: "assets/images/memory-08.svg",
-      caption: "Aku menyimpan semuanya.",
-      story: "Sticky note di tasku, di cermin, di dalam buku-bukuku. Pengingat kecil bahwa ada seseorang yang sedang memikirkanku.",
-      note: "yang 'jangan lupa minum air!!' itu favoritku.",
-      location: "Di mana-mana",
+      caption: "Wajah ngantuk yang selalu kutunggu sebelum tidur.",
+      story: "Pemandangan terakhir sebelum layar mati di banyak malam kita. Cara paling manis untuk menutup hari.",
+      note: "mimpi indah, sampai besok.",
+      location: "Tangkapan layar video call",
       extraPhotos: []
     }
   ],
@@ -257,7 +267,7 @@ window.BIRTHDAY_CONFIG = {
                              icon: "star" | "heart" | "gift" | "sparkles" | "flower"
      Quest 2  trivia       : kuis ringan. Kosongkan `questions` ([]) agar pertanyaan
                              dibuat OTOMATIS dari isi config ini (tanggal pertama
-                             bertemu, lokasi di `memories`, daftar `reasons`), jadi
+                             bertemu, album/`tag` di `memories`, daftar `reasons`), jadi
                              tidak ada jawaban yang dikarang. Isi sendiri dengan format:
                              { question: "...", options: ["A","B","C"], answer: 0 }
                              (answer = nomor urut jawaban benar, mulai dari 0).
@@ -319,11 +329,11 @@ window.BIRTHDAY_CONFIG = {
         type: "photos",
         label: "Kenangan digital",
         title: "Kotak Kenangan Kecil",
-        message: "Beberapa foto yang selalu ingin kulihat lagi.",
+        message: "Beberapa foto kamu yang selalu ingin kulihat lagi.",
         photos: [
-          { src: "assets/images/memory-01.svg", caption: "Foto Pertama Kita" },
-          { src: "assets/images/memory-03.svg", caption: "Jalan Sore di Golden Hour" },
-          { src: "assets/images/memory-07.svg", caption: "Setahun Bersama" }
+          { src: "assets/images/memory-01.svg", caption: "Senyum Favoritku" },
+          { src: "assets/images/memory-03.svg", caption: "Tawa yang Tertangkap Kamera" },
+          { src: "assets/images/memory-07.svg", caption: "Senyum Malu-Malu" }
         ]
       },
       {
