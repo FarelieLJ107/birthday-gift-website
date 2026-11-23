@@ -112,12 +112,13 @@
       var o = uniq([right].concat(near)).slice(0, 3);
       qs.push({ question: "Kapan kisah kita dimulai?", options: shuffle(o), answerText: right });
     }
-    var mems = (C.memories || []).filter(function (m) { return m.title && m.location; });
-    var locs = uniq(mems.map(function (m) { return m.location; }));
-    if (mems.length && locs.length >= 3) {
+    // which album (tag) a photo from the gallery belongs to
+    var mems = (C.memories || []).filter(function (m) { return m.title && m.tag; });
+    var tags = uniq(mems.map(function (m) { return m.tag; }));
+    if (mems.length && tags.length >= 3) {
       var m = mems[Math.floor(Math.random() * mems.length)];
-      var others = shuffle(locs.filter(function (l) { return l !== m.location; })).slice(0, 2);
-      qs.push({ question: "Di mana momen “" + m.title + "” terjadi?", options: shuffle([m.location].concat(others)), answerText: m.location });
+      var others = shuffle(tags.filter(function (t) { return t !== m.tag; })).slice(0, 2);
+      qs.push({ question: "Foto “" + m.title + "” ada di album apa?", options: shuffle([m.tag].concat(others)), answerText: m.tag });
     }
     var reasons = (C.reasons || []).filter(function (r) { return r.title; });
     if (reasons.length) {

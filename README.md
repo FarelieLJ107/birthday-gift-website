@@ -16,9 +16,9 @@ atau API berbayar. Cukup buka `index.html` di browser.
 | # | Halaman | Route | Interaksi |
 |---|---------|-------|-----------|
 | 01 | Pembuka | `#intro` | Hati melayang, animasi kado terbuka, transisi lingkaran ke halaman utama |
-| 02 | Beranda | `#home` | Sapaan, hero foto, countdown ulang tahun, hitungan hari bersama, kartu navigasi, progres penjelajahan, carousel kenangan, catatan tulisan tangan |
-| 03 | Kenangan Kita | `#memories` | Grid polaroid dengan ukuran bervariasi, washi tape & stiker, chip filter, lightbox (prev/next, swipe, keyboard, Esc) |
-| 04 | Detail Kenangan | `#memory/<id>` | Foto besar + thumbnail, judul, tanggal, lokasi, cerita, sticky note, favorit (♡), "Kenangan lainnya", tombol Kenangan berikutnya/Galeri |
+| 02 | Beranda | `#home` | Sapaan, hero foto, countdown ulang tahun, hitungan hari bersama, kartu navigasi, progres penjelajahan, carousel foto favorit, catatan tulisan tangan |
+| 03 | Galeri Kamu: "Potret Kesayanganku" | `#memories` | Foto-foto pasangan dalam grid polaroid dengan ukuran bervariasi, washi tape & stiker, chip filter, lightbox (prev/next, swipe, keyboard, Esc) |
+| 04 | Detail Foto | `#memory/<id>` | Foto besar + thumbnail, judul, tanggal, asal foto, cerita, sticky note, favorit (♡), "Foto lainnya", tombol Berikutnya/Galeri |
 | 05 | Momen Kecil | `#moments` | Timeline vertikal dengan polaroid & stiker, statistik hari bersama |
 | 06 | Alasan Aku Sayang Kamu | `#reasons` | 12 kartu yang bisa dibalik (flip), ledakan hati, progres, tombol "Kejutkan aku", confetti saat semua terbuka |
 | 07 | Suratku | `#letter` | Amplop terbuka, kertas surat bergaris, efek typewriter, "Tampilkan semua", "Baca lagi" |
@@ -32,7 +32,7 @@ Misi, Kue, dan Hadiah dibuka dari kartu di grid **Buka halaman** (Beranda) dan d
 
 Bottom navigation tetap 5 menu; di halaman Misi, Kue, dan Hadiah, menu **Kejutan** yang aktif.
 
-Fitur global: bottom navigation (Beranda · Kenangan · Momen · Surat · Kejutan), transisi
+Fitur global: bottom navigation (Beranda · Galeri · Momen · Surat · Kejutan), transisi
 antarhalaman, scroll reveal, indikator progres scroll di atas layar, tombol kembali,
 pemutar musik (play/pause), dukungan safe-area iPhone, dan mode `prefers-reduced-motion`.
 
@@ -93,12 +93,18 @@ firstMet: "2023-02-14",   // untuk "1.359 days of us"
 Jika path salah atau file belum ada, website otomatis menampilkan placeholder merah muda,
 jadi tidak akan ada ikon gambar rusak.
 
-### Kenangan (galeri + halaman detail)
+### Galeri Kamu — "Potret Kesayanganku" (`memories`)
+Galeri berisi **foto-foto pasanganmu** (selfie, foto yang dia kirim, screenshot video call),
+masing-masing dengan alasan kenapa kamu menyukainya. Tidak perlu foto berdua.
+
 Setiap item di `memories` punya: `id` (unik, tanpa spasi), `title`, `date`, `tag`
-(untuk chip filter), `size` (`"normal"`, `"tall"`, `"wide"`), `photo`, `caption`, `story`,
-`note` (catatan tulisan tangan), `location`, dan `extraPhotos` (foto tambahan, boleh `[]`).
-Tambah atau hapus item sesuka hati; galeri, carousel di Home, dan jumlah foto ikut menyesuaikan.
-Tambahkan `featured: true` pada item tertentu untuk memilih yang tampil di "Kenangan pilihan".
+(album untuk chip filter, contoh: Senyummu, Selfie, Lucu, Video Call), `size`
+(`"normal"`, `"tall"`, `"wide"`), `photo`, `caption` (kenapa kamu suka foto ini), `story`,
+`note` (catatan tulisan tangan), `location` (asal foto, misal "Dikirim lewat WhatsApp"),
+dan `extraPhotos` (foto tambahan, boleh `[]`). `note` dan `location` boleh dikosongkan.
+Tambah atau hapus item sesuka hati; galeri, carousel di Beranda, dan jumlah foto ikut menyesuaikan.
+Tambahkan `featured: true` pada item tertentu untuk memilih yang tampil di "Foto favoritku".
+**Isi galeri saat ini adalah contoh** — ganti foto dan kata-katanya dengan milikmu.
 
 ### Timeline, alasan, surat, kejutan
 - `moments`: tanggal, judul, foto, cerita, `sticker` (heart, star, flower, sparkles, gift…).
@@ -138,8 +144,8 @@ Progres disimpan di browser penerima memakai penyimpanan yang sama dengan fitur 
 | 3 · Puzzle Mini | Foto dipotong 3×3. Ketuk dua potongan untuk menukarnya sampai gambar utuh. | `puzzle.image`, `puzzle.grid` (2–4), `puzzle.intro` |
 
 - **Trivia otomatis:** jika `trivia.questions` dibiarkan `[]`, pertanyaan dibuat **hanya dari isi
-  config yang sudah ada**: tanggal `firstMet`, `location` di `memories`, dan judul `reasons`.
-  Jawaban salahnya berupa tanggal lain, lokasi kenangan lain, atau pilihan yang jelas bercanda.
+  config yang sudah ada**: tanggal `firstMet`, album (`tag`) foto di `memories`, dan judul `reasons`.
+  Jawaban salahnya berupa tanggal lain, album lain, atau pilihan yang jelas bercanda.
   Tidak ada kenangan yang dikarang.
 - **Pertanyaan sendiri:**
   ```js
